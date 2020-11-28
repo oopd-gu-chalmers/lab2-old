@@ -34,6 +34,7 @@ public class CarController {
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
+        cc.cars.get(0).turnRight(90); //Turns the car right
 
         // Start the timer
         cc.timer.start();
@@ -45,17 +46,45 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
+                /*
+                Assuming each image has x(width) = 100, and y(height) = 60.
+                The green frame they're in has the dimensions x = 784 X 560 = y.
+                I'm really not sure about these numbers, gotten from trial and error.
+                 */
+
                 car.move();
                 // int x = (int) Math.round(car.getPosition().getX());
                 // int y = (int) Math.round(car.getPosition().getY());
                 int x = (int) Math.round(car.getX());
                 int y = (int) Math.round(car.getY());
+
+
                 frame.drawPanel.moveit(x, y);
+
+
+                if(car.getY() > 500) {
+                    frame.drawPanel.moveit(x, 500);
+                    car.invertDirection();
+                } else if(car.getY() < 0) {
+                    frame.drawPanel.moveit(x, 0);
+                    car.invertDirection();
+                }
+
+                if(car.getX() > 684) {
+                    frame.drawPanel.moveit(684, y);
+                    car.invertDirection();
+                } else if(car.getX() < 0) {
+                    frame.drawPanel.moveit(0,y);
+                    car.invertDirection();
+                }
+
+
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
         }
     }
+
 
     // Calls the gas method for each car once
     void gas(int amount) {
@@ -63,6 +92,14 @@ public class CarController {
         for (Car car : cars
                 ) {
             car.gas(gas);
+        }
+    }
+
+    void brake(int amount) {
+        double gas = ((double) amount) / 100;
+        for (Car car : cars
+        ) {
+            car.brake(gas);
         }
     }
 }
