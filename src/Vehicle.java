@@ -2,7 +2,8 @@ import java.awt.*;
 
 import static java.lang.Math.*;
 
-/** Represents a base model of a vehicle that all other vehicles are based on.
+/**
+ * Represents a base model of a vehicle that all other vehicles are based on.
  * It has the following attributes:
  * The vehicle's current x coordinate
  * The vehicle's current y coordinate
@@ -15,7 +16,7 @@ import static java.lang.Math.*;
  * Also contains gas and brake methods which in turn contain incrementSpeed and decrementSpeed methods,
  * for the purpose of increasing or decreasing the vehicle's speed.
  */
-public abstract class Vehicle implements Movable{
+public abstract class Vehicle implements Movable {
 
     private double x; // The vehicle's x direction
     private double y; // The vehicle's y direction
@@ -27,7 +28,7 @@ public abstract class Vehicle implements Movable{
     private int directionAngle; // the the angle that the vehicle is facing towards.
 
     public Vehicle(double x, double y, int nrDoors, double enginePower, double currentSpeed,
-                   Color color, String modelName, int directionAngle){
+                   Color color, String modelName, int directionAngle) {
         this.x = x;
         this.y = y;
         this.nrDoors = nrDoors;
@@ -40,6 +41,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Get the X coordinate (For testing purposes)
+     *
      * @return the X coordinate of the vehicle
      */
     public double getX() {
@@ -48,20 +50,25 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Get the Y coordinate (For testing purposes)
+     *
      * @return the Y coordinate of the vehicle
      */
     public double getY() {
         return y;
     }
 
-    /** Sets the x coordinate for vehicle
+    /**
+     * Sets the x coordinate for vehicle
+     *
      * @param x the X coordinate for the vehicle
      */
     public void setX(double x) {
         this.x = x;
     }
 
-    /** Sets the y coordinate for vehicle
+    /**
+     * Sets the y coordinate for vehicle
+     *
      * @param y the Y coordinate for the vehicle
      */
     public void setY(double y) {
@@ -70,6 +77,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Get the number of doors
+     *
      * @return the number of doors
      */
     public int getNrDoors() {
@@ -78,6 +86,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Set the number of doors (For testing purposes?)
+     *
      * @param nrDoors The number of doors wanted
      */
     public void setNrDoors(int nrDoors) {
@@ -86,6 +95,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Get the engine power
+     *
      * @return the engine power
      */
     public double getEnginePower() {
@@ -94,6 +104,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Set the engine power (For testing purposes?)
+     *
      * @param enginePower the engine power wanted
      */
     public void setEnginePower(double enginePower) {
@@ -102,6 +113,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Get the current speed
+     *
      * @return current speed
      */
     public double getCurrentSpeed() {
@@ -110,17 +122,19 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Set the current speed (For testing purposes?)
+     *
      * @param currentSpeed the current speed wanted
      */
     private void setCurrentSpeed(double currentSpeed) {
         //currentSpeed always lies in the interval [0,enginePower]
-        if(currentSpeed >= 0) {
+        if (currentSpeed >= 0) {
             this.currentSpeed = Math.min(currentSpeed, getEnginePower());
         }
     }
 
     /**
      * Get the color of the vehicle
+     *
      * @return the color
      */
     public Color getColor() {
@@ -129,6 +143,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Set the color (For testing purposes)
+     *
      * @param color The color wanted
      */
     public void setColor(Color color) {
@@ -137,6 +152,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Get the model name
+     *
      * @return model name
      */
     public String getModelName() {
@@ -145,6 +161,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Set the model name (For testing purposes?)
+     *
      * @param modelName The model name wanted
      */
     public void setModelName(String modelName) {
@@ -153,6 +170,7 @@ public abstract class Vehicle implements Movable{
 
     /**
      * Gets the direction angle for the vehicle.
+     *
      * @return the angle that the vehicle is facing towards.
      */
     public int getDirectionAngle() {
@@ -170,90 +188,103 @@ public abstract class Vehicle implements Movable{
     }
 
 
-
-
     /**
      * Start the engine
      */
-    public void startEngine(){
+    public void startEngine() {
         setCurrentSpeed(0.1);
     }
 
     /**
      * Stop the engine
      */
-    public void stopEngine(){
+    public void stopEngine() {
         setCurrentSpeed(0);
     }
 
     /**
      * Move the Vehicle forwards.
-     *
      */
     @Override
     public void move() {
-        double angleInRadian = directionAngle *(Math.PI/180);
-        x = getX() + sin(angleInRadian) * getCurrentSpeed();
-        y = getY() +  cos(angleInRadian) * getCurrentSpeed();
+        double angleInRadian = directionAngle * (Math.PI / 180);
+        setX(getX() + sin(angleInRadian) * getCurrentSpeed());
+        setY(getY() - cos(angleInRadian) * getCurrentSpeed());
+
     }
 
     /**
      * Turn the vehicle to the left.
+     *
      * @param angle the amount of degrees you want the vehicle to turn left
      */
     @Override
-    public void turnLeft(int angle){
+    public void turnLeft(int angle) {
         setDirectionAngle(directionAngle - angle);
     }
 
     /**
      * Turn the vehicle to the right.
+     *
      * @param angle the amount of degrees you want the vehicle to turn left
      */
     @Override
-    public void turnRight(int angle){
+    public void turnRight(int angle) {
         setDirectionAngle(directionAngle + angle);
     }
 
     /**
+     * Makes the vehicle do a 180 degree turn, which results in its direction inverting
+     */
+    public void invertDirection() {
+        setDirectionAngle(directionAngle + 180);
+    }
+    /**
      * toString method for testing purposes.
+     *
      * @return x and y coordinates, as well as currentSpeed in string format.
      */
     @Override
-    public String toString(){
-        return "( x: " + getX() + ", y: "  + getY() + ", currentSpeed: " + getCurrentSpeed() + ", " + ")";
+    public String toString() {
+        return "( x: " + getX() + ", y: " + getY() + ", currentSpeed: " + getCurrentSpeed() + ", " + ")";
     }
 
-    /** The speedFactor methods exist in both Saab95 and Volvo240.
+    /**
+     * The speedFactor methods exist in both Saab95 and Volvo240.
      * The speedFactor's return values are different for volvo.speedFactor() respectively saab.speedFactor()
      */
     public abstract double speedFactor();
 
-    /** Increases the vehicle's currentSpeed.
+    /**
+     * Increases the vehicle's currentSpeed.
      *
      * @param amount a multiplier for how much the speed should increase, taken from gas.
      */
-    public void incrementSpeed(double amount){
+    public void incrementSpeed(double amount) {
         double newSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
         setCurrentSpeed(newSpeed);
     }
 
-    /** Decreases the vehicle's currentSpeed.
+    /**
+     * Decreases the vehicle's currentSpeed.
      *
      * @param amount a multiplier for how much the speed should decrease, taken from brake.
      */
-    private void decrementSpeed(double amount){
+    private void decrementSpeed(double amount) {
         double newSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
         setCurrentSpeed(newSpeed);
     }
 
+
+
     /**
      * Gas the vehicle.
-     *
+     * <p>
      * Takes a number between 1 and 0.
+     *
      * @param amount how hard you press the gas
      */
-    public void gas(double amount){
+    public void gas(double amount) {
         if (amount >= 0 & amount <= 1) {
             incrementSpeed(amount);
         }
@@ -262,9 +293,10 @@ public abstract class Vehicle implements Movable{
     /**
      * Brake the vehicle.
      * Takes a number between 1 and 0.
+     *
      * @param amount how hard you press the brakes
      */
-    public void brake(double amount){
+    public void brake(double amount) {
         if (amount >= 0 & amount <= 1) {
             decrementSpeed(amount);
         }
