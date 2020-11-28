@@ -23,28 +23,6 @@ public class Scania extends Truck{
         stopEngine();
     }
 
-    /**
-     * Changes the state of the ramp to raised.
-     */
-    private void raiseRamp() {
-        ramp.raiseRamp();
-    }
-
-    /**
-     * Changes the state of the ramp to lowered.
-     */
-    private void lowerRamp() {
-        ramp.lowerRamp();
-    }
-
-    /**
-     * Checks if ramp can be raised.
-     * @return boolean true if ramp can be raised, otherwise boolean false.
-     */
-    public boolean isRampRaised() {
-        return ramp.isRampRaised();
-    }
-
     /** Gets platformAngle of the Scania
      *
      * @return the platformAngle of the Scania
@@ -59,6 +37,28 @@ public class Scania extends Truck{
      */
     public void setPlatformAngle(int platformAngle) {
         this.platformAngle = platformAngle;
+    }
+
+    /**
+     * Changes the state of the ramp to raised.
+     */
+    private void raiseRamp() {
+        ramp.raiseRamp();
+    }
+
+    /**
+     * Changes the state of the ramp to lowered.
+     */
+    public void lowerRamp() {
+        ramp.lowerRamp();
+    }
+
+    /**
+     * Checks if ramp can be raised.
+     * @return boolean true if ramp can be raised, otherwise boolean false.
+     */
+    public boolean isRampRaised() {
+        return ramp.isRampRaised();
     }
 
     /** Increases the angle of the platform
@@ -84,7 +84,6 @@ public class Scania extends Truck{
         setPlatformAngle(newAngle);
         raiseOrLowerRamp();
     }
-
 
     /** Determines whether the truck is in motion;
      * @return true if getCurrentSpeed() is equal to 0,
@@ -126,7 +125,6 @@ public class Scania extends Truck{
         return getPlatformAngle() > 0;
     }
 
-
     /** Returns a speedFactor based on Scania's enginePower.
      * @return the speedFactor
      * */
@@ -153,7 +151,6 @@ public class Scania extends Truck{
      * Starts the engine of the truck.
      * If the platform is raised, then the engine will not start.
      */
-
     @Override
     public void startEngine() {
         if(isPlatformRaised()) {
