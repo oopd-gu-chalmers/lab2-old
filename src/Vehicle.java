@@ -24,7 +24,7 @@ public abstract class Vehicle implements Movable{
     private double currentSpeed; // The current speed of the vehicle
     private Color color; // Color of the vehicle
     private String modelName; // The vehicle model name
-    private int directionAngle;
+    private int directionAngle; // the the angle that the vehicle is facing towards.
 
     public Vehicle(double x, double y, int nrDoors, double enginePower, double currentSpeed,
                    Color color, String modelName, int directionAngle){
@@ -38,7 +38,35 @@ public abstract class Vehicle implements Movable{
         this.directionAngle = directionAngle;
     }
 
+    /**
+     * Get the X coordinate (For testing purposes)
+     * @return the X coordinate of the vehicle
+     */
+    public double getX() {
+        return x;
+    }
 
+    /**
+     * Get the Y coordinate (For testing purposes)
+     * @return the Y coordinate of the vehicle
+     */
+    public double getY() {
+        return y;
+    }
+
+    /** Sets the x coordinate for vehicle
+     * @param x the X coordinate for the vehicle
+     */
+    public void setX(double x) {
+        this.x = x;
+    }
+
+    /** Sets the y coordinate for vehicle
+     * @param y the Y coordinate for the vehicle
+     */
+    public void setY(double y) {
+        this.y = y;
+    }
 
     /**
      * Get the number of doors
@@ -123,6 +151,26 @@ public abstract class Vehicle implements Movable{
         this.modelName = modelName;
     }
 
+    /**
+     * Gets the direction angle for the vehicle.
+     * @return the angle that the vehicle is facing towards.
+     */
+    public int getDirectionAngle() {
+        return directionAngle;
+    }
+
+    /**
+     * Sets the angle for which direction the vehicle is facing towards. With 0 degrees being up,
+     * -90 degrees being left, and 90 degrees being right
+     *
+     * @param directionAngle the angle that you want the vehicle to face towards.
+     */
+    private void setDirectionAngle(int directionAngle) {
+        this.directionAngle = directionAngle;
+    }
+
+
+
 
     /**
      * Start the engine
@@ -136,31 +184,6 @@ public abstract class Vehicle implements Movable{
      */
     public void stopEngine(){
         setCurrentSpeed(0);
-    }
-
-    /**
-     * Get the X coordinate (For testing purposes)
-     * @return the X coordinate of the vehicle
-     */
-    public double getX() {
-        return x;
-    }
-
-
-    /**
-     * Get the Y coordinate (For testing purposes)
-     * @return the Y coordinate of the vehicle
-     */
-    public double getY() {
-        return y;
-    }
-
-    public void setX(double x) {
-        this.x = x;
-    }
-
-    public void setY(double y) {
-        this.y = y;
     }
 
     /**
@@ -192,41 +215,18 @@ public abstract class Vehicle implements Movable{
         setDirectionAngle(directionAngle + angle);
     }
 
-
     /**
-     * Sets the angle for which direction the vehicle is facing towards. With 0 degrees being up,
-     * -90 degrees being left, and 90 degrees being right
-     *
-     * @param directionAngle the angle that you want the car to face towards.
-     */
-    private void setDirectionAngle(int directionAngle) {
-        this.directionAngle = directionAngle;
-    }
-
-    /**
-     * Gets the direction angle for the car.
-     * @return the angle that the car is facing towards.
-     */
-    public int getDirectionAngle() {
-        return directionAngle;
-    }
-
-    /**
-     * Helper method for testing purposes.
+     * toString method for testing purposes.
      * @return x and y coordinates, as well as currentSpeed in string format.
      */
-
     @Override
     public String toString(){
         return "( x: " + getX() + ", y: "  + getY() + ", currentSpeed: " + getCurrentSpeed() + ", " + ")";
     }
 
-    /*The following method exist in both Saab95 and Volvo240
-     * but the the method bodies are different for methods in Saab95 and Volvo
-     * But because the method name is the same we create an abstract method
-     * which then Saab95 and Volvo inherit and override
+    /** The speedFactor methods exist in both Saab95 and Volvo240.
+     * The speedFactor's return values are different for volvo.speedFactor() respectively saab.speedFactor()
      */
-
     public abstract double speedFactor();
 
     /** Increases the vehicle's currentSpeed.
