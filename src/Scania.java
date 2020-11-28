@@ -13,13 +13,13 @@ import java.awt.*;
  */
 public class Scania extends Truck{
 
-    private int platformAngle; // the angle the platform is at, the platform is considered a ramp
     private final Ramp ramp = new Ramp();
+    private int platformAngle; // the angle the platform is at, the platform is considered a ramp
 
     public Scania(int nrDoors, double enginePower, double currentSpeed,
                   Color color, String modelName){
         super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
-        platformAngle = 0; // set platformAngle to 0 ????
+        setPlatformAngle(0);
         stopEngine();
     }
 
@@ -27,7 +27,6 @@ public class Scania extends Truck{
      * Changes the state of the ramp to raised.
      */
     private void raiseRamp() {
-
         ramp.raiseRamp();
     }
 
