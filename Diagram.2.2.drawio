@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2020-11-28T20:49:22.642Z" agent="5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="5nBMW-ggSaoZG5AvXP5c" version="13.10.1" type="github">
+<mxfile host="app.diagrams.net" modified="2020-11-28T21:01:57.038Z" agent="5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.66 Safari/537.36" etag="Y7x4ZROoWVrAzg_slu8S" version="13.10.1" type="github">
   <diagram id="1R9pqmuIDQbFG5ekNz2X" name="Page-1">
-    <mxGraphModel dx="297" dy="2012" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
+    <mxGraphModel dx="246" dy="1950" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="1654" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -459,13 +459,10 @@
             <mxPoint x="2690" y="970" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-17" value="CarController" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=33;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
-          <mxGeometry x="2830" y="932" width="160" height="34" as="geometry" />
-        </mxCell>
-        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-18" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z_tI0dn7aJH7XG_BfM5y-15" target="Z_tI0dn7aJH7XG_BfM5y-17">
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-18" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z_tI0dn7aJH7XG_BfM5y-15" target="Z_tI0dn7aJH7XG_BfM5y-46">
           <mxGeometry x="-1" y="3" relative="1" as="geometry">
             <mxPoint x="2800" y="990" as="sourcePoint" />
-            <mxPoint x="2830" y="1021" as="targetPoint" />
+            <mxPoint x="3320" y="949" as="targetPoint" />
             <Array as="points">
               <mxPoint x="2780" y="1021" />
               <mxPoint x="2780" y="949" />
@@ -528,6 +525,70 @@
               <mxPoint x="2780" y="1247" />
             </Array>
           </mxGeometry>
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-46" value="CarController" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="3270" y="938" width="230" height="268" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-47" value="&lt;&lt;final&gt;&gt; - delay : int" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="26" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-54" value="- timer : Timer" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="52" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-53" value="* frame : CarView" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="78" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-55" value="* cars : ArrayList&lt;Car&gt;" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="104" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-48" value="" style="line;strokeWidth=1;fillColor=none;align=left;verticalAlign=middle;spacingTop=-1;spacingLeft=3;spacingRight=3;rotatable=0;labelPosition=right;points=[];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="130" width="230" height="8" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-69" value="* gas(amount : int) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="138" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-68" value="* brake(amount : int) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="164" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-67" value="public static void main(String[] args)" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="190" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-61" value="TimerListener" style="swimlane;fontStyle=1;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-46">
+          <mxGeometry y="216" width="230" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-62" value="+ actionPerformed(e : ActionEvent) : void" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" vertex="1" parent="Z_tI0dn7aJH7XG_BfM5y-61">
+          <mxGeometry y="26" width="230" height="26" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-56" value="Timer" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=33;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="3660" y="938" width="160" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-57" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z_tI0dn7aJH7XG_BfM5y-54" target="Z_tI0dn7aJH7XG_BfM5y-56">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="3507" y="1024" as="sourcePoint" />
+            <mxPoint x="3667" y="1024" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="3600" y="1003" />
+              <mxPoint x="3600" y="955" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-58" value="CarView" style="swimlane;fontStyle=1;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=33;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" vertex="1" parent="1">
+          <mxGeometry x="3660" y="1012" width="160" height="34" as="geometry" />
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-59" value="1" style="endArrow=open;html=1;endSize=12;startArrow=diamondThin;startSize=14;startFill=1;edgeStyle=orthogonalEdgeStyle;align=left;verticalAlign=bottom;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="Z_tI0dn7aJH7XG_BfM5y-53" target="Z_tI0dn7aJH7XG_BfM5y-58">
+          <mxGeometry x="-1" y="3" relative="1" as="geometry">
+            <mxPoint x="3540" y="1050" as="sourcePoint" />
+            <mxPoint x="3640" y="1029" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-65" value="" style="endArrow=block;dashed=1;endFill=0;endSize=12;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" edge="1" parent="1" source="Z_tI0dn7aJH7XG_BfM5y-61" target="Z_tI0dn7aJH7XG_BfM5y-66">
+          <mxGeometry width="160" relative="1" as="geometry">
+            <mxPoint x="3530" y="1090" as="sourcePoint" />
+            <mxPoint x="3660" y="1090" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Z_tI0dn7aJH7XG_BfM5y-66" value="«interface»&lt;br&gt;&lt;b&gt;ActionListener&lt;/b&gt;" style="html=1;" vertex="1" parent="1">
+          <mxGeometry x="3690" y="1144" width="110" height="50" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
