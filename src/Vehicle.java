@@ -193,8 +193,8 @@ public abstract class Vehicle implements Movable{
     @Override
     public void move() {
         double angleInRadian = directionAngle *(Math.PI/180);
-        x = sin(angleInRadian) * getCurrentSpeed();
-        y = cos(angleInRadian) * getCurrentSpeed();
+        x = getX() + sin(angleInRadian) * getCurrentSpeed();
+        y = getY() +  cos(angleInRadian) * getCurrentSpeed();
     }
 
     /**
