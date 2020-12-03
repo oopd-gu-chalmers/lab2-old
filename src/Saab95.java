@@ -10,6 +10,12 @@ import java.awt.*;
 public class Saab95 extends Car {
 private Turbo turbo = new Turbo();
 
+    public Saab95(double x, double y,int nrDoors, double enginePower, double currentSpeed,
+                  Color color, String modelName, int directionAngle){
+        super(x,y, nrDoors, enginePower, currentSpeed, color, modelName,directionAngle);
+        setTurboOff();
+        stopEngine();
+    }
 
     public Saab95(int nrDoors, double enginePower, double currentSpeed,
                   Color color, String modelName){

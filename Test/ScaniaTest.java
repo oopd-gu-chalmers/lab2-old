@@ -5,8 +5,26 @@ import java.awt.*;
 import static org.junit.Assert.*;
 
 class ScaniaTest {
-/*
+
     Scania scania = new Scania(2,350,0, Color.green,"Scania" );
+
+    @Test
+    public void isRampRaised() {
+        assertFalse(scania.isRampRaised());
+    }
+
+    @Test
+    public void raisePlatform() {
+        scania.raisePlatformAngle(60);
+        assertTrue(scania.isRampRaised());
+    }
+
+    @Test
+    public void lowerPlatform() {
+        scania.lowerPlatformAngle(60);
+        assertFalse(scania.isRampRaised());
+    }
+    /*
     @Test
     public void getPlatformAngle() {
         assertEquals(0, scania.getPlatformAngle());

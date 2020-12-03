@@ -84,7 +84,7 @@ public class CarTest {
         volvo240.startEngine();
         volvo240.gas(1);
         volvo240.move();
-        assertEquals(1.35, volvo240.getY(), 0.001);
+        assertEquals(-1.35, volvo240.getY(), 0.001);
     }
 
     @Test

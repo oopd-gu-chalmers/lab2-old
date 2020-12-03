@@ -16,10 +16,19 @@ public class Scania extends Truck{
     private final Ramp ramp = new Ramp();
     private int platformAngle; // the angle the platform is at, the platform is considered a ramp
 
+    public Scania(double x, double y, int nrDoors, double enginePower, double currentSpeed,
+                  Color color, String modelName, int directionAngle){
+        super(x,y, nrDoors, enginePower, currentSpeed, color, modelName,directionAngle);
+        setPlatformAngle(0);
+        ramp.lowerRamp();
+        stopEngine();
+    }
+
     public Scania(int nrDoors, double enginePower, double currentSpeed,
                   Color color, String modelName){
         super(0,0, nrDoors, enginePower, currentSpeed, color, modelName,0);
         setPlatformAngle(0);
+        ramp.lowerRamp();
         stopEngine();
     }
 
@@ -49,7 +58,7 @@ public class Scania extends Truck{
     /**
      * Changes the state of the ramp to lowered.
      */
-    public void lowerRamp() {
+    private void lowerRamp() {
         ramp.lowerRamp();
     }
 
@@ -142,7 +151,7 @@ public class Scania extends Truck{
      */
     @Override
     public void gas(double amount) {
-        if(isPlatformRaised()) {
+        if(!isRampRaised()) {
             super.gas(amount);
         }
     }
@@ -153,8 +162,14 @@ public class Scania extends Truck{
      */
     @Override
     public void startEngine() {
-        if(isPlatformRaised()) {
+        if(!isRampRaised()) {
             super.startEngine();
+        }
+    }
+
+    public void move(){
+        if(!isRampRaised()  ) {
+            super.move();
         }
     }
 }
