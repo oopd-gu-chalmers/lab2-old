@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 import static java.lang.Math.*;
 
@@ -26,6 +27,7 @@ public abstract class Vehicle implements Movable {
     private Color color; // Color of the vehicle
     private String modelName; // The vehicle model name
     private int directionAngle; // the the angle that the vehicle is facing towards.
+    private BufferedImage image; // an image of a Vehicle in a Canvas
 
     public Vehicle(double x, double y, int nrDoors, double enginePower, double currentSpeed,
                    Color color, String modelName, int directionAngle) {
@@ -37,6 +39,19 @@ public abstract class Vehicle implements Movable {
         this.color = color;
         this.modelName = modelName;
         this.directionAngle = directionAngle;
+    }
+
+    public Vehicle(double x, double y, int nrDoors, double enginePower, double currentSpeed,
+                   Color color, String modelName, int directionAngle, BufferedImage image) {
+        this.x = x;
+        this.y = y;
+        this.nrDoors = nrDoors;
+        this.enginePower = enginePower;
+        this.currentSpeed = currentSpeed;
+        this.color = color;
+        this.modelName = modelName;
+        this.directionAngle = directionAngle;
+        this.image = image;
     }
 
     /**
@@ -187,6 +202,13 @@ public abstract class Vehicle implements Movable {
         this.directionAngle = directionAngle;
     }
 
+    /** Gets the image for the vehicle
+     *
+     * @return an image of a Vehicle in a Canvas
+     */
+    public BufferedImage getImage() {
+        return image;
+    }
 
     /**
      * Start the engine
