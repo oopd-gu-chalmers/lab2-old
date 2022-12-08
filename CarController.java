@@ -1,65 +1,163 @@
-import javax.swing.*;
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-/*
-* This class represents the Controller part in the MVC pattern.
-* It's responsibilities is to listen to the View and responds in a appropriate manner by
-* modifying the model state and the updating the view.
- */
+import java.util.Iterator;
+import javax.swing.Timer;
 
 public class CarController {
-    // member fields:
-
-    // The delay (ms) corresponds to 20 updates a sec (hz)
     private final int delay = 50;
-    // The timer is started with an listener (see below) that executes the statements
-    // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
-
-    // The frame that represents this instance View of the MVC pattern
+    private Timer timer = new Timer(50, new CarController.TimerListener());
     CarView frame;
-    // A list of cars, modify if needed
-    ArrayList<ACar> cars = new ArrayList<>();
+    public ArrayList<Vehicle> vehicles = new ArrayList();
 
-    //methods:
+    public CarController() {
+    }
 
     public static void main(String[] args) {
-        // Instance of this class
         CarController cc = new CarController();
-
-        cc.cars.add(new Volvo240());
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
+        cc.vehicles.add(new Saab95());
+        cc.vehicles.add(new Volvo240());
+        cc.vehicles.add(new Scania());
+        cc.frame = new CarView("CarSim 1.0");
+        cc.takeInput();
         cc.timer.start();
     }
 
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
-    private class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
-            for (ACar car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getPosition().getX());
-                int y = (int) Math.round(car.getPosition().getY());
-                frame.drawPanel.moveit(x, y);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+    public void takeInput() {
+        this.frame.gasButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CarController.this.gas(CarController.this.frame.gasAmount);
             }
-        }
+        });
+        this.frame.brakeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CarController.this.brake(CarController.this.frame.gasAmount);
+            }
+        });
+        this.frame.turboOnButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CarController.this.turboOn();
+            }
+        });
+        this.frame.turboOffButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CarController.this.turboOff();
+            }
+        });
+        this.frame.stopButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CarController.this.stopAllCars();
+            }
+        });
+        this.frame.startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                CarController.this.startAllCars();
+            }
+        });
     }
 
-    // Calls the gas method for each car once
     void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (ACar car : cars
-                ) {
-            car.gas(gas);
+        double gas = (double)amount / 100.0D;
+        Iterator var4 = this.vehicles.iterator();
+
+        while(var4.hasNext()) {
+            Vehicle vehicle = (Vehicle)var4.next();
+            vehicle.gas(gas);
+        }
+
+    }
+
+    void brake(int amount) {
+        double brake = (double)amount / 100.0D;
+        Iterator var4 = this.vehicles.iterator();
+
+        while(var4.hasNext()) {
+            Vehicle vehicle = (Vehicle)var4.next();
+            vehicle.brake(brake);
+        }
+
+    }
+
+    void turboOn() {
+        Iterator var1 = this.vehicles.iterator();
+
+        while(var1.hasNext()) {
+            Vehicle vehicle = (Vehicle)var1.next();
+            if (vehicle instanceof Saab95) {
+                ((Saab95)vehicle).setTurboOn();
+            }
+        }
+
+    }
+
+    void turboOff() {
+        Iterator var1 = this.vehicles.iterator();
+
+        while(var1.hasNext()) {
+            Vehicle vehicle = (Vehicle)var1.next();
+            if (vehicle instanceof Saab95) {
+                ((Saab95)vehicle).setTurboOff();
+            }
+        }
+
+    }
+
+    void stopAllCars() {
+        Iterator var1 = this.vehicles.iterator();
+
+        while(var1.hasNext()) {
+            Vehicle vehicle = (Vehicle)var1.next();
+            vehicle.stopEngine();
+        }
+
+    }
+
+    void startAllCars() {
+        Iterator var1 = this.vehicles.iterator();
+
+        while(var1.hasNext()) {
+            Vehicle vehicle = (Vehicle)var1.next();
+            vehicle.startEngine();
+        }
+
+    }
+
+    private class TimerListener implements ActionListener {
+        private TimerListener() {
+        }
+
+        public void actionPerformed(ActionEvent e) {
+            for(Iterator var2 = CarController.this.vehicles.iterator(); var2.hasNext(); CarController.this.frame.drawPanel.repaint()) {
+                Vehicle vehicle = (Vehicle)var2.next();
+                vehicle.move();
+                int x = (int)Math.round(vehicle.getxPosition());
+                int y = (int)Math.round(vehicle.getyPosition());
+                if (vehicle instanceof Volvo240) {
+                    CarController.this.frame.drawPanel.moveVolvo(x, y);
+                }
+
+                if (vehicle instanceof Saab95) {
+                    CarController.this.frame.drawPanel.moveSaab(x, y);
+                }
+
+                if (vehicle instanceof Scania) {
+                    CarController.this.frame.drawPanel.moveScania(x, y);
+                }
+
+                if (vehicle.getyPosition() >= 500.0D) {
+                    vehicle.setDirection(3);
+                }
+
+                if (vehicle.getyPosition() <= 0.0D) {
+                    vehicle.setDirection(1);
+                }
+            }
+
         }
     }
 }
