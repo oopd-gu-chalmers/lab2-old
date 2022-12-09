@@ -1,7 +1,4 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
+
 
 import java.util.ArrayList;
 
@@ -22,6 +19,6 @@ public class CarWorkshop<T extends Car> {
     }
 
     public T unloadCar() {
-        return this.carInWorkshop.size() > 0 ? (Car)this.carInWorkshop.remove(0) : null;
+        return this.carInWorkshop.size() > 0 ? (T)this.carInWorkshop.remove(0) : null;
     }
 }

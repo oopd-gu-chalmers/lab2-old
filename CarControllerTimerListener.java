@@ -1,13 +1,12 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
+
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Iterator;
 
 class CarController$TimerListener implements ActionListener {
+    private CarController this$0;
+
     private CarController$TimerListener(CarController var1) {
         this.this$0 = var1;
     }
