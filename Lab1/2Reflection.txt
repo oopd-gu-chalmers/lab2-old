@@ -1,0 +1,34 @@
+# laboration 1/2
+
+1.) The inheritance hierarchy in this code follows the Open-Closed Principle, 
+    which states that software entities (classes, modules, etc.) should be open for extension but closed for modification. 
+    In other words, new behavior should be added by creating new classes instead of modifying existing ones.
+    In this case, the **`Car`** class is a generic class that provides common properties and methods for all cars. 
+    It is designed to be extended by more specific classes, such as **`Volvo240`** and **`Saab95`**,
+    which inherit all the properties and methods of **`Car`** but add their own specific behavior.
+    This design follows the Open-Closed Principle because it allows new types of cars to be added to the system by creating new subclasses of **`Car`** 
+    without modifying the existing **`Car`** class. For example, if we wanted to add a **`TeslaModelS`** class to the system, 
+    we could create a new subclass of **`Car`** that sets the number of doors, engine power, color, and model name to the appropriate values for that car,
+    and override the **`speedFactor()`** method to reflect its electric powertrain. 
+    This would allow us to add new behavior without changing the existing **`Car`** class or breaking any existing code that uses it.
+    Overall, the inheritance hierarchy in this code is designed to be open for extension but closed for modification, 
+    which follows the Open-Closed Principle and makes the code more flexible and easier to maintain over time.
+
+2.) **`gas()`** and **`brake()`** only accept values in the interval [0, 1]:
+    
+    In both the **`gas()`** and **`brake()`** methods, an if statement is used to check if the input **`amount`** is within the range [0, 1]. 
+    If the input is within the valid range, the corresponding **`incrementSpeed()`** or **`decrementSpeed()`** method is called. If the input is outside the valid range, the method does nothing.
+
+    **`currentSpeed`** always lies in the interval [0, enginePower]:
+    
+    In the **`incrementSpeed()`** method, **`Math.min()`** is used to ensure that the new speed does not exceed the engine power. 
+    In the **`decrementSpeed()`** method, **`Math.max()`** is used to ensure that the new speed does not go below 0. After calculating the new speed, 
+    the **`setCurrentSpeed()`** method is called to update the **`currentSpeed`**.
+    Calls to **`gas()`** cannot result in the speed decreasing, and calls to **`brake()`** cannot result in the speed increasing:
+    
+    This is implicitly enforced by the **`incrementSpeed()`** and **`decrementSpeed()`** methods.
+     In the **`incrementSpeed()`** method, the new speed is calculated by adding a positive value (speedFactor() * amount) to the current speed, which ensures that the speed cannot decrease. 
+     In the **`decrementSpeed()`** method, the new speed is calculated by subtracting a positive value (speedFactor() * amount) from the current speed, which ensures that the speed cannot increase.
+    
+    The **`setCurrentSpeed()`** method: The **`setCurrentSpeed()`** method is added to enforce the **`currentSpeed`** constraints. 
+    It checks if the input speed is within the allowed range of [0, enginePower]. If it is within the valid range, the **`currentSpeed`** is updated; otherwise, the method does nothing.
