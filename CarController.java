@@ -26,6 +26,7 @@ public class CarController {
     public void takeInput() {
         this.frame.gasButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                System.out.println("tesy");
                 CarController.this.gas(CarController.this.frame.gasAmount);
             }
         });
