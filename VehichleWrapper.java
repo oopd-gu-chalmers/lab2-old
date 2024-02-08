@@ -2,6 +2,8 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
+import javax.imageio.ImageIO;
+
 import src.Vehichle;
 
 public class VehichleWrapper {
@@ -9,11 +11,13 @@ public class VehichleWrapper {
     private Point position; 
     private BufferedImage image;
 
-    public VehichleWrapper(Vehichle vehicle, Point position) {
+    public VehichleWrapper(Vehichle vehicle) {
         this.vehicle = vehicle;
-        this.position = position;
+        this.position = new Point();
+        this.position.x = (int) vehicle.getX();
+        this.position.y = (int) vehicle.getY();
         try {
-			this.image = javax.imageio.ImageIO.read(new java.io.File("src/" + vehicle.getModelName() + ".jpg"));
+			this.image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/"+vehicle.getModelName()+".jpg"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

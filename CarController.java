@@ -27,7 +27,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Vehichle> cars = new ArrayList<>();
+    ArrayList<VehichleWrapper> cars = new ArrayList<>();
 
     //methods:
 
@@ -35,12 +35,25 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240());
-        cc.cars.add(new Saab95());
-        cc.cars.add(new Scania());
+        Volvo240 volvo = new Volvo240();
+        Saab95 saab = new Saab95();
+        Scania scania = new Scania();
+        saab.setLocation(0, 100);
+        scania.setLocation(0, 200);
+        VehichleWrapper volvoWrapper = new VehichleWrapper(volvo);
+        VehichleWrapper saabWrapper = new VehichleWrapper(saab);
+        VehichleWrapper scaniaWrapper = new VehichleWrapper(scania);
+
+        cc.cars.add(volvoWrapper);
+        cc.cars.add(saabWrapper);
+        cc.cars.add(scaniaWrapper);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
+
+        cc.frame.drawPanel.addVehicles(volvoWrapper);
+        cc.frame.drawPanel.addVehicles(saabWrapper);
+        cc.frame.drawPanel.addVehicles(scaniaWrapper);
 
         // Start the timer
         cc.timer.start();
@@ -51,12 +64,12 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehichle car : cars) {
-                car.move();
+            for (VehichleWrapper vehichle : cars) {
+                vehichle.getVehicle().move();
                 checkInBounds(frame.getX(),frame.getY());
-                int x = (int) Math.round(car.getPosition().getX());
-                int y = (int) Math.round(car.getPosition().getY());
-                frame.drawPanel.moveit(car, x, y);
+                int x = (int) Math.round(vehichle.getVehicle().getX());
+                int y = (int) Math.round(vehichle.getVehicle().getY());
+                frame.drawPanel.moveit(vehichle.getVehicle(), x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -65,29 +78,29 @@ public class CarController {
 
     // Calls the gas method for each car once
     void gas(int amount) {
-        double gas = ((double) amount) / 100;for (Vehichle car : cars
+        double gas = ((double) amount) / 100;for (VehichleWrapper car : cars
                 ) {
-            car.gas(gas);
+            car.getVehicle().gas(gas);
         }
     }
     void brake(int amount) {
-        double brake = ((double) amount) / 100;for (Vehichle car : cars
+        double brake = ((double) amount) / 100;for (VehichleWrapper car : cars
         ) {
-            car.brake(brake);
+            car.getVehicle().brake(brake);
         }
     }
     void startCars() {
-        for (Vehichle car : cars)
-            car.startEngine();
+        for (VehichleWrapper car : cars)
+            car.getVehicle().startEngine();
     }
     void stopCars() {
-        for (Vehichle car : cars)
-            car.stopEngine();
+        for (VehichleWrapper car : cars)
+            car.getVehicle().stopEngine();
     }
     public void checkInBounds(int x, int y){
-        for (Vehichle car : cars) {
+        for (VehichleWrapper car : cars) {
             if (car.getX()>x-100 || car.getX()<0 || car.getY()>y+200 || car.getY()<-5) {
-                car.flipDirection();
+                car.getVehicle().flipDirection();
             }
         }
     }

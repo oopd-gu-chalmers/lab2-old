@@ -46,7 +46,8 @@ public abstract class Vehichle implements Movable{
         }
 
         public void startEngine() {
-            currentSpeed = 0.1;
+            if (currentSpeed == 0)
+                currentSpeed = 0.1;
         }
 
         public void stopEngine() {

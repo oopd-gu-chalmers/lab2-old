@@ -24,16 +24,14 @@ public class DrawPanel extends JPanel{
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 
-    void addVehicles() {
-        vehicles.add(new VehichleWrapper(new Volvo240(), new Point(0, 0)));
-        vehicles.add(new VehichleWrapper(new Saab95(), new Point(0, 100)));
-        vehicles.add(new VehichleWrapper(new Scania(), new Point(0, 200)));
+    void addVehicles(VehichleWrapper vehicle) {
+        vehicles.add(vehicle);
     }
 
     // TODO: Make this general for all cars
     void moveit(Vehichle vehichle, int x, int y){
         for (VehichleWrapper vehicle : vehicles) {
-            if (vehicle.getVehicle() == vehichle) {
+            if (vehicle.getVehicle().getModelName() == vehichle.getModelName()) {
                 vehicle.setPosition(x, y);
             }
         }
@@ -41,7 +39,6 @@ public class DrawPanel extends JPanel{
 
     // Initializes the panel and reads the images
     public DrawPanel(int x, int y) {
-        addVehicles();
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
