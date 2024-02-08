@@ -3,7 +3,7 @@ package src;
 import java.awt.*;
 import java.awt.geom.Point2D;
 
-abstract class Vehichle implements Movable{
+public abstract class Vehichle implements Movable{
     private int nrDoors; // Number of doors on the car
     protected double enginePower; // Engine power of the car
     private double currentSpeed = 0; // The current speed of the car
@@ -52,8 +52,8 @@ abstract class Vehichle implements Movable{
         public void stopEngine() {
             currentSpeed = 0;
         }
-        public void getModelName() {
-            System.out.println(modelName);
+        public String getModelName() {
+            return modelName;
         }
 
         @Override

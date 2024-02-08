@@ -5,7 +5,7 @@ import java.awt.*;
 public class Scania extends Truck{
     private static final int maxAngle = 70;
     private ScaniaPlatform carPlatform;
-    Scania(){
+    public Scania(){
         super(2, Color.BLACK, 500, "Scania");
         carPlatform = new ScaniaPlatform(maxAngle);
     }

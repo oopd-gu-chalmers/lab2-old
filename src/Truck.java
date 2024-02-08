@@ -2,7 +2,7 @@ package src;
 
 import java.awt.*;
 
-abstract class Truck extends Vehichle {
+public abstract class Truck extends Vehichle {
 
     Truck(int nrDoors, Color color, double enginePower, String modelName) {
         super(nrDoors, color, enginePower, modelName, 2);
