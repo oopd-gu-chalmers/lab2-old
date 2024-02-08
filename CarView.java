@@ -107,6 +107,24 @@ public class CarView extends JFrame{
                 carC.gas(gasAmount);
             }
         });
+        brakeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.brake(gasAmount);
+            }
+        });
+        startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.startCars();
+            }
+        });
+        stopButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                carC.stopCars();
+            }
+        });
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
@@ -119,5 +137,11 @@ public class CarView extends JFrame{
         this.setVisible(true);
         // Make sure the frame exits when "x" is pressed
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    }
+    public int getX(){
+        return X;
+    }
+    public int getY(){
+        return Y;
     }
 }
