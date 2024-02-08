@@ -12,6 +12,7 @@ public abstract class Vehichle implements Movable{
     private double direction = 0;
     private Point2D point;
     private int carSizeCategory;
+    private boolean isLoaded = false;
 
     public Vehichle(int nrDoors, Color color, double enginePower, String modelName, int category) {
         this.nrDoors = nrDoors;
@@ -24,6 +25,9 @@ public abstract class Vehichle implements Movable{
     }
     public int getNrDoors() {
         return nrDoors;
+    }
+    public void setLoaded(boolean loaded) {
+        isLoaded = loaded;
     }
     public int getCarSizeCategory() {
         return carSizeCategory;
@@ -59,7 +63,8 @@ public abstract class Vehichle implements Movable{
 
         @Override
         public void move() {
-            point.setLocation(point.getX() + Math.cos(direction) * currentSpeed, point.getY() + Math.sin(direction) * currentSpeed);
+            if (!isLoaded)
+                point.setLocation(point.getX() + Math.cos(direction) * currentSpeed, point.getY() + Math.sin(direction) * currentSpeed);
         }
 
         @Override
@@ -106,7 +111,7 @@ public abstract class Vehichle implements Movable{
 
         //skriv dokumentation
         public void gas(double amount) {
-            if (amount >= 0 && amount <= 1){
+            if (amount >= 0 && amount <= 1 && currentSpeed > 0){
                 incrementSpeed(amount);
             }
                 else {

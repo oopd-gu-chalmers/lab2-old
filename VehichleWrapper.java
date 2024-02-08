@@ -1,15 +1,12 @@
 import java.awt.Point;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
 import src.Vehichle;
 
-public class VehichleWrapper {
+public class VehichleWrapper extends Wrapper{
     private Vehichle vehicle;
-    private Point position; 
-    private BufferedImage image;
 
     public VehichleWrapper(Vehichle vehicle) {
         this.vehicle = vehicle;
@@ -23,20 +20,11 @@ public class VehichleWrapper {
 		}
             
     }
-    public int getX() {
-        return position.x;
+    public void moveit(){
+        position.x = (int) vehicle.getX();
+        position.y = (int) vehicle.getY();
     }
     public Vehichle getVehicle() {
         return vehicle;
     }
-    public int getY() {
-        return position.y;
-    }
-    public BufferedImage getImage() {
-        return image;
-    }
-    public void setPosition(int x, int y) {
-        this.position.setLocation(x,y);
-    }
-
 }

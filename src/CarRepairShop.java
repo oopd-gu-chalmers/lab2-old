@@ -3,18 +3,18 @@ package src;
 import java.awt.geom.Point2D;
 import java.util.Stack;
 
-class CarRepairShop<T extends Car> implements Loadable<T> {
+public class CarRepairShop<T extends Car> implements Loadable<T> {
     private CarLoader loadedCars;
     private Point2D shopLocation;
 
-    CarRepairShop(int capacity, double x, double y) {
+    public CarRepairShop(int capacity, double x, double y) {
         shopLocation = new Point2D.Double(x, y);
         loadedCars = new CarLoader(capacity);
     }
-    private double shopX() {
+    public double shopX() {
         return shopLocation.getX();
     }
-    private double shopY() {
+    public double shopY() {
         return shopLocation.getY();
     }
     public void unloadCar() {
@@ -22,6 +22,9 @@ class CarRepairShop<T extends Car> implements Loadable<T> {
     }
     public void loadCar(T car) {
         loadedCars.loadCar(car, shopX(), shopY());
+    }
+    public boolean loadable(T car){
+        return loadedCars.carProximity(car, shopX(), shopY());
     }
     public Stack<Car> getLoadedCars() {
         return loadedCars.getLoadedCars();

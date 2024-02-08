@@ -1,8 +1,9 @@
-import src.Car;
+
+import src.CarRepairShop;
 import src.Volvo240;
 import src.Saab95;
 import src.Scania;
-import src.Vehichle;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,7 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<VehichleWrapper> cars = new ArrayList<>();
-
+    ShopWrapper shopWrapper;
     //methods:
 
     public static void main(String[] args) {
@@ -44,6 +45,9 @@ public class CarController {
         VehichleWrapper saabWrapper = new VehichleWrapper(saab);
         VehichleWrapper scaniaWrapper = new VehichleWrapper(scania);
 
+        CarRepairShop<Volvo240> shop = new CarRepairShop<Volvo240>(3, 300,0);
+        cc.shopWrapper = new ShopWrapper(shop);
+
         cc.cars.add(volvoWrapper);
         cc.cars.add(saabWrapper);
         cc.cars.add(scaniaWrapper);
@@ -51,9 +55,10 @@ public class CarController {
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
-        cc.frame.drawPanel.addVehicles(volvoWrapper);
-        cc.frame.drawPanel.addVehicles(saabWrapper);
-        cc.frame.drawPanel.addVehicles(scaniaWrapper);
+        cc.frame.drawPanel.addItems(volvoWrapper);
+        cc.frame.drawPanel.addItems(saabWrapper);
+        cc.frame.drawPanel.addItems(scaniaWrapper);
+        cc.frame.drawPanel.addItems(cc.shopWrapper);
 
         // Start the timer
         cc.timer.start();
@@ -67,9 +72,10 @@ public class CarController {
             for (VehichleWrapper vehichle : cars) {
                 vehichle.getVehicle().move();
                 checkInBounds(frame.getX(),frame.getY());
-                int x = (int) Math.round(vehichle.getVehicle().getX());
-                int y = (int) Math.round(vehichle.getVehicle().getY());
-                frame.drawPanel.moveit(vehichle.getVehicle(), x, y);
+                vehichle.moveit();
+                if (vehichle.getVehicle() instanceof Volvo240 && shopWrapper.getShop().loadable((Volvo240) vehichle.getVehicle())) {
+                    shopWrapper.getShop().loadCar((Volvo240) vehichle.getVehicle());
+                }
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -97,9 +103,45 @@ public class CarController {
         for (VehichleWrapper car : cars)
             car.getVehicle().stopEngine();
     }
+    void turboOn() {
+        Saab95 saab;
+        for (VehichleWrapper car : cars) {
+            if (car.getVehicle() instanceof Saab95) {
+                saab = (Saab95) car.getVehicle();
+                saab.setTurboOn();
+            }
+        }
+    }
+    void turboOff() {
+        Saab95 saab;
+        for (VehichleWrapper car : cars) {
+            if (car.getVehicle() instanceof Saab95) {
+                saab = (Saab95) car.getVehicle();
+                saab.setTurboOff();
+            }
+        }
+    }
+    void liftPlatform() {
+        Scania scania;
+        for (VehichleWrapper car : cars) {
+            if (car.getVehicle() instanceof Scania) {
+                scania = (Scania) car.getVehicle();
+                scania.raisePlatform();
+            }
+        }
+    }
+    void lowerPlatform() {
+        Scania scania;
+        for (VehichleWrapper car : cars) {
+            if (car.getVehicle() instanceof Scania) {
+                scania = (Scania) car.getVehicle();
+                scania.lowerPlatform();
+            }
+        }
+    }
     public void checkInBounds(int x, int y){
         for (VehichleWrapper car : cars) {
-            if (car.getX()>x-100 || car.getX()<0 || car.getY()>y+200 || car.getY()<-5) {
+            if (car.getVehicle().getX()>x-100 || car.getVehicle().getX()<0 || car.getVehicle().getY()>y+200 || car.getVehicle().getY()<-5) {
                 car.getVehicle().flipDirection();
             }
         }

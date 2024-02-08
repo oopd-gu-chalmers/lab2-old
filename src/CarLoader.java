@@ -19,10 +19,15 @@ public class CarLoader{
             throw new IllegalStateException("Car too big to load");
         }
         if (loadedCars.size() < capacity){
+            if (loadedCars.contains(car)){
+                return;
+            }
             loadedCars.add(car);
             car.setLocation(x, y);
+            car.stopEngine();
+            car.setLoaded(true);
         } else {
-            throw new IllegalStateException("Truck is full");
+            throw new IllegalStateException("is full");
         }
     }
 
@@ -30,16 +35,17 @@ public class CarLoader{
         return loadedCars;
     }
 
-    private boolean carProximity(Car car, double x, double y){
+    public boolean carProximity(Car car, double x, double y){
         double xCar = car.getX();
         double yCar = car.getY();
         double dist = Math.sqrt(Math.pow(xCar-x,2)+Math.pow(yCar-y,2));
-        return dist < 1.5;
+        return dist < 3;
     }
     public void unloadCar() {
             if (!loadedCars.empty()){
                 Car car = loadedCars.pop();
                 car.setLocation(car.getX(), car.getY()-1);
+                car.setLoaded(false);
             } else {
                 throw new IllegalArgumentException("No car to unload");
             }

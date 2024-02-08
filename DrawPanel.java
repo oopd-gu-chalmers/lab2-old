@@ -1,40 +1,19 @@
 import java.awt.*;
-import java.awt.geom.Point2D;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import src.Scania;
-import src.Volvo240;
-import src.Saab95;
-import src.Vehichle;
 
 // This panel represents the animated part of the view with the car images.
 
 public class DrawPanel extends JPanel{
 
     // Just a single image, TODO: Generalize
-    ArrayList<VehichleWrapper> vehicles = new ArrayList<>();
+    ArrayList<Wrapper> items = new ArrayList<>();
 
-    BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
-
-    void addVehicles(VehichleWrapper vehicle) {
-        vehicles.add(vehicle);
+    void addItems(Wrapper item) {
+        items.add(item);
     }
-
-    // TODO: Make this general for all cars
-    void moveit(Vehichle vehichle, int x, int y){
-        for (VehichleWrapper vehicle : vehicles) {
-            if (vehicle.getVehicle().getModelName() == vehichle.getModelName()) {
-                vehicle.setPosition(x, y);
-            }
-        }
+    void removeItems(Wrapper item) {
+        items.remove(item);
     }
 
     // Initializes the panel and reads the images
@@ -42,20 +21,6 @@ public class DrawPanel extends JPanel{
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);
-        // Print an error message in case file is not found with a try/catch block
-        try {
-            // You can remove the "pics" part if running outside of IntelliJ and
-            // everything is in the same main folder.
-            // volvoImage = ImageIO.read(new File("Volvo240.jpg"));
-
-            // Rememember to rightclick src New -> Package -> name: pics -> MOVE *.jpg to pics.
-            // if you are starting in IntelliJ.
-            volvoWorkshopImage = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg"));
-        } catch (IOException ex)
-        {
-            ex.printStackTrace();
-        }
-
     }
 
     // This method is called each time the panel updates/refreshes/repaints itself
@@ -63,9 +28,8 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (VehichleWrapper vehicle : vehicles) {
-            g.drawImage(vehicle.getImage(), vehicle.getX(), vehicle.getY(), null);
+        for (Wrapper item : items) {
+            g.drawImage(item.getImage(), item.getX(), item.getY(), null);
         }
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
     }
 }
