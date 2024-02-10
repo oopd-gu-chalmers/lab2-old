@@ -23,6 +23,7 @@ public class CarController {
     CarView frame;
     //A list of cars, modify if needed
     ArrayList<Car> cars = new ArrayList<>();
+    ArrayList<Truck> trucks = new ArrayList();
 
     //methods:
 
@@ -31,6 +32,12 @@ public class CarController {
         CarController cc = new CarController();
 
         cc.cars.add(new Volvo240(4, 100, Color.BLACK, "ILoveVolvo"));
+
+        cc.cars.add(new Saab95(4,50,Color.RED,"ILoveSaab",true));
+
+        cc.trucks.add(new Scania(2, 20, Color.BLUE, "ILoveScania"));
+
+
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -106,4 +113,35 @@ public class CarController {
             car.stopEngine();
         }
     }
+
+    void turboOn() {
+        for (Car car : cars) {
+            if (car instanceof Saab95) {
+                Saab95 saab = (Saab95) car; // evetuellt kanske i någon annan del av progemmet? början?
+                saab.setTurboOn();
+            }
+        }
+    }
+
+    void turboOff() {
+        for (Car car : cars) {
+            if (car instanceof Saab95) {
+                Saab95 saab = (Saab95) car; // evetuellt kanske i någon annan del av progemmet? början?
+                saab.setTurboOff();
+            }
+        }
+    }
+    void liftBed() {
+        for (Truck truck : trucks) {
+            truck.raiseBed();
+            }
+        }
+    void lowerBed() {
+        for (Truck truck : trucks) {
+            truck.lowerBed();
+        }
+    }
+
 }
+
+
