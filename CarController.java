@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -23,7 +25,7 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     // A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
+    ArrayList<Vehicle> cars = new ArrayList<>();
 
     //methods:
 
@@ -34,7 +36,8 @@ public class CarController {
         cc.cars.add(new Volvo240());
         cc.cars.add(new Saab95());
         cc.cars.get(1).setCurrentPos(0, 100);
-
+        cc.cars.add(new Scania());
+        cc.cars.get(2).setCurrentPos(0, 200);
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
 
@@ -47,7 +50,7 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Car car : cars) {
+            for (Vehicle car : cars) {
                 if (car.getCurrentPos()[0] + frame.drawPanel.volvoImage.getWidth() >= frame.getPreferredSize().getWidth()){ // frame.drawPanel.volvoImage volvoImage is very hard coded change!
                     car.setDirection(car.getDirection() + 180);
                 } else if (car.getCurrentPos()[0] < 0) {
@@ -56,6 +59,7 @@ public class CarController {
                 car.move();
                 int x = (int) Math.round(car.getCurrentPos()[0]);
                 int y = (int) Math.round(car.getCurrentPos()[1]);
+                int index = cars.indexOf(car);
                 frame.drawPanel.moveit(cars);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
@@ -66,7 +70,7 @@ public class CarController {
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars)
+        for (Vehicle car : cars)
         {
             car.gas(gas);
         }
@@ -74,16 +78,56 @@ public class CarController {
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Car car : cars)
+        for (Vehicle car : cars)
         {
             car.brake(brake);
         }
     }
 
     void startEngines() {
-        for (Car car : cars)
+        for (Vehicle car : cars)
         {
             car.startEngine();
         }
     }
+
+    // void saabTurboOn() {
+    //     for (Vehicle car : cars)
+    //     {
+    //         if (car instanceof Saab95){
+    //             Saab95 saab = (Saab95) car;
+    //             saab.setTurboOn();
+    //         }    
+    //     }
+    // }
+
+    // void saabTurboOff() {
+    //     for (Vehicle car : cars)
+    //     {
+    //         if (car instanceof Saab95){
+    //             Saab95 saab = (Saab95) car;
+    //             saab.setTurboOff();
+    //         }    
+    //     }
+    // }
+
+    // void PlatformDown() {
+    //     for (Vehicle car : cars)
+    //     {
+    //         if (car instanceof TiltablePosterior){
+    //             TiltablePosterior tiltable = (TiltablePosterior) car;
+    //             tiltable.lowerTilt();
+    //         }    
+    //     }
+    // }
+
+    // void PlatformUp() {
+    //     for (Vehicle car : cars)
+    //     {
+    //         if (car instanceof TiltablePosterior){
+    //             TiltablePosterior tiltable = (TiltablePosterior) car;
+    //             tiltable.raiseTilt();
+    //         }    
+    //     }
+    // }
 }

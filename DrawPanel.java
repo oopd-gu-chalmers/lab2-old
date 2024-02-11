@@ -18,17 +18,14 @@ public class DrawPanel extends JPanel{
     // To keep track of a single car's position
     //Point carPoint = new Point();
 
-    ArrayList<Object[]> carPoints = new ArrayList<Object[]>();
+    ArrayList<Vehicle> cars = new ArrayList<>();
 
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 
     // TODO: Make this general for all cars
-    void moveit(ArrayList<Car> cars){
-        for (Car car: cars) {
-            Object[] carRepresentation = {(int) Math.round(car.getCurrentPos()[0]), (int) Math.round(car.getCurrentPos()[1]), car.getmodelName()};
-            carPoints.add(carRepresentation);
-        }
+    void moveit(ArrayList<Vehicle> cars){
+        this.cars = cars;
     }
 
     // Initializes the panel and reads the images
@@ -60,17 +57,17 @@ public class DrawPanel extends JPanel{
     @Override
     protected void paintComponent(Graphics g) { // NOT GOOD!
         super.paintComponent(g);
-        for (Object[] list : carPoints) {
-            int x = (int) list[0];
-            int y = (int) list[1];
-            String modelName = (String) list[2];
-            if (modelName == "Saab95") {
+        for(Vehicle car : cars) {
+            int x = (int) Math.round(car.getCurrentPos()[0]);
+            int y = (int) Math.round(car.getCurrentPos()[1]);
+            if (car.getmodelName() == "Saab95") {
                 g.drawImage(saabImage, x, y, null); // see javadoc for more info on the parameters
-            } else if (modelName == "Volvo240") {
+            } else if (car.getmodelName() == "Volvo240") {
                 g.drawImage(volvoImage, x, y, null);
+            } else if (car.getmodelName() == "Scania") {
+                g.drawImage(scaniaImage, x, y, null);
             }
-        }
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
-        carPoints.clear();
+        }
     }
 }

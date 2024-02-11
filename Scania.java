@@ -2,7 +2,7 @@ import java.awt.*;
 
 public class Scania extends Truck {
     
-    private double platformDegree;
+    private double platformDegree = 0;
     private double maxPlatformDegree;
     private final double AngleTick = 10;
 
