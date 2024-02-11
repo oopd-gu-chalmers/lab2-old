@@ -32,6 +32,8 @@ public class CarController {
         CarController cc = new CarController();
 
         cc.cars.add(new Volvo240());
+        cc.cars.add(new Saab95());
+        cc.cars.get(1).setCurrentPos(0, 100);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -46,10 +48,15 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Car car : cars) {
+                if (car.getCurrentPos()[0] + frame.drawPanel.volvoImage.getWidth() >= frame.getPreferredSize().getWidth()){ // frame.drawPanel.volvoImage volvoImage is very hard coded change!
+                    car.setDirection(car.getDirection() + 180);
+                } else if (car.getCurrentPos()[0] < 0) {
+                    car.setDirection(car.getDirection() - 180);
+                }
                 car.move();
                 int x = (int) Math.round(car.getCurrentPos()[0]);
                 int y = (int) Math.round(car.getCurrentPos()[1]);
-                frame.drawPanel.moveit(x, y);
+                frame.drawPanel.moveit(cars);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
@@ -62,6 +69,21 @@ public class CarController {
         for (Car car : cars)
         {
             car.gas(gas);
+        }
+    }
+
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (Car car : cars)
+        {
+            car.brake(brake);
+        }
+    }
+
+    void startEngines() {
+        for (Car car : cars)
+        {
+            car.startEngine();
         }
     }
 }

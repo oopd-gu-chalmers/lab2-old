@@ -2,6 +2,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -14,15 +16,19 @@ public class DrawPanel extends JPanel{
     BufferedImage scaniaImage;
     BufferedImage saabImage;
     // To keep track of a single car's position
-    Point carPoint = new Point();
+    //Point carPoint = new Point();
+
+    ArrayList<Object[]> carPoints = new ArrayList<Object[]>();
 
     BufferedImage volvoWorkshopImage;
     Point volvoWorkshopPoint = new Point(300,300);
 
     // TODO: Make this general for all cars
-    void moveit(int x, int y){
-        carPoint.x = x;
-        carPoint.y = y;
+    void moveit(ArrayList<Car> cars){
+        for (Car car: cars) {
+            Object[] carRepresentation = {(int) Math.round(car.getCurrentPos()[0]), (int) Math.round(car.getCurrentPos()[1]), car.getmodelName()};
+            carPoints.add(carRepresentation);
+        }
     }
 
     // Initializes the panel and reads the images
@@ -52,9 +58,19 @@ public class DrawPanel extends JPanel{
     // This method is called each time the panel updates/refreshes/repaints itself
     // TODO: Change to suit your needs.
     @Override
-    protected void paintComponent(Graphics g) {
+    protected void paintComponent(Graphics g) { // NOT GOOD!
         super.paintComponent(g);
-        g.drawImage(volvoImage, carPoint.x, carPoint.y, null); // see javadoc for more info on the parameters
+        for (Object[] list : carPoints) {
+            int x = (int) list[0];
+            int y = (int) list[1];
+            String modelName = (String) list[2];
+            if (modelName == "Saab95") {
+                g.drawImage(saabImage, x, y, null); // see javadoc for more info on the parameters
+            } else if (modelName == "Volvo240") {
+                g.drawImage(volvoImage, x, y, null);
+            }
+        }
         g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
+        carPoints.clear();
     }
 }
