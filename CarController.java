@@ -26,6 +26,7 @@ public class CarController {
     CarView frame;
     // A list of cars, modify if needed
     ArrayList<Vehicle> cars = new ArrayList<>();
+    Workshop<Volvo240> workshop = new Workshop<Volvo240>(500, 0, 2);
 
     //methods:
 
@@ -40,7 +41,7 @@ public class CarController {
         cc.cars.get(2).setCurrentPos(0, 200);
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
-
+        cc.frame.drawPanel.loadWorkshop(cc.workshop);
         // Start the timer
         cc.timer.start();
     }
@@ -56,7 +57,9 @@ public class CarController {
                 } else if (car.getCurrentPos()[0] < 0) {
                     car.setDirection(car.getDirection() - 180);
                 }
+                
                 car.move();
+                checkForCollisionWithWorkshop();
                 int x = (int) Math.round(car.getCurrentPos()[0]);
                 int y = (int) Math.round(car.getCurrentPos()[1]);
                 int index = cars.indexOf(car);
@@ -72,7 +75,11 @@ public class CarController {
         double gas = ((double) amount) / 100;
         for (Vehicle car : cars)
         {
-            car.gas(gas);
+            try {
+                car.gas(gas);
+            } catch(Exception IllegalStateException) {
+                continue;
+            }
         }
     }
 
@@ -91,43 +98,66 @@ public class CarController {
         }
     }
 
-    // void saabTurboOn() {
-    //     for (Vehicle car : cars)
-    //     {
-    //         if (car instanceof Saab95){
-    //             Saab95 saab = (Saab95) car;
-    //             saab.setTurboOn();
-    //         }    
-    //     }
-    // }
+    void stopEngines() {
+        for (Vehicle car : cars)
+        {
+            car.stopEngine();
+        }
+    }
 
-    // void saabTurboOff() {
-    //     for (Vehicle car : cars)
-    //     {
-    //         if (car instanceof Saab95){
-    //             Saab95 saab = (Saab95) car;
-    //             saab.setTurboOff();
-    //         }    
-    //     }
-    // }
+    void saabTurboOn() {
+        for (Vehicle car : cars)
+        {
+            if (car instanceof Saab95){
+                Saab95 saab = (Saab95) car;
+                saab.setTurboOn();
+            }    
+        }
+    }
 
-    // void PlatformDown() {
-    //     for (Vehicle car : cars)
-    //     {
-    //         if (car instanceof TiltablePosterior){
-    //             TiltablePosterior tiltable = (TiltablePosterior) car;
-    //             tiltable.lowerTilt();
-    //         }    
-    //     }
-    // }
+    void saabTurboOff() {
+        for (Vehicle car : cars)
+        {
+            if (car instanceof Saab95){
+                Saab95 saab = (Saab95) car;
+                saab.setTurboOff();
+            }    
+        }
+    }
 
-    // void PlatformUp() {
-    //     for (Vehicle car : cars)
-    //     {
-    //         if (car instanceof TiltablePosterior){
-    //             TiltablePosterior tiltable = (TiltablePosterior) car;
-    //             tiltable.raiseTilt();
-    //         }    
-    //     }
-    // }
+    void PlatformDown() {
+        for (Vehicle car : cars)
+        {
+            if (car instanceof TiltablePosterior){
+                TiltablePosterior tiltable = (TiltablePosterior) car;
+                tiltable.lowerTilt();
+            }    
+        }
+    }
+
+    void PlatformUp() {
+        for (Vehicle car : cars)
+        {
+            if (car instanceof TiltablePosterior){
+                TiltablePosterior tiltable = (TiltablePosterior) car;
+                tiltable.raiseTilt();
+            }    
+        }
+    }
+
+    void checkForCollisionWithWorkshop() {
+        for (Vehicle car : cars) {
+            double car_x = car.getCurrentPos()[0] + frame.drawPanel.volvoImage.getWidth() / 2; //VolvoImage not optimal, but easiest. should define constant for image size.
+            double car_y = car.getCurrentPos()[1] + frame.drawPanel.volvoImage.getHeight() / 2;
+            double workshop_x = workshop.getCurrentPos()[0] + frame.drawPanel.volvoWorkshopImage.getWidth() / 2; //Same here.
+            double workshop_y = workshop.getCurrentPos()[1] + frame.drawPanel.volvoWorkshopImage.getHeight() / 2;
+            double distance = Math.sqrt(Math.pow(workshop_x - car_x, 2) + Math.pow(workshop_y - car_y, 2));
+            if (car instanceof Volvo240) {
+                workshop.load((Volvo240) car);
+                if (workshop.getCurrentLoad().contains(car)) {
+                    car.stopEngine();
+                }
+            }
+        }
+    }
 }

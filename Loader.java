@@ -16,7 +16,7 @@ public class Loader<B extends ObjectWithPosition>{ //loading utility class. Take
         double x = Math.abs(parent.getCurrentPos()[0] - vehicle.getCurrentPos()[0]);
         double y = Math.abs(parent.getCurrentPos()[1] - vehicle.getCurrentPos()[1]);
         double distance = Math.sqrt(x*x+y*y);
-        if (distance < 5) {
+        if (distance < 50) { //maybe should be elsewhere??
             return true;
         }
         else {

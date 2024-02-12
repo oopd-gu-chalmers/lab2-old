@@ -15,17 +15,20 @@ public class DrawPanel extends JPanel{
     BufferedImage volvoImage;
     BufferedImage scaniaImage;
     BufferedImage saabImage;
+    BufferedImage volvoWorkshopImage;
     // To keep track of a single car's position
     //Point carPoint = new Point();
 
     ArrayList<Vehicle> cars = new ArrayList<>();
-
-    BufferedImage volvoWorkshopImage;
-    Point volvoWorkshopPoint = new Point(300,300);
+    Workshop<?> workshop;
 
     // TODO: Make this general for all cars
     void moveit(ArrayList<Vehicle> cars){
         this.cars = cars;
+    }
+
+    void loadWorkshop(Workshop<?> workshops) { //Load workshops should handle multiple workshops?
+        this.workshop = workshops;
     }
 
     // Initializes the panel and reads the images
@@ -67,7 +70,10 @@ public class DrawPanel extends JPanel{
             } else if (car.getmodelName() == "Scania") {
                 g.drawImage(scaniaImage, x, y, null);
             }
-        g.drawImage(volvoWorkshopImage, volvoWorkshopPoint.x, volvoWorkshopPoint.y, null);
         }
+        int x = (int) Math.round(workshop.getCurrentPos()[0]);
+        int y = (int) Math.round(workshop.getCurrentPos()[1]);
+        g.drawImage(volvoWorkshopImage, x, y, null);
     }
 }
+
