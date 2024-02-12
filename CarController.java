@@ -22,8 +22,8 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     //A list of cars, modify if needed
-    ArrayList<Car> cars = new ArrayList<>();
-    ArrayList<Truck> trucks = new ArrayList();
+    ArrayList<Vehicle> vehicles = new ArrayList<>();
+    // ArrayList<Truck> trucks = new ArrayList();
 
     //methods:
 
@@ -31,13 +31,18 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        cc.cars.add(new Volvo240(4, 100, Color.BLACK, "ILoveVolvo"));
+        Volvo240 volvo = new Volvo240(4, 100, Color.BLACK, "ILoveVolvo");
+        cc.vehicles.add(volvo);
 
-        cc.cars.add(new Saab95(4,50,Color.RED,"ILoveSaab",true));
+        Saab95 saab = new Saab95(4,50,Color.RED,"ILoveSaab",true);
+        cc.vehicles.add(saab);
+        saab.setXPos(0);
+        saab.setYPos(100);
 
-        cc.trucks.add(new Scania(2, 20, Color.BLUE, "ILoveScania"));
-
-
+        Scania scania = new Scania(2, 20, Color.BLUE, "ILoveScania");
+        cc.vehicles.add(scania);
+        scania.setXPos(0);
+        scania.setYPos(200);
 
         // Start a new view and send a reference of self
         cc.frame = new CarView("CarSim 1.0", cc);
@@ -50,94 +55,129 @@ public class CarController {
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
+//        public void actionPerformed(ActionEvent e) {
+//            int maxX = frame.drawPanel.getWidth();
+//            int maxY = frame.drawPanel.getWidth()-200;
+//
+//            for (Vehicle vehicle : vehicles) {
+//                vehicle.move();
+//                int x = (int) Math.round(vehicle.getXPos());
+//                int y = (int) Math.round(vehicle.getYPos());
+//                if (x < 0) {
+//                    x = 0;
+//                    vehicle.setDirection(-vehicle.getDirection());
+//                }
+//                else if (x> maxX) {
+//                    vehicle.setXPos(maxX);
+//                    vehicle.setDirection(-vehicle.getDirection());
+//                }
+//
+//                if (y < 0) {
+//                    y = 0;
+//                    vehicle.setDirection(-vehicle.getDirection());
+//                }
+//                else if (y > maxY) {
+//                    vehicle.setYPos(maxY);
+//                    vehicle.setDirection(-vehicle.getDirection());
+//                }
+//
+//                frame.drawPanel.moveit(vehicle, x, y);
+//                // repaint() calls the paintComponent method of the panel
+//                frame.drawPanel.repaint();
+//            }
+//        }
+//    }
+
+
         public void actionPerformed(ActionEvent e) {
-            int maxX = frame.drawPanel.getWidth();
-            int maxY = frame.drawPanel.getWidth()-200;
+            for (Vehicle vehicle : vehicles) {
+                vehicle.move(); // Låt varje Vehicle själv hantera sin rörelse och gränskontroll
 
-            for (Car car : cars) {
-                car.move();
-                int x = (int) Math.round(car.getXPos());
-                int y = (int) Math.round(car.getYPos());
-                if (x < 0) {
-                    x = 0;
-                    car.setDirection(-car.getDirection());
-                }
-                else if (x> maxX) {
-                    car.setXPos(maxX);
-                    car.setDirection(-car.getDirection());
-                }
-
-                if (y < 0) {
-                    y = 0;
-                    car.setDirection(-car.getDirection());
-                }
-                else if (y > maxY) {
-                    car.setYPos(maxY);
-                    car.setDirection(-car.getDirection());
-                }
-
-                frame.drawPanel.moveit(x, y);
-                // repaint() calls the paintComponent method of the panel
-                frame.drawPanel.repaint();
+                // Gränskontroll kan hanteras här eller inuti vehicle.move()
+                checkAndCorrectPosition(vehicle);
             }
+
+            frame.drawPanel.repaint(); // Uppdatera vy efter att alla fordon har flyttat
+        }
+    }
+
+    private void checkAndCorrectPosition(Vehicle vehicle) {
+        int maxX = frame.drawPanel.getWidth();
+        int maxY = frame.drawPanel.getHeight() - 200; // Justera -200 baserat på dina behov
+
+        // Använd getXPos() och getYPos() för att få fordonets position
+        double x = vehicle.getXPos();
+        double y = vehicle.getYPos();
+
+        // Korrigerar positionen och riktningen om fordonet når gränserna
+        if (x < 0 || x > maxX) {
+            vehicle.setDirection(-vehicle.getDirection());
+            vehicle.setXPos(x < 0 ? 0 : maxX);
+        }
+
+        if (y < 0 || y > maxY) {
+            vehicle.setDirection(-vehicle.getDirection());
+            vehicle.setYPos(y < 0 ? 0 : maxY);
         }
     }
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Car car : cars
+        for (Vehicle vehicle : vehicles
                 ) {
-            car.gas(gas);
+            vehicle.gas(gas);
         }
     }
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Car car : cars
+        for (Vehicle vehicle : vehicles
         ) {
-            car.brake(brake);
+            vehicle.brake(brake);
         }
     }
 
     void startEngine() {
-        for (Car car : cars
+        for (Vehicle vehicle : vehicles
         ) {
-            car.startEngine();
+            vehicle.startEngine();
         }
     }
 
     void stopEngine() {
-        for (Car car : cars
+        for (Vehicle vehicle : vehicles
         ) {
-            car.stopEngine();
+            vehicle.stopEngine();
         }
     }
 
     void turboOn() {
-        for (Car car : cars) {
-            if (car instanceof Saab95) {
-                Saab95 saab = (Saab95) car; // evetuellt kanske i någon annan del av progemmet? början?
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle instanceof Saab95) {
+                Saab95 saab = (Saab95) vehicle; // evetuellt kanske i någon annan del av progemmet? början?
                 saab.setTurboOn();
             }
         }
     }
 
     void turboOff() {
-        for (Car car : cars) {
-            if (car instanceof Saab95) {
-                Saab95 saab = (Saab95) car; // evetuellt kanske i någon annan del av progemmet? början?
+        for (Vehicle vehicle : vehicles) {
+            if (vehicle instanceof Saab95) {
+                Saab95 saab = (Saab95) vehicle; // evetuellt kanske i någon annan del av progemmet? början?
                 saab.setTurboOff();
             }
         }
     }
     void liftBed() {
-        for (Truck truck : trucks) {
+        for (Vehicle vehicle : vehicles) {
+            Truck truck = (Truck) vehicle;
             truck.raiseBed();
             }
         }
     void lowerBed() {
-        for (Truck truck : trucks) {
+        for (Vehicle vehicle : vehicles) {
+            Truck truck = (Truck) vehicle;
             truck.lowerBed();
         }
     }
