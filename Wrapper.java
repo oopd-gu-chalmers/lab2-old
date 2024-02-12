@@ -2,8 +2,8 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 
 public abstract class Wrapper {
-    public BufferedImage image;
-    public Point position;
+    BufferedImage image;
+    Point position;
     
     public void setPosition(int x, int y) {
         this.position.setLocation(x,y);

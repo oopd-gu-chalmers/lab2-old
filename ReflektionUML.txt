@@ -1,0 +1,54 @@
+Analysera de beroenden som finns med avseende på cohesion och coupling, och Dependency Inversion Principle.
+- Vilka beroenden är nödvändiga?
+    Beroenden till externt biblotek är nödvändigt, 
+    Beroenden från Controller till src är nödvändiga 
+
+- Vilka klasser är beroende av varandra som inte borde vara det?
+    CarView och CarController är beroende av varandra vilket dom inte borde.
+    Fler beroende än nödvändigt mellan CarController, Wrapper och src, exempel drawpanel håller samma objekt som i carcontroll med starka beroenden
+    CarController borde inte vara beroende av drawpanel genom CarView
+    CarController borde inte vara beroende av de konkreta bilklasserna utan wrapper borde ta det
+
+- Finns det starkare beroenden än nödvändigt?
+    DrawPanel skulle möjligen inte behöva vara ett starkt beroende till CarView då det inte finns anledning att spara det som ett objekt.
+    DrawPanel behöver inte heller ha starkt beroende av Item listan.
+
+- Kan ni identifiera några brott mot övriga designprinciper vi pratat om i kursen?
+    -
+
+Uppgift 3: Ansvarsområden
+Analysera era klasser med avseende på Separation of Concern (SoC) och Single Responsibility Principle (SRP).
+- Vilka ansvarsområden har era klasser?
+    I SRC så har de ansvar att representera en teoretiskt fordon eller shop, varje objekt som skapas är ett nytt fordon
+    DrawPanel har ansvar att rita ut representationen av de objekt som finns
+    CarController fungerar som motor i att kommunicera mellan representativa objekten och det visuella.
+    Wrapped är en abstract klass som är grunden till den visuella representationen av de teoretiska objekten. ShopWrapper och vehichelWrapper ärver grundfunktionen och utökar den med
+    den faktiskta representationen av objektet.
+
+- Vilka anledningar har de att förändras?
+    CarController kontrollerar inte bara objekten utan håller den teoretiska representationen av dom i wrapper filen. Istället borde den flyttas över 
+    till en annan klass som ansvar för detta.
+    CarController håller koll på shop och updaterar varje frame för att se om den ska ta upp en bil, vilket är inget som har med bilen att göra igentligen
+
+- På vilka klasser skulle ni behöva tillämpa dekomposition för att bättre följa SoC och SRP?
+    DrawPanel så den inte håller objekten som ska målas ut
+    CarController av samma anledning
+    CarController borde inte execuera hela programmet, dvs skapa en main
+
+Rita ett UML-diagram över en ny design som åtgärdar de brister ni identifierat med avseende både på beroenden och ansvarsfördelning.
+Motivera, i termer av de principer vi gått igenom, varför era förbättringar verkligen är förbättringar.
+Skriv en refaktoriseringsplan. Planen bör bestå av en sekvens refaktoriseringssteg som tar er från det nuvarande programmet till ett som implementerar er nya design. Planen behöver inte vara enormt detaljerad. Se Övning 3: UML, static vs dynamic för ett exempel på en refaktoriseringsplan.
+Finns det några delar av planen som går att utföra parallellt, av olika utvecklare som arbetar oberoende av varandra? Om inte, finns det något sätt att omformulera planen så att en sådan arbetsdelning är möjlig?
+
+Förbättringarna utgår ifrån att minska klassernas arbetsuppgifter för att följa SRP, genom att bland annat flytta över saker från CarController.
+De minskar även beroenden till src paketet. (decoupling)
+Svagare beroenden inom packetet
+Minsksar även antalet starka beroenden och tar bort dubbla beroenden (två vägs beroenden)
+Open closed principen förbättras också då DrawPanel inte behöver vara hårdkodad
+
+1. skapa nya klass som är mainController
+2. lägg över de aspekter som berör spelet allmänt i main från CarController.
+3. Skapa en representation/samlingsklass av alla bilar som läggs till. Lägg till de bilar/vehichles i klassen med Wrapper representationen. Koppla den sedan till CarController.
+4. Ta bort det dubbla beroendet mellan CarController och CarView.
+5. Ta bort beroendet från CarView till DrawPanel och lägg den Istället i mainController men som svagt beroende (skapa inte ett objekt av klassen)
+6. Skapa getters i Object klasserna för att returnera WrapperObjecten. Skicka iväg de samlade obkjekten (shop och Cars) till DrawPanel.
