@@ -174,7 +174,7 @@ public class CarController {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Truck) { // Kontrollerar om vehicle är en instans av Truck
                 Truck truck = (Truck) vehicle;
-                truck.raiseBed();
+                truck.raise();
             }
         }
     }
@@ -182,7 +182,7 @@ public class CarController {
         for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Truck) {
                 Truck truck = (Truck) vehicle;
-                truck.lowerBed();
+                truck.lower();
             }
         }
     }
