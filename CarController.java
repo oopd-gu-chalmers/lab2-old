@@ -57,8 +57,8 @@ public class CarController {
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle vehicle : vehicles) {
-                vehicle.move();
                 checkAndCorrectPosition(vehicle);
+                vehicle.move();
 
                 //frame.drawPanel.moveit(vehicle, x, y);
                 // repaint() calls the paintComponent method of the panel

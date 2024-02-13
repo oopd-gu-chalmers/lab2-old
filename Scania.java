@@ -9,6 +9,7 @@ public class Scania extends Truck{
 
     @Override
     public void move(){
+        System.out.println("Moving truck with bed angle: " + scaniaBed.getAngle() + ", speed: " + getCurrentSpeed());
         if (scaniaBed.getAngle() == 0)
             super.move();
         else
