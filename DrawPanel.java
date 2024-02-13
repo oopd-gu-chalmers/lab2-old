@@ -11,7 +11,8 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel {
     private CarController cc;
-    private HashMap<String, BufferedImage> vehicleImages = new HashMap<>();
+    private ArrayList<BufferedImage> vehicleImages = new ArrayList<>();
+    private BufferedImage image;
 
     public DrawPanel(CarController cc, int x, int y) {
         this.setDoubleBuffered(true);
@@ -22,39 +23,33 @@ public class DrawPanel extends JPanel {
             loadVehicleImages();
         } catch (IOException e) {
             e.printStackTrace();
-            // Hantera fel, t.ex. visa ett felmeddelande
         }
     }
 
     private void loadVehicleImages() throws IOException {
-        // Antag att vi har en mapp "pics" i resurskatalogen och bilder namngivna efter fordonstyper
-        vehicleImages.put("Volvo240", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
-        vehicleImages.put("Saab95", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
-        vehicleImages.put("Scania", ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
-        // Lägg till fler bilder efter behov
+        vehicleImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
+        vehicleImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
+        vehicleImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
+        vehicleImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg")));
+
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
+        g.drawImage(vehicleImages.get(3), 300, 300, null);
         for (Vehicle vehicle : cc.vehicles) {
-            if (vehicle instanceof Volvo240) {
-                BufferedImage image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"))
-                int x = (int) Math.round(vehicle.getXPos());
-                int y = (int) Math.round(vehicle.getYPos());
-                g.drawImage(image, x, y, null);
-            } else if (vehicle instanceof Saab95) {
-                BufferedImage image = vehicleImages.get(vehicle.getClass().getSimpleName());
-                int x = (int) Math.round(vehicle.getXPos());
-                int y = (int) Math.round(vehicle.getYPos());
-                g.drawImage(image, x, y, null);
-            } else if (vehicle instanceof Scania) {
-
-            }
-            BufferedImage image = vehicleImages.get(vehicle.getClass().getSimpleName());
             int x = (int) Math.round(vehicle.getXPos());
             int y = (int) Math.round(vehicle.getYPos());
-            g.drawImage(image, x, y, null);
+            if (vehicle instanceof Volvo240) {
+                image = vehicleImages.get(0);
+            } else if (vehicle instanceof Saab95) {
+                image = vehicleImages.get(1);
+            } else if (vehicle instanceof Scania) {
+                image = vehicleImages.get(2);
             }
+            g.drawImage(image, x, y, null);
+
+        }
         }
     }

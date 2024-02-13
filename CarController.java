@@ -39,7 +39,7 @@ public class CarController {
         saab.setXPos(0);
         saab.setYPos(100);
 
-        Scania scania = new Scania(2, 20, Color.BLUE, "ILoveScania");
+        Scania scania = new Scania(2, 100, Color.BLUE, "ILoveScania");
         cc.vehicles.add(scania);
         scania.setXPos(0);
         scania.setYPos(200);
@@ -55,71 +55,72 @@ public class CarController {
     * view to update its images. Change this method to your needs.
     * */
     private class TimerListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {
+            for (Vehicle vehicle : vehicles) {
+                vehicle.move();
+                checkAndCorrectPosition(vehicle);
+
+                //frame.drawPanel.moveit(vehicle, x, y);
+                // repaint() calls the paintComponent method of the panel
+                frame.drawPanel.repaint();
+            }
+
+        }}
+
+
 //        public void actionPerformed(ActionEvent e) {
-//            int maxX = frame.drawPanel.getWidth();
-//            int maxY = frame.drawPanel.getWidth()-200;
-//
 //            for (Vehicle vehicle : vehicles) {
-//                vehicle.move();
-//                int x = (int) Math.round(vehicle.getXPos());
-//                int y = (int) Math.round(vehicle.getYPos());
-//                if (x < 0) {
-//                    x = 0;
-//                    vehicle.setDirection(-vehicle.getDirection());
-//                }
-//                else if (x> maxX) {
-//                    vehicle.setXPos(maxX);
-//                    vehicle.setDirection(-vehicle.getDirection());
-//                }
+//                vehicle.move(); // Låt varje Vehicle själv hantera sin rörelse och gränskontroll
 //
-//                if (y < 0) {
-//                    y = 0;
-//                    vehicle.setDirection(-vehicle.getDirection());
-//                }
-//                else if (y > maxY) {
-//                    vehicle.setYPos(maxY);
-//                    vehicle.setDirection(-vehicle.getDirection());
-//                }
-//
-//                frame.drawPanel.moveit(vehicle, x, y);
-//                // repaint() calls the paintComponent method of the panel
-//                frame.drawPanel.repaint();
+//                // Gränskontroll kan hanteras här eller inuti vehicle.move()
+//                checkAndCorrectPosition(vehicle);
 //            }
+//
+//            frame.drawPanel.repaint(); // Uppdatera vy efter att alla fordon har flyttat
 //        }
 //    }
 
+        private void checkAndCorrectPosition(Vehicle vehicle) {
+            int maxX = frame.drawPanel.getWidth();
+            int maxY = frame.drawPanel.getWidth()-200;
 
-        public void actionPerformed(ActionEvent e) {
-            for (Vehicle vehicle : vehicles) {
-                vehicle.move(); // Låt varje Vehicle själv hantera sin rörelse och gränskontroll
-
-                // Gränskontroll kan hanteras här eller inuti vehicle.move()
-                checkAndCorrectPosition(vehicle);
+            int x = (int) Math.round(vehicle.getXPos());
+            int y = (int) Math.round(vehicle.getYPos());
+            if (x < 0) {
+                vehicle.setXPos(0);
+                vehicle.setDirection(-vehicle.getDirection());
+            }
+            else if (x> maxX) {
+                vehicle.setXPos(maxX);
+                vehicle.setDirection(-vehicle.getDirection());
             }
 
-            frame.drawPanel.repaint(); // Uppdatera vy efter att alla fordon har flyttat
-        }
-    }
-
-    private void checkAndCorrectPosition(Vehicle vehicle) {
-        int maxX = frame.drawPanel.getWidth();
-        int maxY = frame.drawPanel.getHeight() - 200; // Justera -200 baserat på dina behov
-
-        // Använd getXPos() och getYPos() för att få fordonets position
-        double x = vehicle.getXPos();
-        double y = vehicle.getYPos();
-
-        // Korrigerar positionen och riktningen om fordonet når gränserna
-        if (x < 0 || x > maxX) {
-            vehicle.setDirection(-vehicle.getDirection());
-            vehicle.setXPos(x < 0 ? 0 : maxX);
-        }
-
-        if (y < 0 || y > maxY) {
-            vehicle.setDirection(-vehicle.getDirection());
-            vehicle.setYPos(y < 0 ? 0 : maxY);
-        }
-    }
+            if (y < 0) {
+                vehicle.setYPos(0);
+                vehicle.setDirection(-vehicle.getDirection());
+            }
+            else if (y > maxY) {
+                vehicle.setYPos(maxY);
+                vehicle.setDirection(-vehicle.getDirection());
+        }   }
+//        int maxX = frame.drawPanel.getWidth();
+//        int maxY = frame.drawPanel.getHeight() - 200; // Justera -200 baserat på dina behov
+//
+//        // Använd getXPos() och getYPos() för att få fordonets position
+//        double x = vehicle.getXPos();
+//        double y = vehicle.getYPos();
+//
+//        // Korrigerar positionen och riktningen om fordonet når gränserna
+//        if (x < 0 || x > maxX) {
+//            vehicle.setDirection(-vehicle.getDirection());
+//            vehicle.setXPos(x < 0 ? 0 : maxX);
+//        }
+//
+//        if (y < 0 || y > maxY) {
+//            vehicle.setDirection(-vehicle.getDirection());
+//            vehicle.setYPos(y < 0 ? 0 : maxY);
+//        }
+//    }
 
     // Calls the gas method for each car once
     void gas(int amount) {
@@ -171,14 +172,18 @@ public class CarController {
     }
     void liftBed() {
         for (Vehicle vehicle : vehicles) {
-            Truck truck = (Truck) vehicle;
-            truck.raiseBed();
+            if (vehicle instanceof Truck) { // Kontrollerar om vehicle är en instans av Truck
+                Truck truck = (Truck) vehicle;
+                truck.raiseBed();
             }
         }
+    }
     void lowerBed() {
         for (Vehicle vehicle : vehicles) {
-            Truck truck = (Truck) vehicle;
-            truck.lowerBed();
+            if (vehicle instanceof Truck) {
+                Truck truck = (Truck) vehicle;
+                truck.lowerBed();
+            }
         }
     }
 

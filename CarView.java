@@ -20,7 +20,7 @@ public class CarView extends JFrame{
     // The controller member
     CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(carC, X, Y-240);
+    DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -42,7 +42,9 @@ public class CarView extends JFrame{
     // Constructor
     public CarView(String framename, CarController cc){
         this.carC = cc;
+        this.drawPanel = new DrawPanel(carC, X, Y-240);
         initComponents(framename);
+
     }
 
     // Sets everything in place and fits everything
@@ -129,7 +131,6 @@ public class CarView extends JFrame{
             @Override
             public void actionPerformed(ActionEvent e) {
                 carC.stopEngine();
-
             }
         });
         turboOnButton.addActionListener(new ActionListener() {
