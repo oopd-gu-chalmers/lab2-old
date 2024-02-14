@@ -27,7 +27,7 @@ public class CarController {
     //ArrayList<ServiceShop<? extends Car>> serviceShops = new ArrayList<>();
 
     //private ServiceShop<Volvo240> volvoServiceShop;
-    private ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
+    ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
 
     ArrayList<Vehicle> vehiclesInService = new ArrayList<>();
 
@@ -70,8 +70,8 @@ public class CarController {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle vehicle : vehiclesInMotion) {
                 checkAndCorrectPosition(vehicle);
-                checkCollision(vehicle, volvoServiceShop);
                 vehicle.move();
+                checkCollision(vehicle);
 
                 //frame.drawPanel.moveit(vehicle, x, y);
                 // repaint() calls the paintComponent method of the panel
@@ -118,12 +118,12 @@ public class CarController {
             }
     }
 
-    private void checkCollision(Vehicle vehicle, ServiceShop<Car> serviceShop) {
+    private void checkCollision(Vehicle vehicle) {
         //serviceShop.getClass().getGenericSuperclass().equals(car.getClass())
-        if (vehicle.getYPos() == serviceShop.getYPos() && vehicle.getXPos() == serviceShop.getXPos()){
+        if (vehicle.getYPos() == volvoServiceShop.getYPos() && vehicle.getXPos() == volvoServiceShop.getXPos()){
             if (vehicle instanceof Volvo240) {
-                Car car = (Car) vehicle;
-                serviceShop.load(car);
+                Volvo240 volvo = (Volvo240) vehicle;
+                volvoServiceShop.load(volvo);
                 vehiclesInMotion.remove(vehicle);
                 vehiclesInService.add(vehicle);
             }

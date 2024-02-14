@@ -37,7 +37,7 @@ public class DrawPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Vehicle vehicle : cc.vehicles) {
+        for (Vehicle vehicle : cc.vehiclesInMotion) {  //eventuellt gå igenom alla
             int x = (int) Math.round(vehicle.getXPos());
             int y = (int) Math.round(vehicle.getYPos());
             if (vehicle instanceof Volvo240) {
@@ -48,11 +48,10 @@ public class DrawPanel extends JPanel {
                 image = images.get(2);
             }
             g.drawImage(image, x, y, null);
-        for (ServiceShop<? extends Car> serviceShop : cc.serviceShops){
-            int xPos = (int) Math.round(serviceShop.getXPos());
-            int yPos = (int) Math.round(serviceShop.getYPos());
-            g.drawImage(images.get(3), xPos, yPos, null);
-        }
+        int xPos = (int) Math.round(cc.volvoServiceShop.getXPos());
+        int yPos = (int) Math.round(cc.volvoServiceShop.getYPos());
+        g.drawImage(images.get(3), xPos, yPos, null);
+
 
         }
         }
