@@ -23,13 +23,20 @@ public class CarController {
     CarView frame;
     //A list of cars, modify if needed
     ArrayList<Vehicle> vehicles = new ArrayList<>();
-    // ArrayList<Truck> trucks = new ArrayList();
+
+    ArrayList<ServiceShop<? extends Car>> serviceShops = new ArrayList<>();
+
 
     //methods:
 
     public static void main(String[] args) {
         // Instance of this class
         CarController cc = new CarController();
+
+        ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
+        cc.serviceShops.add(volvoServiceShop);
+        volvoServiceShop.setXPos(0);
+        volvoServiceShop.setYPos(300);
 
         Volvo240 volvo = new Volvo240(4, 100, Color.BLACK, "ILoveVolvo");
         cc.vehicles.add(volvo);
@@ -82,7 +89,7 @@ public class CarController {
 
         private void checkAndCorrectPosition(Vehicle vehicle) {
             int maxX = frame.drawPanel.getWidth();
-            int maxY = frame.drawPanel.getWidth()-200;
+            int maxY = frame.drawPanel.getHeight();
 
             int x = (int) Math.round(vehicle.getXPos());
             int y = (int) Math.round(vehicle.getYPos());
@@ -102,7 +109,8 @@ public class CarController {
             else if (y > maxY) {
                 vehicle.setYPos(maxY);
                 vehicle.setDirection(-vehicle.getDirection());
-        }   }
+            }
+    }
 //        int maxX = frame.drawPanel.getWidth();
 //        int maxY = frame.drawPanel.getHeight() - 200; // Justera -200 baserat på dina behov
 //

@@ -7,6 +7,9 @@ public class ServiceShop<T extends Car> implements Loadable<T> {
     private final List<T> storage = new ArrayList<>();  // Composition
     private final int maxCapacity;  // Maximalt antal bilar som verkstaden kan ta emot
 
+    private double xPos;
+    private double yPos;
+
     public ServiceShop(int maxCapacity) {
         this.maxCapacity = maxCapacity;
     }
@@ -29,6 +32,22 @@ public class ServiceShop<T extends Car> implements Loadable<T> {
 
     protected List<T> getStorage() {
         return storage;
+    }
+
+    protected double getXPos() {
+        return xPos;
+    }
+
+    protected double getYPos() {
+        return yPos;
+    }
+
+    protected void setXPos(double x) {
+        xPos = x;
+    }
+
+    protected void setYPos(double y) {
+        yPos = y;
     }
 }
 

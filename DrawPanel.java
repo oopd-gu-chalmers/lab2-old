@@ -11,7 +11,7 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel {
     private CarController cc;
-    private ArrayList<BufferedImage> vehicleImages = new ArrayList<>();
+    private ArrayList<BufferedImage> images = new ArrayList<>();
     private BufferedImage image;
 
     public DrawPanel(CarController cc, int x, int y) {
@@ -27,28 +27,34 @@ public class DrawPanel extends JPanel {
     }
 
     private void loadVehicleImages() throws IOException {
-        vehicleImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
-        vehicleImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
-        vehicleImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
-        vehicleImages.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg")));
+        images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
+        images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
+        images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
+        images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg")));
 
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        g.drawImage(vehicleImages.get(3), 300, 300, null);
         for (Vehicle vehicle : cc.vehicles) {
             int x = (int) Math.round(vehicle.getXPos());
             int y = (int) Math.round(vehicle.getYPos());
             if (vehicle instanceof Volvo240) {
-                image = vehicleImages.get(0);
+                image = images.get(0);
             } else if (vehicle instanceof Saab95) {
-                image = vehicleImages.get(1);
+                image = images.get(1);
             } else if (vehicle instanceof Scania) {
-                image = vehicleImages.get(2);
+                image = images.get(2);
             }
             g.drawImage(image, x, y, null);
+        for (ServiceShop serviceShop<T> : cc.serviceShops){
+            int xPos = (int) Math.round(serviceShop.getXPos());
+            int yPos = (int) Math.round(serviceShop.getYPos());
+            if (Car instanceof Volvo240) {
+                g.drawImage(images.get(3), xPos, yPos, null);
+            }
+        }
 
         }
         }
