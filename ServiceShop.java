@@ -17,7 +17,6 @@ public class ServiceShop<T extends Car> implements Loadable<T> {
     public void load(T car) {
         if (storage.size() < maxCapacity) {
             storage.add(car);
-            car.stopEngine();
         } else {
             throw new IllegalStateException("Verkstaden är full.");
         }
@@ -51,5 +50,3 @@ public class ServiceShop<T extends Car> implements Loadable<T> {
         yPos = y;
     }
 }
-
-//ServiceShop<Saab95> shop = new ServiceShop<>();

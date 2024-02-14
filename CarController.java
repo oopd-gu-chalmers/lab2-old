@@ -22,14 +22,9 @@ public class CarController {
     // The frame that represents this instance View of the MVC pattern
     CarView frame;
     //A list of cars, modify if needed
-    ArrayList<Vehicle> vehiclesInMotion = new ArrayList<>();
+    ArrayList<Vehicle> vehicles = new ArrayList<>();
 
-    //ArrayList<ServiceShop<? extends Car>> serviceShops = new ArrayList<>();
-
-    //private ServiceShop<Volvo240> volvoServiceShop;
     ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
-
-    ArrayList<Vehicle> vehiclesInService = new ArrayList<>();
 
 
     //methods:
@@ -38,21 +33,19 @@ public class CarController {
         // Instance of this class
         CarController cc = new CarController();
 
-        //cc.volvoServiceShop = new ServiceShop<Volvo240>(5);
-        //cc.serviceShops.add(volvoServiceShop);
         cc.volvoServiceShop.setXPos(0);
         cc.volvoServiceShop.setYPos(300);
 
         Volvo240 volvo = new Volvo240(4, 100, Color.BLACK, "ILoveVolvo");
-        cc.vehiclesInMotion.add(volvo);
+        cc.vehicles.add(volvo);
 
         Saab95 saab = new Saab95(4,50,Color.RED,"ILoveSaab",true);
-        cc.vehiclesInMotion.add(saab);
+        cc.vehicles.add(saab);
         saab.setXPos(0);
         saab.setYPos(100);
 
         Scania scania = new Scania(2, 100, Color.BLUE, "ILoveScania");
-        cc.vehiclesInMotion.add(scania);
+        cc.vehicles.add(scania);
         scania.setXPos(0);
         scania.setYPos(200);
 
@@ -68,30 +61,16 @@ public class CarController {
     * */
     private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
-            for (Vehicle vehicle : vehiclesInMotion) {
+            for (Vehicle vehicle : vehicles) {
                 checkAndCorrectPosition(vehicle);
                 vehicle.move();
                 checkCollision(vehicle);
-
-                //frame.drawPanel.moveit(vehicle, x, y);
                 // repaint() calls the paintComponent method of the panel
                 frame.drawPanel.repaint();
             }
 
         }}
 
-
-//        public void actionPerformed(ActionEvent e) {
-//            for (Vehicle vehicle : vehicles) {
-//                vehicle.move(); // Låt varje Vehicle själv hantera sin rörelse och gränskontroll
-//
-//                // Gränskontroll kan hanteras här eller inuti vehicle.move()
-//                checkAndCorrectPosition(vehicle);
-//            }
-//
-//            frame.drawPanel.repaint(); // Uppdatera vy efter att alla fordon har flyttat
-//        }
-//    }
 
         private void checkAndCorrectPosition(Vehicle vehicle) {
             int maxX = frame.drawPanel.getWidth();
@@ -120,42 +99,28 @@ public class CarController {
 
     private void checkCollision(Vehicle vehicle) {
         //serviceShop.getClass().getGenericSuperclass().equals(car.getClass())
-        if (vehicle.getYPos() == volvoServiceShop.getYPos() && vehicle.getXPos() == volvoServiceShop.getXPos()){
-            if (vehicle instanceof Volvo240) {
-                Volvo240 volvo = (Volvo240) vehicle;
-                volvoServiceShop.load(volvo);
-                vehiclesInMotion.remove(vehicle);
-                vehiclesInService.add(vehicle);
-            }
+        if (vehicle.currentSpeed != 0){
+            if (Math.abs(vehicle.getXPos() - volvoServiceShop.getXPos()) < 5 && Math.abs(vehicle.getYPos() - volvoServiceShop.getYPos()) < 5){
+                if (vehicle instanceof Volvo240) {
+                    System.out.println(vehicle.getClass());
+                    Volvo240 volvo = (Volvo240) vehicle;
+                    System.out.println(volvoServiceShop.getStorage().size());
+                    volvoServiceShop.load(volvo);
+                    System.out.println(volvoServiceShop.getStorage().size());
+                    volvo.stopEngine();
+                }}
 
 
         }
 
 
     }
-//        int maxX = frame.drawPanel.getWidth();
-//        int maxY = frame.drawPanel.getHeight() - 200; // Justera -200 baserat på dina behov
-//
-//        // Använd getXPos() och getYPos() för att få fordonets position
-//        double x = vehicle.getXPos();
-//        double y = vehicle.getYPos();
-//
-//        // Korrigerar positionen och riktningen om fordonet når gränserna
-//        if (x < 0 || x > maxX) {
-//            vehicle.setDirection(-vehicle.getDirection());
-//            vehicle.setXPos(x < 0 ? 0 : maxX);
-//        }
-//
-//        if (y < 0 || y > maxY) {
-//            vehicle.setDirection(-vehicle.getDirection());
-//            vehicle.setYPos(y < 0 ? 0 : maxY);
-//        }
-//    }
+
 
     // Calls the gas method for each car once
     void gas(int amount) {
         double gas = ((double) amount) / 100;
-        for (Vehicle vehicle : vehiclesInMotion
+        for (Vehicle vehicle : vehicles
                 ) {
             vehicle.gas(gas);
         }
@@ -163,28 +128,28 @@ public class CarController {
 
     void brake(int amount) {
         double brake = ((double) amount) / 100;
-        for (Vehicle vehicle : vehiclesInMotion
+        for (Vehicle vehicle : vehicles
         ) {
             vehicle.brake(brake);
         }
     }
 
     void startEngine() {
-        for (Vehicle vehicle : vehiclesInMotion
+        for (Vehicle vehicle : vehicles
         ) {
             vehicle.startEngine();
         }
     }
 
     void stopEngine() {
-        for (Vehicle vehicle : vehiclesInMotion
+        for (Vehicle vehicle : vehicles
         ) {
             vehicle.stopEngine();
         }
     }
 
     void turboOn() {
-        for (Vehicle vehicle : vehiclesInMotion) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Saab95) {
                 Saab95 saab = (Saab95) vehicle; // evetuellt kanske i någon annan del av progemmet? början?
                 saab.setTurboOn();
@@ -193,7 +158,7 @@ public class CarController {
     }
 
     void turboOff() {
-        for (Vehicle vehicle : vehiclesInMotion) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Saab95) {
                 Saab95 saab = (Saab95) vehicle; // evetuellt kanske i någon annan del av progemmet? början?
                 saab.setTurboOff();
@@ -201,7 +166,7 @@ public class CarController {
         }
     }
     void liftBed() {
-        for (Vehicle vehicle : vehiclesInMotion) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Truck) { // Kontrollerar om vehicle är en instans av Truck
                 Truck truck = (Truck) vehicle;
                 truck.raise();
@@ -209,7 +174,7 @@ public class CarController {
         }
     }
     void lowerBed() {
-        for (Vehicle vehicle : vehiclesInMotion) {
+        for (Vehicle vehicle : vehicles) {
             if (vehicle instanceof Truck) {
                 Truck truck = (Truck) vehicle;
                 truck.lower();
