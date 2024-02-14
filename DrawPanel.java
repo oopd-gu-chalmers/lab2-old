@@ -48,12 +48,10 @@ public class DrawPanel extends JPanel {
                 image = images.get(2);
             }
             g.drawImage(image, x, y, null);
-        for (ServiceShop serviceShop<T> : cc.serviceShops){
+        for (ServiceShop<? extends Car> serviceShop : cc.serviceShops){
             int xPos = (int) Math.round(serviceShop.getXPos());
             int yPos = (int) Math.round(serviceShop.getYPos());
-            if (Car instanceof Volvo240) {
-                g.drawImage(images.get(3), xPos, yPos, null);
-            }
+            g.drawImage(images.get(3), xPos, yPos, null);
         }
 
         }

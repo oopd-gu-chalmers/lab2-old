@@ -17,6 +17,7 @@ public class ServiceShop<T extends Car> implements Loadable<T> {
     public void load(T car) {
         if (storage.size() < maxCapacity) {
             storage.add(car);
+            car.stopEngine();
         } else {
             throw new IllegalStateException("Verkstaden är full.");
         }
