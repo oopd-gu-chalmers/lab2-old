@@ -10,7 +10,7 @@ public abstract class Vehicle implements Movable {
     private double yPos; // y-position of the car
     private double direction; // direction of the car in radians
 
-    private boolean engineOn;
+    protected boolean engineOn;
 
     public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;

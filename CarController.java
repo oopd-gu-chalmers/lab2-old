@@ -102,11 +102,8 @@ public class CarController {
         if (vehicle.currentSpeed != 0){
             if (Math.abs(vehicle.getXPos() - volvoServiceShop.getXPos()) < 5 && Math.abs(vehicle.getYPos() - volvoServiceShop.getYPos()) < 5){
                 if (vehicle instanceof Volvo240) {
-                    System.out.println(vehicle.getClass());
                     Volvo240 volvo = (Volvo240) vehicle;
-                    System.out.println(volvoServiceShop.getStorage().size());
                     volvoServiceShop.load(volvo);
-                    System.out.println(volvoServiceShop.getStorage().size());
                     volvo.stopEngine();
                 }}
 
@@ -122,7 +119,8 @@ public class CarController {
         double gas = ((double) amount) / 100;
         for (Vehicle vehicle : vehicles
                 ) {
-            vehicle.gas(gas);
+            if (vehicle.engineOn){
+                vehicle.gas(gas);}
         }
     }
 

@@ -2,6 +2,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
@@ -9,8 +10,7 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel {
     private CarController cc;
-    private ArrayList<BufferedImage> images = new ArrayList<>();
-    private BufferedImage image;
+    private HashMap<Class, BufferedImage> vehicleImages = new HashMap<>();
 
     public DrawPanel(CarController cc, int x, int y) {
         this.setDoubleBuffered(true);
@@ -18,39 +18,34 @@ public class DrawPanel extends JPanel {
         this.setBackground(Color.cyan);
         this.cc = cc;
         try {
-            loadVehicleImages();
+            loadImages();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void loadVehicleImages() throws IOException {
-        images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
-        images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
-        images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
-        images.add(ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg")));
-
+    private void loadImages() throws IOException {
+        vehicleImages.put(Volvo240.class, ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg")));
+        vehicleImages.put(Saab95.class, ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Saab95.jpg")));
+        vehicleImages.put(Scania.class, ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Scania.jpg")));
+        // Antag att VolvoBrand.jpg är en allmän bild som inte associeras med en specifik fordonstyp
+        vehicleImages.put(Object.class, ImageIO.read(DrawPanel.class.getResourceAsStream("pics/VolvoBrand.jpg")));
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Vehicle vehicle : cc.vehicles) {  //eventuellt gå igenom alla
+        for (Vehicle vehicle : cc.vehicles) {
             int x = (int) Math.round(vehicle.getXPos());
             int y = (int) Math.round(vehicle.getYPos());
-            if (vehicle instanceof Volvo240) {
-                image = images.get(0);
-            } else if (vehicle instanceof Saab95) {
-                image = images.get(1);
-            } else if (vehicle instanceof Scania) {
-                image = images.get(2);
+            BufferedImage image = vehicleImages.get(vehicle.getClass());
+            if (image != null) {
+                g.drawImage(image, x, y, null);
             }
-            g.drawImage(image, x, y, null);
+        }
+        // Exempel på hur man ritar en allmän bild om inget specifikt fordon matchades
         int xPos = (int) Math.round(cc.volvoServiceShop.getXPos());
         int yPos = (int) Math.round(cc.volvoServiceShop.getYPos());
-        g.drawImage(images.get(3), xPos, yPos, null);
-
-
-        }
-        }
+        g.drawImage(vehicleImages.get(Object.class), xPos, yPos, null);
     }
+}
