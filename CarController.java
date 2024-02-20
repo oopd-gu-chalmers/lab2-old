@@ -105,12 +105,9 @@ public class CarController {
                     Volvo240 volvo = (Volvo240) vehicle;
                     volvoServiceShop.load(volvo);
                     volvo.stopEngine();
-                }}
-
-
+                }
+            }
         }
-
-
     }
 
 
