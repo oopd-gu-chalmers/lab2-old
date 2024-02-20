@@ -10,6 +10,8 @@ public abstract class Vehicle implements Movable {
     private double yPos; // y-position of the car
     private double direction; // direction of the car in radians
 
+    protected boolean engineOn;
+
     public Vehicle(int nrDoors, double enginePower, Color color, String modelName) {
         this.nrDoors = nrDoors;
         this.color = color;
@@ -42,13 +44,15 @@ public abstract class Vehicle implements Movable {
         color = clr;
     }
 
-    protected void startEngine(){
-        currentSpeed = 0.1;
-    }
+    protected void startEngine(){engineOn = true;}
+
 
     protected void stopEngine(){
         currentSpeed = 0;
+        engineOn = false;
     }
+
+    protected boolean getEngineOn(){return engineOn;}
 
     protected abstract double speedFactor();
 
@@ -98,11 +102,13 @@ public abstract class Vehicle implements Movable {
     };
 
     protected void gas(double amount) {
+        if (engineOn) {
         if (amount >= 0 && amount <=1){
             incrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Argument must be between 0 and 1");
-        }
+        }}
+        else { throw new IllegalArgumentException("Turn engine on before you push gas");}
     }
 
     protected void brake(double amount){
