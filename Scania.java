@@ -9,6 +9,7 @@ public class Scania extends Truck {
     public Scania() {
         super(2, Color.blue, 100, "Scania");
         setMaxPlatformDegree(70);
+        setImage("pics/Scania.jpg");
     }
 
     private void setMaxPlatformDegree(double angle) {

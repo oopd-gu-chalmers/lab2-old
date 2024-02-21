@@ -1,8 +1,11 @@
 import java.awt.*;
 import java.lang.Math;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 
-abstract class Vehicle extends ObjectWithPosition implements Moveable{
+abstract class Vehicle implements DrawableWithPosition, Moveable{
 
+    private BufferedImage image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));//default is Volvo 240
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
@@ -11,7 +14,9 @@ abstract class Vehicle extends ObjectWithPosition implements Moveable{
     private double direction; // anglee in degrees, 0 is to the right.
     private double[] dimensions = {0, 0};
     private final int turndegrees = 30; // Constant number of degrees for a turn.
-    
+    private double x_pos; // Coordinate Position x
+    private double y_pos; // Coordinate Position y
+
     public Vehicle(int nrDoors, Color color, double enginePower, String modelName){
         this.nrDoors = nrDoors;
         this.color = color;
@@ -114,4 +119,23 @@ abstract class Vehicle extends ObjectWithPosition implements Moveable{
     public void turnRight(){
         direction = direction - turndegrees;
     }
+    public double[] getCurrentPos() { // Added for test of move().
+    double[] pos = {x_pos, y_pos};
+    return pos;
+    }
+    public void setCurrentPos(double x, double y) { // Added for test of move().
+        x_pos = x;
+        y_pos = y;
+    }
+    public BufferedImage getImage(){
+        return imagePath;
+    }
+    public void setImage(String image){
+
+        imagePath = image;
+    }
+    public int getImageWidth(){
+        imagePath.
+    }
 }
+

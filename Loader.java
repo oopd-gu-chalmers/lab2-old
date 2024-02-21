@@ -1,6 +1,6 @@
 import java.util.Deque;
 
-public class Loader<B extends ObjectWithPosition>{ //loading utility class. Takes a generic type B.
+public class Loader<B extends DrawableWithPosition>{ //loading utility class. Takes a generic type B.
 
     Loadable<B> parent;
     Deque<B> load;

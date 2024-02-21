@@ -6,18 +6,9 @@ import java.awt.event.ActionEvent;
 public class Simulation{
     CarView frame;
     CarController controller;
+    private static final int delay = 50;
     Timer timer = new Timer(delay,new TimerListener());
 
-
-    private static final int delay = 50;
-         // The delay (ms) corresponds to 20 updates a sec (hz)
-
-    // The timer is started with a listener (see below) that executes the statements
-    // each step between delays.
-
-
-    // The frame that represents this instance View of the MVC pattern
-    // A list of cars, modify if needed
 
     public static void main(String[] args) {
         CarController controller = new CarController();

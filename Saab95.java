@@ -7,6 +7,7 @@ public class Saab95 extends Car{
         super(2,Color.red,125,"Saab95");
         setSize(500, 180);
 	    turboOn = false;
+        setImage("pics/Saab95.jpg");
     }
 
     public void setTurboOn(){
