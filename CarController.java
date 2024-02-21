@@ -18,16 +18,16 @@ public class CarController {
     ArrayList<Vehicle> cars = new ArrayList<>();
     Workshop<Volvo240> workshop = new Workshop<Volvo240>(500, 0, 2);  
     //methods:
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-        
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-        cc.frame.drawPanel.loadWorkshop(cc.workshop);
-        // Start the timer
-        cc.timer.start();
-    }
+        // public static void main(String[] args) {
+        // // Instance of this class
+        // CarController cc = new CarController();
+        // // Start a new view and send a reference of self
+        // cc.frame = new CarView("CarSim 1.0", cc);
+        // cc.frame.drawPanel.loadWorkshop(cc.workshop);
+        // // Start the timer
+        // cc.timer.start();}
+            
+
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
