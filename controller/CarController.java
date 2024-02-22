@@ -1,5 +1,6 @@
 package controller;
 
+import model.VehicleModel;
 import model.components.*;
 import view.CarView;
 
@@ -19,47 +20,40 @@ public class CarController {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
-    private final int delay = 50;
+    //private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    private Timer timer = new Timer(delay, new TimerListener());
+    //private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView frame;
+    CarView view;
+
+    VehicleModel model;
     //A list of cars, modify if needed
-    ArrayList<Vehicle> vehicles = new ArrayList<>();
+    //ArrayList<Vehicle> vehicles = new ArrayList<>();
 
-    ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
+    //ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
 
+    public CarController(CarView view, VehicleModel model){
+        this.view = view;
+        this.model = model;
+    }
+
+    public void buttons(){
+        view.gasButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                double gas = ((double) amount) / 100;
+                ArrayList<Vehicle> vehicleList = model.getVehicles();
+                for (Vehicle vehicle : vehicleList) {
+                    if (vehicle.engineOn){
+                        vehicle.gas(gas);}
+
+            }
+        });
+    }
 
     //methods:
-
-    public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
-
-        cc.volvoServiceShop.setXPos(0);
-        cc.volvoServiceShop.setYPos(300);
-
-        Volvo240 volvo = new Volvo240(4, 100, Color.BLACK, "ILoveVolvo");
-        cc.vehicles.add(volvo);
-
-        Saab95 saab = new Saab95(4,50,Color.RED,"ILoveSaab",true);
-        cc.vehicles.add(saab);
-        saab.setXPos(0);
-        saab.setYPos(100);
-
-        Scania scania = new Scania(2, 100, Color.BLUE, "ILoveScania");
-        cc.vehicles.add(scania);
-        scania.setXPos(0);
-        scania.setYPos(200);
-
-        // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
-
-        // Start the timer
-        cc.timer.start();
-    }
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
@@ -125,8 +119,11 @@ public class CarController {
             public void actionPerformed (ActionEvent e){
                 carC.gas(gasAmount);
 
+
             }
         });
+
+
 
         brakeButton.addActionListener(new
 

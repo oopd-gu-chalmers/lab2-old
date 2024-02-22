@@ -105,7 +105,7 @@ public abstract class Vehicle implements Movable {
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     };
 
-    protected void gas(double amount) {
+    public void gas(double amount) {
         if (engineOn) {
         if (amount >= 0 && amount <=1){
             incrementSpeed(amount);
