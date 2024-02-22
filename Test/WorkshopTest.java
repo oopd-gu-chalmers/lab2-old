@@ -41,7 +41,7 @@ public class WorkshopTest {
     @Test
     public void cannotLoadWhileDistanceTooLong() {
         TestSaab1.startEngine();
-        for (int i = 0; i < 6; i++){
+        for (int i = 0; i < 60; i++){
             TestSaab1.gas(1);
         }
         TestSaab1.move();

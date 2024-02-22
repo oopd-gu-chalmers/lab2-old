@@ -2,10 +2,11 @@ import java.awt.*;
 import java.lang.Math;
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 abstract class Vehicle implements DrawableWithPosition, Moveable{
 
-    private BufferedImage image = ImageIO.read(DrawPanel.class.getResourceAsStream("pics/Volvo240.jpg"));//default is Volvo 240
+    private BufferedImage image;//default is Volvo 240
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
@@ -25,6 +26,7 @@ abstract class Vehicle implements DrawableWithPosition, Moveable{
         setCurrentPos(0, 0);
         this.direction = 0;
         stopEngine();
+        setImage("pics/Volvo240.jpg");
     }
     
     public int getNrDoors(){
@@ -128,14 +130,14 @@ abstract class Vehicle implements DrawableWithPosition, Moveable{
         y_pos = y;
     }
     public BufferedImage getImage(){
-        return imagePath;
+        return image;
     }
-    public void setImage(String image){
-
-        imagePath = image;
-    }
-    public int getImageWidth(){
-        imagePath.
+    public void setImage(String imagePath){
+        try {
+            this.image = ImageIO.read(DrawPanel.class.getResourceAsStream(imagePath));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
 

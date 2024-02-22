@@ -1,14 +1,14 @@
 import java.util.Deque;
+import java.util.LinkedList;
 
 public class Loader<B extends DrawableWithPosition>{ //loading utility class. Takes a generic type B.
 
     Loadable<B> parent;
-    Deque<B> load;
+    Deque<B> load = new LinkedList<B>();
     int maxLoad;
 
     public Loader(Loadable<B> parent) { //Parent needs to be a loadable object.
         this.parent = parent;
-        load = parent.getCurrentLoad();
         maxLoad = parent.getMaxLoad();
     }
 

@@ -1,9 +1,4 @@
-import javax.swing.*;
 import java.util.ArrayList; 
-import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -110,10 +105,10 @@ public class CarController {
 
     void checkForCollisionWithWorkshop() {
         for (Vehicle car : cars) {
-            double car_x = car.getCurrentPos()[0] + frame.drawPanel.volvoImage.getWidth() / 2; //VolvoImage not optimal, but easiest. should define constant for image size.
-            double car_y = car.getCurrentPos()[1] + frame.drawPanel.volvoImage.getHeight() / 2;
-            double workshop_x = workshop.getCurrentPos()[0] + frame.drawPanel.volvoWorkshopImage.getWidth() / 2; //Same here.
-            double workshop_y = workshop.getCurrentPos()[1] + frame.drawPanel.volvoWorkshopImage.getHeight() / 2;
+            double car_x = car.getCurrentPos()[0] + car.getImage().getWidth() / 2; //VolvoImage not optimal, but easiest. should define constant for image size.
+            double car_y = car.getCurrentPos()[1] + car.getImage().getHeight() / 2;
+            double workshop_x = workshop.getCurrentPos()[0] + car.getImage().getWidth() / 2; //Same here.
+            double workshop_y = workshop.getCurrentPos()[1] + car.getImage().getHeight() / 2;
             double distance = Math.sqrt(Math.pow(workshop_x - car_x, 2) + Math.pow(workshop_y - car_y, 2));
             if (car instanceof Volvo240) {
                 workshop.load((Volvo240) car);
@@ -129,9 +124,9 @@ public class CarController {
             car.move();
         }
     }
-    void checkForCollisionWithBorder(){
+    void checkForCollisionWithBorder(double borderWidth){
         for (Vehicle car: cars){
-        if (car.getCurrentPos()[0] + frame.drawPanel.volvoImage.getWidth() >= frame.getPreferredSize().getWidth()){ // frame.drawPanel.volvoImage volvoImage is very hard coded change!
+        if (car.getCurrentPos()[0] + car.getImage().getWidth() >= borderWidth){ // frame.drawPanel.volvoImage volvoImage is very hard coded change!
             car.setDirection(car.getDirection() + 180);
         } else if (car.getCurrentPos()[0] < 0) {
             car.setDirection(car.getDirection() - 180);

@@ -7,7 +7,6 @@ public abstract class CarTransport extends Truck implements Loadable<Car>{
 
     private int maxLoadNum;
     private boolean rampDown;
-    private Deque<Car> loadedVehicles = new LinkedList<Car>();
     private Loader<Car> loader = new Loader<Car>(this);
     private double[] sizeLimits = {0, 0};
 
@@ -19,7 +18,7 @@ public abstract class CarTransport extends Truck implements Loadable<Car>{
     }
     
     public Deque<Car> getCurrentLoad() {
-        return loadedVehicles;
+        return loader.load;
     }
 
     @Override
@@ -69,7 +68,7 @@ public abstract class CarTransport extends Truck implements Loadable<Car>{
     @Override 
     public void move(){ 
         super.move();
-        for (Car x : loadedVehicles) { //Move all cars to the position of the car transport, and change their heading to match the car transport.
+        for (Car x : getCurrentLoad()) { //Move all cars to the position of the car transport, and change their heading to match the car transport.
             x.setDirection(getDirection());
             x.setCurrentPos(getCurrentPos()[0], getCurrentPos()[1]);
         }

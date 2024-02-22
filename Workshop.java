@@ -1,12 +1,15 @@
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.*;
+
+import javax.imageio.ImageIO;
 
 public class Workshop<A extends Vehicle> implements DrawableWithPosition, Loadable<A>{ 
     
     //Workshop handles a generic type which is passed to both Loadable and Loader. The type determines,
     //what type of vehicles it can handle. For example only Saab95.
-    private String imagePath = "pics/VolvoBrand.jpg";
-    private int maxVehicles;
-    private Deque<A> loadedVehicles = new LinkedList<A>();     
+    private BufferedImage image;
+    private int maxVehicles;  
     private Loader<A> loader = new Loader<A>(this);
     
     private double x_pos; // Coordinate Position x
@@ -15,10 +18,11 @@ public class Workshop<A extends Vehicle> implements DrawableWithPosition, Loadab
     public Workshop(double x, double y, int maxVehicles) {
         setCurrentPos(x, y);
         this.maxVehicles = maxVehicles;
+        setImage("pics/VolvoBrand.jpg");
     };
 
     public Deque<A> getCurrentLoad() {
-        return loadedVehicles;
+        return loader.load;
     }
     
     public int getMaxLoad() {
@@ -40,11 +44,15 @@ public class Workshop<A extends Vehicle> implements DrawableWithPosition, Loadab
         x_pos = x;
         y_pos = y;
     }
-    public String getImage(){
-        return imagePath;
+    public BufferedImage getImage(){
+        return image;
     }
-    public void setImage(String image){
-        imagePath = image;
+    public void setImage(String imagePath){
+        try {
+            this.image = ImageIO.read(DrawPanel.class.getResourceAsStream(imagePath));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
 
