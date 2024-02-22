@@ -1,3 +1,5 @@
+package model.components;
+
 import java.awt.*;
 
 public class CarTransport extends Truck implements Loadable<Car> {

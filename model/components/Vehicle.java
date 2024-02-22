@@ -1,3 +1,7 @@
+package model.components;
+
+import model.components.Movable;
+
 import java.awt.*;
 
 public abstract class Vehicle implements Movable {

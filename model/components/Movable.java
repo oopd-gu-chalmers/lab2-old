@@ -1,3 +1,5 @@
+package model.components;
+
 public interface Movable {
 
     void move();

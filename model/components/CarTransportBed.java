@@ -1,4 +1,7 @@
-import java.awt.*;
+package model.components;
+
+import model.components.Car;
+
 import java.util.Stack;
 
 public class CarTransportBed{

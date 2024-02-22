@@ -1,3 +1,6 @@
+import model.components.Car;
+import model.components.CarTransport;
+import model.components.Volvo240;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,7 +14,7 @@ public class TestCarTransport {
     @BeforeEach
     public void setUp() {
         carTransport = new CarTransport(2, 5, Color.BLUE, "CarTransport1");
-        volvoCar = new Volvo240(2, 4, Color.RED, "Car");
+        volvoCar = new Volvo240(2, 4, Color.RED, "model.components.Car");
     }
     @Test
     public void testRaiseLowerWhileStill() {
@@ -26,6 +29,7 @@ public class TestCarTransport {
     @Test
     public void testRaiseLowerWhileMoving() {
         carTransport.startEngine();
+        carTransport.gas(0.5);
         assertThrows(IllegalStateException.class, () -> carTransport.lower());
     }
 

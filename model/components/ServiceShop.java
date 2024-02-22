@@ -1,7 +1,11 @@
+package model.components;
+
+import model.components.Car;
+import model.components.Loadable;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Stack;
 
 public class ServiceShop<T extends Car> implements Loadable<T> {
     private final List<T> storage = new ArrayList<>();  // Composition

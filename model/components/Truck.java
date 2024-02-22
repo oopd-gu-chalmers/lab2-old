@@ -1,3 +1,5 @@
+package model.components;
+
 import java.awt.*;
 
 public abstract class Truck extends Vehicle implements HasBed {

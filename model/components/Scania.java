@@ -1,6 +1,8 @@
+package model.components;
+
 import java.awt.*;
 
-public class Scania extends Truck{
+public class Scania extends Truck {
     private final ScaniaBed scaniaBed = new ScaniaBed();
 
     public Scania(int nrDoors, double enginePower, Color color, String modelName) {

@@ -1,3 +1,5 @@
+package model.components;
+
 public class ScaniaBed {
 
     private int angle = 0;

@@ -1,3 +1,7 @@
+package model.components;
+
+import model.components.Car;
+
 import java.awt.*;
 
 public class Volvo240 extends Car {
