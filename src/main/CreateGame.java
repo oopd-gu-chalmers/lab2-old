@@ -1,6 +1,8 @@
-import controller.CarController;
-import model.*;
-import model.components.VehicleFactory;
+package main;
+
+import main.controller.CarController;
+import main.model.VehicleModel;
+import main.model.*;
 
 import java.awt.*;
 
@@ -27,7 +29,7 @@ public class CreateGame {
         scania.setYPos(200);
 
         // Start a new view and send a reference of self
-        cc.frame = new CarView("CarSim 1.0", cc);
+        cc.frame = new UserInterface("CarSim 1.0", cc);
 
         // Start the timer
         cc.timer.start();

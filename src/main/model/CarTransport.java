@@ -1,4 +1,4 @@
-package model.components;
+package main.model;
 
 import java.awt.*;
 

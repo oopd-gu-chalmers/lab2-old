@@ -1,4 +1,4 @@
-import model.components.Saab95;
+import main.model.Saab95;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

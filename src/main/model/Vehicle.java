@@ -1,6 +1,4 @@
-package model.components;
-
-import model.components.Movable;
+package main.model;
 
 import java.awt.*;
 
@@ -56,7 +54,7 @@ public abstract class Vehicle implements Movable {
         engineOn = false;
     }
 
-    protected boolean getEngineOn(){return engineOn;}
+    public boolean getEngineOn(){return engineOn;}
 
     protected abstract double speedFactor();
 
@@ -115,7 +113,7 @@ public abstract class Vehicle implements Movable {
         else { throw new IllegalArgumentException("Turn engine on before you push gas");}
     }
 
-    protected void brake(double amount){
+    public void brake(double amount){
         if (amount >= 0 && amount <=1){
             decrementSpeed(amount);
         } else {

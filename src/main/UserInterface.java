@@ -1,7 +1,7 @@
-package view;
+package main;
 
-import controller.CarController;
-import view.DrawPanel;
+import main.controller.CarController;
+import main.view.DrawPanel;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -18,7 +18,7 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class CarView extends JFrame implements ActionListener{
+public class UserInterface extends JFrame implements ActionListener{
     private static final int X = 800;
     private static final int Y = 800;
 
@@ -30,22 +30,22 @@ public class CarView extends JFrame implements ActionListener{
     JPanel controlPanel = new JPanel();
 
     JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
-    int gasAmount = 0;
+    public JSpinner gasSpinner = new JSpinner();
+
     JLabel gasLabel = new JLabel("Amount of gas");
 
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("model.components.Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
+    public JButton gasButton = new JButton("Gas");
+    public JButton brakeButton = new JButton("Brake");
+    public JButton turboOnButton = new JButton("Saab Turbo on");
+    public JButton turboOffButton = new JButton("Saab Turbo off");
+    public JButton liftBedButton = new JButton("main.model.Scania Lift Bed");
+    public JButton lowerBedButton = new JButton("Lower Lift Bed");
 
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
+    public JButton startButton = new JButton("Start all cars");
+    public JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
+    public UserInterface(String framename, CarController cc){
         this.carC = cc;
         this.drawPanel = new DrawPanel(carC, X, Y-240); // Kanske kan skapas i carcontroller
         initComponents(framename);
@@ -186,5 +186,5 @@ public class CarView extends JFrame implements ActionListener{
 
     public void actionPerformed(ActionEvent e){
         this.repaint();
-    }
+    } //drawpanel
 }

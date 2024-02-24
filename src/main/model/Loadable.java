@@ -1,4 +1,4 @@
-package model.components;
+package main.model;
 
 public interface Loadable<T extends Vehicle> {
     void load(T vehicle);

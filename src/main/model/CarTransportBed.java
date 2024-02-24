@@ -1,6 +1,4 @@
-package model.components;
-
-import model.components.Car;
+package main.model;
 
 import java.util.Stack;
 

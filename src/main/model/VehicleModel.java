@@ -1,6 +1,4 @@
-package model;
-
-import model.components.Vehicle;
+package main.model;
 
 import java.util.ArrayList;
 

@@ -1,10 +1,10 @@
-package view;
+package main.view;
 
 import controller.CarController;
-import model.components.Saab95;
-import model.components.Scania;
-import model.components.Vehicle;
-import model.components.Volvo240;
+import main.model.Saab95;
+import main.model.Scania;
+import main.model.Vehicle;
+import main.model.Volvo240;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

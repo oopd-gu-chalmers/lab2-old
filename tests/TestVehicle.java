@@ -1,5 +1,5 @@
-import model.components.Vehicle;
-import model.components.Volvo240;
+import main.model.Vehicle;
+import main.model.Volvo240;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;

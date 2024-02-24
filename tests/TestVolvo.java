@@ -1,4 +1,4 @@
-import model.components.Volvo240;
+import main.model.Volvo240;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

@@ -1,11 +1,12 @@
-package controller;
+package main.controller;
 
-import model.VehicleModel;
-import model.components.*;
-import view.CarView;
+import main.model.VehicleModel;
+import main.UserInterface;
+import main.model.*;
 
 import javax.swing.*;
-import java.awt.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -26,39 +27,79 @@ public class CarController {
     //private Timer timer = new Timer(delay, new TimerListener());
 
     // The frame that represents this instance View of the MVC pattern
-    CarView view;
+    private UserInterface cView;
 
-    VehicleModel model;
+    private VehicleModel vModel;
+
+    int gasAmount = 0;
+
+    ArrayList<Vehicle> vehicleList;
+
     //A list of cars, modify if needed
     //ArrayList<Vehicle> vehicles = new ArrayList<>();
 
     //ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
 
-    public CarController(CarView view, VehicleModel model){
-        this.view = view;
-        this.model = model;
+    public CarController(UserInterface cView, VehicleModel vModel){
+        this.cView = cView;
+        this.vModel = vModel;
+        this.vehicleList = vModel.getVehicles();
     }
 
-    public void buttons(){
-        view.gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                double gas = ((double) amount) / 100;
-                ArrayList<Vehicle> vehicleList = model.getVehicles();
-                for (Vehicle vehicle : vehicleList) {
-                    if (vehicle.engineOn){
-                        vehicle.gas(gas);}
 
+
+
+    private void initListeners(){
+        cView.gasButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                gas(gasAmount);
             }
         });
+
+        cView.brakeButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                brake(gasAmount);
+            }
+        });
+
+        cView.startButton.addActionListener(new ActionListener() {public void actionPerformed (ActionEvent e){
+
+            }
+        }
+
+        cView.gasSpinner.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
+            }
+        });
+
     }
+
+
+    void gas(int amount) {
+        double gas = ((double) amount) / 100;
+        for (Vehicle vehicle : vehicleList) {
+            if (vehicle.getEngineOn()){
+                vehicle.gas(gas);}
+        }
+    }
+
+    void brake(int amount) {
+        double brake = ((double) amount) / 100;
+        for (Vehicle vehicle : vehicleList
+        ) {
+            vehicle.brake(brake);
+        }
+    }
+
+
 
     //methods:
 
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
-    private class TimerListener implements ActionListener {
+/*    private class TimerListener implements ActionListener {
         public void actionPerformed(ActionEvent e) {
             for (Vehicle vehicle : vehicles) {
                 checkAndCorrectPosition(vehicle);
@@ -111,17 +152,9 @@ public class CarController {
 
 
 
-}
+}*/
+/*
 
-
-        ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                carC.gas(gasAmount);
-
-
-            }
-        });
 
 
 
@@ -193,22 +226,9 @@ public class CarController {
 
     }
     // Calls the gas method for each car once
-    void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Vehicle vehicle : vehicles
-                ) {
-            if (vehicle.engineOn){
-                vehicle.gas(gas);}
-        }
-    }
 
-    void brake(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Vehicle vehicle : vehicles
-        ) {
-            vehicle.brake(brake);
-        }
-    }
+*/
+
 
     void startEngine() {
         for (Vehicle vehicle : vehicles
@@ -243,7 +263,7 @@ public class CarController {
     }
     void liftBed() {
         for (Vehicle vehicle : vehicles) {
-            if (vehicle instanceof Truck) { // Kontrollerar om vehicle är en instans av model.components.Truck
+            if (vehicle instanceof Truck) { // Kontrollerar om vehicle är en instans av main.model.Truck
                 Truck truck = (Truck) vehicle;
                 truck.raise();
             }
@@ -257,6 +277,7 @@ public class CarController {
             }
         }
     }
+
 
 }
 

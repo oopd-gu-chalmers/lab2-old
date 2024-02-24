@@ -1,7 +1,4 @@
-package model.components;
-
-import model.components.Car;
-import model.components.Loadable;
+package main.model;
 
 import java.util.ArrayList;
 import java.util.List;

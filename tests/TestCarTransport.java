@@ -1,6 +1,6 @@
-import model.components.Car;
-import model.components.CarTransport;
-import model.components.Volvo240;
+import main.model.Car;
+import main.model.CarTransport;
+import main.model.Volvo240;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,7 +14,7 @@ public class TestCarTransport {
     @BeforeEach
     public void setUp() {
         carTransport = new CarTransport(2, 5, Color.BLUE, "CarTransport1");
-        volvoCar = new Volvo240(2, 4, Color.RED, "model.components.Car");
+        volvoCar = new Volvo240(2, 4, Color.RED, "main.model.Car");
     }
     @Test
     public void testRaiseLowerWhileStill() {
