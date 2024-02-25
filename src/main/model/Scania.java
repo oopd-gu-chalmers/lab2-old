@@ -1,4 +1,4 @@
-package main.model;
+package src.main.model;
 
 import java.awt.*;
 
@@ -31,7 +31,7 @@ public class Scania extends Truck {
     }
 
     @Override
-    protected void gas(double amount){
+    public void gas(double amount){
         if (scaniaBed.getAngle() > 0)
             throw new IllegalStateException("Can't gas when bed is raised.");
         else

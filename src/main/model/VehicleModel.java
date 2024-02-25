@@ -1,4 +1,4 @@
-package main.model;
+package src.main.model;
 
 import java.util.ArrayList;
 
@@ -6,7 +6,7 @@ public class VehicleModel {
     private final VehicleList vehicleList;
 
     public VehicleModel(){
-        vehicleList = new VehicleList();
+        this.vehicleList = new VehicleList();
     }
 
     public void addVehicle(Vehicle v){
@@ -15,8 +15,7 @@ public class VehicleModel {
 
     }
 
-    public ArrayList<Vehicle> getVehicles(){
-        return vehicleList.vehicles;
+    public ArrayList<Vehicle> getVehicles(){return vehicleList.getVehicles();
     }
 
 }

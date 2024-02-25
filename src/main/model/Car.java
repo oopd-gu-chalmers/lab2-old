@@ -1,5 +1,4 @@
-package main.model;
-
+package src.main.model;
 import java.awt.*;
 
 public abstract class Car extends Vehicle {

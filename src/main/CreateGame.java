@@ -1,50 +1,59 @@
-package main;
+package src.main;
 
-import main.controller.CarController;
-import main.model.VehicleModel;
-import main.model.*;
+import src.main.controller.CarController;
+import src.main.model.VehicleModel;
+import src.main.model.*;
 
 import java.awt.*;
 
 public class CreateGame {
 
     public static void main(String[] args) {
-        // Instance of this class
-        CarController cc = new CarController();
+        // Create model
+        VehicleModel model = createModel();
+
+        // Create controller
+        CarController cc = new CarController(model);
+
+        // Create view
+        UserInterface view = new UserInterface("CarSim 1.0", cc);
+
+        // Set the view in the controller
+        cc.setView(view);
+
 
         cc.volvoServiceShop.setXPos(0);
         cc.volvoServiceShop.setYPos(300);
 
-        Volvo240 volvo = new Volvo240(4, 100, Color.BLACK, "ILoveVolvo");
-        cc.vehicles.add(volvo);
+        /*Volvo240 volvo = new Volvo240(4, 100, Color.BLACK, "ILoveVolvo");
+        cc.getVehicleList().add(volvo);
 
         Saab95 saab = new Saab95(4,50,Color.RED,"ILoveSaab",true);
-        cc.vehicles.add(saab);
+        cc.getVehicleList().add(saab);
         saab.setXPos(0);
         saab.setYPos(100);
 
         Scania scania = new Scania(2, 100, Color.BLUE, "ILoveScania");
-        cc.vehicles.add(scania);
+        cc.getVehicleList().add(scania);
         scania.setXPos(0);
-        scania.setYPos(200);
+        scania.setYPos(200);*/
 
-        // Start a new view and send a reference of self
-        cc.frame = new UserInterface("CarSim 1.0", cc);
+
 
         // Start the timer
         cc.timer.start();
 
-        VehicleModel components = createModel();
+
     }
 
     public static VehicleModel createModel(){
-        VehicleModel components = new VehicleModel();
+        VehicleModel model = new VehicleModel();
 
-        components.addVehicle(VehicleFactory.createVolvo240(4, 100, Color.BLACK, "ILoveVolvo"));
-        components.addVehicle(VehicleFactory.createSaab(4,50,Color.RED,"ILoveSaab",true));
-        components.addVehicle(VehicleFactory.createScania(2, 100, Color.BLUE, "ILoveScania"));
+        model.addVehicle(VehicleFactory.createVolvo240(4, 100, Color.BLACK, "ILoveVolvo"));
+        model.addVehicle(VehicleFactory.createSaab(4,50,Color.RED,"ILoveSaab",true));
+        model.addVehicle(VehicleFactory.createScania(2, 100, Color.BLUE, "ILoveScania"));
 
-        return components;
+        return model;
     }
 
 

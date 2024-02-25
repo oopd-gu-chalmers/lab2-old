@@ -1,5 +1,4 @@
-package main.model;
-
+package src.main.model;
 import java.util.Stack;
 
 public class CarTransportBed{

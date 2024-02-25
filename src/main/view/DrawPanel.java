@@ -1,10 +1,10 @@
-package main.view;
+package src.main.view;
 
-import controller.CarController;
-import main.model.Saab95;
-import main.model.Scania;
-import main.model.Vehicle;
-import main.model.Volvo240;
+import src.main.controller.CarController;
+import src.main.model.Saab95;
+import src.main.model.Scania;
+import src.main.model.Vehicle;
+import src.main.model.Volvo240;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -41,7 +41,7 @@ public class DrawPanel extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Vehicle vehicle : cc.vehicles) {
+        for (Vehicle vehicle : cc.getVehicleList()) {
             int x = (int) Math.round(vehicle.getXPos());
             int y = (int) Math.round(vehicle.getYPos());
             BufferedImage image = vehicleImages.get(vehicle.getClass());

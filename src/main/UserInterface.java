@@ -1,7 +1,7 @@
-package main;
+package src.main;
 
-import main.controller.CarController;
-import main.view.DrawPanel;
+import src.main.view.DrawPanel;
+import src.main.controller.CarController;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -182,9 +182,17 @@ public class UserInterface extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void add
+    //public void add
 
     public void actionPerformed(ActionEvent e){
         this.repaint();
     } //drawpanel
+
+    public int getDrawPanelWidth() {
+        return drawPanel.getWidth();
+    }
+
+    public int getDrawPanelHeight() {
+        return drawPanel.getHeight();
+    }
 }
