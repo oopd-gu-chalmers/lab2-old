@@ -12,18 +12,19 @@ public class CreateGame {
         // Create model
         VehicleModel model = createModel();
 
-        // Create controller
-        CarController cc = new CarController(model);
-
         // Create view
-        UserInterface view = new UserInterface("CarSim 1.0", cc);
+        UserInterface view = createView();
 
-        // Set the view in the controller
-        cc.setView(view);
+        // Create controller
+        CarController cc = new CarController(model, view);
 
 
-        cc.volvoServiceShop.setXPos(0);
-        cc.volvoServiceShop.setYPos(300);
+
+
+        // Create service shop
+        ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
+        volvoServiceShop.setXPos(0);
+        volvoServiceShop.setYPos(300);
 
         /*Volvo240 volvo = new Volvo240(4, 100, Color.BLACK, "ILoveVolvo");
         cc.getVehicleList().add(volvo);
@@ -56,5 +57,9 @@ public class CreateGame {
         return model;
     }
 
+    private static UserInterface createView() {
+        return new UserInterface("CarSim 1.0");
+        // nåt mer
+    }
 
 }

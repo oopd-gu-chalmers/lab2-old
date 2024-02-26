@@ -9,6 +9,7 @@ import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -18,12 +19,9 @@ import java.awt.event.ActionListener;
  * TODO: Write more actionListeners and wire the rest of the buttons
  **/
 
-public class UserInterface extends JFrame implements ActionListener{
+public class UserInterface extends JFrame{
     private static final int X = 800;
     private static final int Y = 800;
-
-    // The controller member
-    CarController carC;
 
     DrawPanel drawPanel;
 
@@ -45,9 +43,8 @@ public class UserInterface extends JFrame implements ActionListener{
     public JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public UserInterface(String framename, CarController cc){
-        this.carC = cc;
-        this.drawPanel = new DrawPanel(carC, X, Y-240); // Kanske kan skapas i carcontroller
+    public UserInterface(String framename){
+        this.drawPanel = new DrawPanel(X, Y-240); // Kanske kan skapas i carcontroller
         initComponents(framename);
 
     }
@@ -62,19 +59,14 @@ public class UserInterface extends JFrame implements ActionListener{
 
         this.add(drawPanel);
 
-
-
+        // Create spinner
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
                         0, //min
                         100, //max
                         1);//step
         gasSpinner = new JSpinner(spinnerModel);
-        gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner)e.getSource()).getValue();
-            }
-        });
+
 
         gasPanel.setLayout(new BorderLayout());
         gasPanel.add(gasLabel, BorderLayout.PAGE_START);
@@ -106,68 +98,6 @@ public class UserInterface extends JFrame implements ActionListener{
         stopButton.setPreferredSize(new Dimension(X/5-15,200));
         this.add(stopButton);
 
-        // This actionListener is for the gas button only
-        // TODO: Create more for each component as necessary
-        gasButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.gas(gasAmount);
-
-            }
-        });
-
-        brakeButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.brake(gasAmount);
-
-            }
-        });
-
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.startEngine();
-
-            }
-        });
-
-        stopButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.stopEngine();
-            }
-        });
-
-        turboOnButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.turboOn();
-
-            }
-        });
-        turboOffButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.turboOff();
-
-            }
-        });
-        liftBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.liftBed();
-
-            }
-        });
-
-        lowerBedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                carC.lowerBed();
-
-            }
-        });
 
         // Make the frame pack all it's components by respecting the sizes if possible.
         this.pack();
@@ -182,11 +112,9 @@ public class UserInterface extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    //public void add
-
-    public void actionPerformed(ActionEvent e){
-        this.repaint();
-    } //drawpanel
+    public void addActionListener(ActionListener al) {
+        this.addActionListener(al);
+    }
 
     public int getDrawPanelWidth() {
         return drawPanel.getWidth();

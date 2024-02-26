@@ -17,5 +17,4 @@ public class VehicleModel {
 
     public ArrayList<Vehicle> getVehicles(){return vehicleList.getVehicles();
     }
-
 }

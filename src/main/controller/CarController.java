@@ -1,6 +1,5 @@
 package src.main.controller;
 
-
 import src.main.UserInterface;
 import src.main.model.*;
 
@@ -21,40 +20,30 @@ public class CarController {
     // member fields:
 
     // The delay (ms) corresponds to 20 updates a sec (hz)
-    //private final int delay = 50;
+    private final int delay = 50;
     // The timer is started with a listener (see below) that executes the statements
     // each step between delays.
-    //private Timer timer = new Timer(delay, new TimerListener());
-
-    // The frame that represents this instance View of the MVC pattern
-    private UserInterface cView;
+    public Timer timer = new Timer(delay, new TimerListener());
 
     private VehicleModel vModel;
 
     int gasAmount = 0;
 
+    //A list of cars
     ArrayList<Vehicle> vehicleList;
 
-    //A list of cars, modify if needed
-    //ArrayList<Vehicle> vehicles = new ArrayList<>();
-
-    //ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
-
-    public CarController(VehicleModel vModel) {
+    public CarController(VehicleModel vModel, UserInterface cView){
         this.vehicleList = vModel.getVehicles();
         this.vModel = vModel;
-
-    }
-
-    public void setView(UserInterface cView) {
-        this.cView = cView;
+        initInteraction(cView);
     }
 
     public ArrayList<Vehicle> getVehicleList() {
         return vehicleList;
     }
 
-    private void initListeners() {
+
+    private void initListeners(UserInterface cView) {
         cView.gasButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 gas(gasAmount);
@@ -111,6 +100,11 @@ public class CarController {
 
     }
 
+        public void initInteraction(UserInterface view) {
+        // view.add ... nån typ av listener
+        view.addActionListener(new TimerListener(UserInterface cView));
+        initListeners(view);
+    }
 
     void gas(int amount) {
         double gas = ((double) amount) / 100;
@@ -181,44 +175,44 @@ public class CarController {
     /* Each step the TimerListener moves all the cars in the list and tells the
      * view to update its images. Change this method to your needs.
      * */
-    private class TimerListener implements ActionListener {
+    private class TimerListener implements ActionListener {     // Vad är syftet med denna???
+        public TimerListener(UserInterface cView) {
+            initListeners(cView);
+        }
         public void actionPerformed(ActionEvent e) {
             int maxX = cView.getDrawPanelWidth();
             int maxY = cView.getDrawPanelHeight();
             for (Vehicle vehicle : vehicleList) {
-                checkAndCorrectPosition(vehicle, maxX, maxY);
                 vehicle.move();
-                checkCollision(vehicle);
-                // repaint() calls the paintComponent method of the panel
-                cView.repaint();  // Detta är mkt oklart
             }
 
-        }}
+        }}}
 
 
-        private void checkAndCorrectPosition(Vehicle vehicle, int maxX, int maxY) {
-            int x = (int) Math.round(vehicle.getXPos());
-            int y = (int) Math.round(vehicle.getYPos());
-            if (x < 0) {
-                vehicle.setXPos(0);
-                vehicle.setDirection(-vehicle.getDirection());
-            }
-            else if (x> maxX) {
-                vehicle.setXPos(maxX);
-                vehicle.setDirection(-vehicle.getDirection());
-            }
 
-            if (y < 0) {
-                vehicle.setYPos(0);
-                vehicle.setDirection(-vehicle.getDirection());
-            }
-            else if (y > maxY) {
-                vehicle.setYPos(maxY);
-                vehicle.setDirection(-vehicle.getDirection());
-            }
-    }
+    /*private void checkAndCorrectPosition(Vehicle vehicle, int maxX, int maxY) {
+        int x = (int) Math.round(vehicle.getXPos());
+        int y = (int) Math.round(vehicle.getYPos());
+        if (x < 0) {
+            vehicle.setXPos(0);
+            vehicle.setDirection(-vehicle.getDirection());
+        }
+        else if (x> maxX) {
+            vehicle.setXPos(maxX);
+            vehicle.setDirection(-vehicle.getDirection());
+        }
 
-    private void checkCollision(Vehicle vehicle) {
+        if (y < 0) {
+            vehicle.setYPos(0);
+            vehicle.setDirection(-vehicle.getDirection());
+        }
+        else if (y > maxY) {
+            vehicle.setYPos(maxY);
+            vehicle.setDirection(-vehicle.getDirection());
+        }
+    }*/
+
+    /*private void checkCollision(Vehicle vehicle) {
         //serviceShop.getClass().getGenericSuperclass().equals(car.getClass())
         if (vehicle.getCurrentSpeed() != 0){
             if (Math.abs(vehicle.getXPos() - volvoServiceShop.getXPos()) < 5 && Math.abs(vehicle.getYPos() - volvoServiceShop.getYPos()) < 5){
@@ -229,86 +223,6 @@ public class CarController {
                 }
             }
         }
-    }
-
-
-
-}
-/*
-
-
-
-
-        brakeButton.addActionListener(new
-
-        ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                carC.brake(gasAmount);
-
-            }
-        });
-
-        startButton.addActionListener(new
-
-        ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                carC.startEngine();
-
-            }
-        });
-
-        stopButton.addActionListener(new
-
-        ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                carC.stopEngine();
-            }
-        });
-        turboOnButton.addActionListener(new
-
-        ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                carC.turboOn();
-
-            }
-        });
-        turboOffButton.addActionListener(new
-
-        ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                carC.turboOff();
-
-            }
-        });
-        liftBedButton.addActionListener(new
-
-        ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                carC.liftBed();
-
-            }
-        });
-
-        lowerBedButton.addActionListener(new
-
-        ActionListener() {
-            @Override
-            public void actionPerformed (ActionEvent e){
-                carC.lowerBed();
-
-            }
-        });
-
-    }
-    // Calls the gas method for each car once
-
-*/
-
+    }*/
 
 

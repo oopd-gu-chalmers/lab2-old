@@ -43,11 +43,11 @@ public class ServiceShop<T extends Car> implements Loadable<T> {
         return yPos;
     }
 
-    protected void setXPos(double x) {
+    public void setXPos(double x) {
         xPos = x;
     }
 
-    protected void setYPos(double y) {
+    public void setYPos(double y) {
         yPos = y;
     }
 }
