@@ -43,6 +43,43 @@ public class CarController {
     }
 
 
+    public ActionListener createGasActionListener() {
+        return e -> gas(gasAmount);
+    }
+
+    public ActionListener createBrakeActionListener() {
+        return e -> brake(gasAmount);
+    }
+
+    public ActionListener createStartActionListener() {
+        return e -> startEngine();
+    }
+
+    public ActionListener createStopActionListener() {
+        return e -> stopEngine();
+    }
+
+    public ActionListener createTurboOnActionListener() {
+        return e -> turboOn();
+    }
+
+    public ActionListener createTurboOffActionListener() {
+        return e -> turboOff();
+    }
+
+    public ActionListener createLiftBedActionListener() {
+        return e -> liftBed();
+    }
+
+    public ActionListener createLowerBedActionListener() {
+        return e -> lowerBed();
+    }
+
+    public ChangeListener createGasSpinnerChangeListener() {
+        return e -> gasAmount = (int) ((JSpinner) e.getSource()).getValue();
+    }
+
+    // ------------------ TA BORT DETTA UNDER ------------------
     private void initListeners(UserInterface cView) {
         cView.gasButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -100,10 +137,12 @@ public class CarController {
 
     }
 
+    // ------------------ TA BORT DETTA ÖVER ------------------
+    
         public void initInteraction(UserInterface view) {
         // view.add ... nån typ av listener
-        view.addActionListener(new TimerListener(UserInterface cView));
-        initListeners(view);
+        view.addActionListener(new TimerListener(view));
+        // initListeners(view);
     }
 
     void gas(int amount) {

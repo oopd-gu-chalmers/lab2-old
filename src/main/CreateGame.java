@@ -12,33 +12,27 @@ public class CreateGame {
         // Create model
         VehicleModel model = createModel();
 
-        // Create view
-        UserInterface view = createView();
+        // Create ui
+        UserInterface ui = createUserinterface();
 
         // Create controller
-        CarController cc = new CarController(model, view);
+        CarController cc = new CarController(model, ui);
 
-
-
+        // Add listeners
+        ui.addGasButtonListener(cc.createGasActionListener());
+        ui.addBrakeButtonListener(cc.createBrakeActionListener());
+        ui.addStartButtonListener(cc.createStartActionListener());
+        ui.addStopButtonListener(cc.createStopActionListener());
+        ui.addTurboOnButtonListener(cc.createTurboOnActionListener());
+        ui.addTurboOffButtonListener(cc.createTurboOffActionListener());
+        ui.addLiftBedButtonListener(cc.createLiftBedActionListener());
+        ui.addLowerBedButtonListener(cc.createLowerBedActionListener());
+        ui.addGasSpinnerListener(cc.createGasSpinnerChangeListener());
 
         // Create service shop
         ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
         volvoServiceShop.setXPos(0);
         volvoServiceShop.setYPos(300);
-
-        /*Volvo240 volvo = new Volvo240(4, 100, Color.BLACK, "ILoveVolvo");
-        cc.getVehicleList().add(volvo);
-
-        Saab95 saab = new Saab95(4,50,Color.RED,"ILoveSaab",true);
-        cc.getVehicleList().add(saab);
-        saab.setXPos(0);
-        saab.setYPos(100);
-
-        Scania scania = new Scania(2, 100, Color.BLUE, "ILoveScania");
-        cc.getVehicleList().add(scania);
-        scania.setXPos(0);
-        scania.setYPos(200);*/
-
 
 
         // Start the timer
@@ -50,14 +44,23 @@ public class CreateGame {
     public static VehicleModel createModel(){
         VehicleModel model = new VehicleModel();
 
-        model.addVehicle(VehicleFactory.createVolvo240(4, 100, Color.BLACK, "ILoveVolvo"));
-        model.addVehicle(VehicleFactory.createSaab(4,50,Color.RED,"ILoveSaab",true));
-        model.addVehicle(VehicleFactory.createScania(2, 100, Color.BLUE, "ILoveScania"));
+        Vehicle volvo = VehicleFactory.createVolvo240(4, 100, Color.BLACK, "ILoveVolvo");
+        model.addVehicle(volvo);
+
+        Vehicle saab = VehicleFactory.createSaab(4,50,Color.RED,"ILoveSaab",true);
+        saab.setXPos(0);
+        saab.setYPos(100);
+        model.addVehicle(saab);
+
+        Vehicle scania = VehicleFactory.createScania(2, 100, Color.BLUE, "ILoveScania");
+        scania.setXPos(0);
+        scania.setYPos(200);
+        model.addVehicle(scania);
 
         return model;
     }
 
-    private static UserInterface createView() {
+    private static UserInterface createUserinterface() {
         return new UserInterface("CarSim 1.0");
         // nåt mer
     }

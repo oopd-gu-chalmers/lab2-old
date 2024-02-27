@@ -112,10 +112,44 @@ public class UserInterface extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
-    public void addActionListener(ActionListener al) {
-        this.addActionListener(al);
+
+    public void addGasButtonListener(ActionListener al) {
+        gasButton.addActionListener(al);
     }
 
+    public void addBrakeButtonListener(ActionListener al) {
+        brakeButton.addActionListener(al);
+    }
+
+    public void addStartButtonListener(ActionListener al) {
+        startButton.addActionListener(al);
+    }
+
+    public void addStopButtonListener(ActionListener al) {
+        stopButton.addActionListener(al);
+    }
+
+    public void addTurboOnButtonListener(ActionListener al) {
+        turboOnButton.addActionListener(al);
+    }
+
+    public void addTurboOffButtonListener(ActionListener al) {
+        turboOffButton.addActionListener(al);
+    }
+
+    public void addLiftBedButtonListener(ActionListener al) {
+        liftBedButton.addActionListener(al);
+    }
+
+    public void addLowerBedButtonListener(ActionListener al) {
+        lowerBedButton.addActionListener(al);
+    }
+
+    public void addGasSpinnerListener(ChangeListener cl) {
+        gasSpinner.addChangeListener(cl);
+    }
+
+    // Vet inte om dessa nedan behövs
     public int getDrawPanelWidth() {
         return drawPanel.getWidth();
     }
