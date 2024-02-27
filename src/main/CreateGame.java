@@ -3,6 +3,7 @@ package src.main;
 import src.main.controller.CarController;
 import src.main.model.VehicleModel;
 import src.main.model.*;
+import src.main.view.DrawPanel;
 
 import java.awt.*;
 
@@ -12,11 +13,17 @@ public class CreateGame {
         // Create model
         VehicleModel model = createModel();
 
+        // Create drawPanel
+        DrawPanel drawPanel = new DrawPanel(model);   // definiera fönstrets storlek i modellen
+
         // Create ui
-        UserInterface ui = createUserinterface();
+        UserInterface ui = createUserinterface(drawPanel, model);  // lägg in panelen här
 
         // Create controller
         CarController cc = new CarController(model, ui);
+
+
+        model.addListener(drawPanel);
 
         // Add listeners
         ui.addGasButtonListener(cc.createGasActionListener());
@@ -29,11 +36,10 @@ public class CreateGame {
         ui.addLowerBedButtonListener(cc.createLowerBedActionListener());
         ui.addGasSpinnerListener(cc.createGasSpinnerChangeListener());
 
-        // Create service shop
-        ServiceShop<Volvo240> volvoServiceShop = new ServiceShop<>(5);
+        // Get serviceshop and set position
+        ServiceShop<Volvo240> volvoServiceShop = model.getVolvoServiceShop();
         volvoServiceShop.setXPos(0);
         volvoServiceShop.setYPos(300);
-
 
         // Start the timer
         cc.timer.start();
@@ -60,8 +66,9 @@ public class CreateGame {
         return model;
     }
 
-    private static UserInterface createUserinterface() {
-        return new UserInterface("CarSim 1.0");
+    private static UserInterface createUserinterface(DrawPanel panel, VehicleModel model) {
+        UserInterface ui = new UserInterface("CarSim 1.0", panel, model.getWidth(), model.getHeight());
+        return ui;
         // nåt mer
     }
 

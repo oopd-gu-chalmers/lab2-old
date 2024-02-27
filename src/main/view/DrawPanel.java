@@ -1,10 +1,7 @@
 package src.main.view;
 
 import src.main.controller.CarController;
-import src.main.model.Saab95;
-import src.main.model.Scania;
-import src.main.model.Vehicle;
-import src.main.model.Volvo240;
+import src.main.model.*;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -19,11 +16,13 @@ import javax.swing.*;
 
 public class DrawPanel extends JPanel implements ActionListener {
 
+    private VehicleModel model;
     private HashMap<Class, BufferedImage> vehicleImages = new HashMap<>();
 
-    public DrawPanel(int x, int y) {
+    public DrawPanel(VehicleModel model) {
+        this.model = model;
         this.setDoubleBuffered(true);
-        this.setPreferredSize(new Dimension(x, y));
+        this.setPreferredSize(new Dimension(model.getWidth(), model.getHeight()-240));
         this.setBackground(Color.cyan);
         try {
             loadImages();
@@ -32,6 +31,7 @@ public class DrawPanel extends JPanel implements ActionListener {
         }
     }
 
+    @Override
     public void actionPerformed(ActionEvent e){this.repaint();}
 
 
@@ -46,7 +46,7 @@ public class DrawPanel extends JPanel implements ActionListener {
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Vehicle vehicle : cc.getVehicleList()) {
+        for (Vehicle vehicle : cc.getVehicleList()) {   // Gå igenom en lista av drawables
             int x = (int) Math.round(vehicle.getXPos());
             int y = (int) Math.round(vehicle.getYPos());
             BufferedImage image = vehicleImages.get(vehicle.getClass());

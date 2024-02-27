@@ -120,4 +120,15 @@ public abstract class Vehicle implements Movable {
             throw new IllegalArgumentException("Argument must be between 0 and 1");
         }
     }
+
+    public void checkAndCorrectPosition(Vehicle vehicle, int maxX, int maxY) {
+        int x = (int) Math.round(vehicle.getXPos());
+        int y = (int) Math.round(vehicle.getYPos());
+        if (x < 0) {
+            vehicle.setXPos(0);
+            vehicle.setDirection(-vehicle.getDirection());
+        }
+}
+
+
 }

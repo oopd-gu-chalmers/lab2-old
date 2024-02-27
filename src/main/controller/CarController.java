@@ -32,10 +32,9 @@ public class CarController {
     //A list of cars
     ArrayList<Vehicle> vehicleList;
 
-    public CarController(VehicleModel vModel, UserInterface cView){
+    public CarController(VehicleModel vModel, UserInterface cView) {
         this.vehicleList = vModel.getVehicles();
         this.vModel = vModel;
-        initInteraction(cView);
     }
 
     public ArrayList<Vehicle> getVehicleList() {
@@ -79,71 +78,6 @@ public class CarController {
         return e -> gasAmount = (int) ((JSpinner) e.getSource()).getValue();
     }
 
-    // ------------------ TA BORT DETTA UNDER ------------------
-    private void initListeners(UserInterface cView) {
-        cView.gasButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                gas(gasAmount);
-            }
-        });
-
-        cView.brakeButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                brake(gasAmount);
-            }
-        });
-
-        cView.startButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                startEngine();
-            }
-        });
-
-        cView.stopButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                stopEngine();
-            }
-        });
-
-        cView.turboOnButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                turboOn();
-            }
-        });
-
-        cView.turboOffButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                turboOff();
-            }
-        });
-
-        cView.liftBedButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                liftBed();
-            }
-        });
-
-        cView.lowerBedButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                lowerBed();
-            }
-        });
-
-        cView.gasSpinner.addChangeListener(new ChangeListener() {
-            public void stateChanged(ChangeEvent e) {
-                gasAmount = (int) ((JSpinner) e.getSource()).getValue();
-            }
-        });
-
-    }
-
-    // ------------------ TA BORT DETTA ÖVER ------------------
-    
-        public void initInteraction(UserInterface view) {
-        // view.add ... nån typ av listener
-        view.addActionListener(new TimerListener(view));
-        // initListeners(view);
-    }
 
     void gas(int amount) {
         double gas = ((double) amount) / 100;
@@ -193,6 +127,7 @@ public class CarController {
             }
         }
     }
+
     void liftBed() {
         for (Vehicle vehicle : vehicleList) {
             if (vehicle instanceof Truck) { // Kontrollerar om vehicle är en instans av main.model.Truck
@@ -201,6 +136,7 @@ public class CarController {
             }
         }
     }
+
     void lowerBed() {
         for (Vehicle vehicle : vehicleList) {
             if (vehicle instanceof Truck) {
@@ -215,17 +151,24 @@ public class CarController {
      * view to update its images. Change this method to your needs.
      * */
     private class TimerListener implements ActionListener {     // Vad är syftet med denna???
-        public TimerListener(UserInterface cView) {
-            initListeners(cView);
-        }
+        @Override
         public void actionPerformed(ActionEvent e) {
-            int maxX = cView.getDrawPanelWidth();
-            int maxY = cView.getDrawPanelHeight();
-            for (Vehicle vehicle : vehicleList) {
-                vehicle.move();
-            }
+            // Logik som ska utföras vid varje tick; till exempel:
+            vModel.updateVehicles();
+            // vModel.updateView(); /// repaint() på något sätt
 
-        }}}
+
+        }
+    }
+
+//        public void actionPerformed(ActionEvent e) {
+//            int maxX = cView.getDrawPanelWidth();
+//            int maxY = cView.getDrawPanelHeight();
+//            for (Vehicle vehicle : vehicleList) {
+//                vehicle.move();
+//            }
+
+}
 
 
 
