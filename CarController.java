@@ -1,4 +1,3 @@
-import java.util.ArrayList; 
 
 /*
 * This class represents the Controller part in the MVC pattern.
@@ -10,8 +9,7 @@ import java.util.ArrayList;
 
 public class CarController {
     // member fields:
-    ArrayList<Vehicle> cars = new ArrayList<>();
-    Workshop<Volvo240> workshop = new Workshop<Volvo240>(500, 0, 2);  
+    World world;
     //methods:
         // public static void main(String[] args) {
         // // Instance of this class
@@ -27,110 +25,52 @@ public class CarController {
     /* Each step the TimerListener moves all the cars in the list and tells the
     * view to update its images. Change this method to your needs.
     * */
+    public CarController(World w){
+        this.world=w;
+    }
   
     // Calls the gas method for each car once
     void gas(int amount) {
-        double gas = ((double) amount) / 100;
-        for (Vehicle car : cars)
-        {
-            try {
-                car.gas(gas);
-            } catch(Exception IllegalStateException) {
-                continue;
-            }
-        }
+        world.gas(amount);
     }
 
     void brake(int amount) {
-        double brake = ((double) amount) / 100;
-        for (Vehicle car : cars)
-        {
-            car.brake(brake);
-        }
+        world.brake(amount);
     }
 
     void startEngines() {
-        for (Vehicle car : cars)
-        {
-            car.startEngine();
-        }
+        world.startEngines();
     }
 
     void stopEngines() {
-        for (Vehicle car : cars)
-        {
-            car.stopEngine();
-        }
+        world.stopEngines();
     }
 
     void saabTurboOn() {
-        for (Vehicle car : cars)
-        {
-            if (car instanceof Saab95){
-                Saab95 saab = (Saab95) car;
-                saab.setTurboOn();
-            }    
-        }
+        world.saabTurboOn();
     }
 
     void saabTurboOff() {
-        for (Vehicle car : cars)
-        {
-            if (car instanceof Saab95){
-                Saab95 saab = (Saab95) car;
-                saab.setTurboOff();
-            }    
-        }
+        world.saabTurboOff();
     }
 
     void PlatformDown() {
-        for (Vehicle car : cars)
-        {
-            if (car instanceof TiltablePosterior){
-                TiltablePosterior tiltable = (TiltablePosterior) car;
-                tiltable.lowerTilt();
-            }    
-        }
+        world.PlatformDown();
     }
 
     void PlatformUp() {
-        for (Vehicle car : cars)
-        {
-            if (car instanceof TiltablePosterior){
-                TiltablePosterior tiltable = (TiltablePosterior) car;
-                tiltable.raiseTilt();
-            }    
-        }
+        world.PlatformUp();
     }
-
-    void checkForCollisionWithWorkshop() {
-        for (Vehicle car : cars) {
-            double car_x = car.getCurrentPos()[0] + car.getImage().getWidth() / 2; //VolvoImage not optimal, but easiest. should define constant for image size.
-            double car_y = car.getCurrentPos()[1] + car.getImage().getHeight() / 2;
-            double workshop_x = workshop.getCurrentPos()[0] + car.getImage().getWidth() / 2; //Same here.
-            double workshop_y = workshop.getCurrentPos()[1] + car.getImage().getHeight() / 2;
-            double distance = Math.sqrt(Math.pow(workshop_x - car_x, 2) + Math.pow(workshop_y - car_y, 2));
-            if (car instanceof Volvo240) {
-                workshop.load((Volvo240) car);
-                if (workshop.getCurrentLoad().contains(car)) {
-                    car.stopEngine();
-                }
-            }
-        }
+    void AddVolvo(){
+        world.AddVolvo();
     }
-
-    void moveAllCars(){
-        for (Vehicle car : cars){
-            car.move();
-        }
+    void AddSaab(){
+        world.AddSaab();
     }
-    void checkForCollisionWithBorder(double borderWidth){
-        for (Vehicle car: cars){
-        if (car.getCurrentPos()[0] + car.getImage().getWidth() >= borderWidth){ // frame.drawPanel.volvoImage volvoImage is very hard coded change!
-            car.setDirection(car.getDirection() + 180);
-        } else if (car.getCurrentPos()[0] < 0) {
-            car.setDirection(car.getDirection() - 180);
-        }
+    void AddScania(){
+        world.AddScania();
     }
+    void AddVolvoFM9(){
+        world.AddVolvoFM9();
     }
 }
