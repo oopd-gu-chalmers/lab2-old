@@ -12,8 +12,8 @@ public class World implements ActionListener{
     Workshop<Volvo240> workshop = new Workshop<Volvo240>(500, 0, 2);
     ArrayList<WorldObserver> observers= new ArrayList<WorldObserver>();
     ArrayList<DrawableWithPosition> drawobjects = new ArrayList<DrawableWithPosition>(); //Lite redundant men smidigt
-    int X;
-    int Y;
+    int X;  //Behövs för att kunna hantera collisions med border
+    int Y;  //Behövs inte men mer logiskt att ta in både x och y kanske?
 
     
     public World(int x_size, int y_size){
@@ -24,9 +24,9 @@ public class World implements ActionListener{
 
     public void actionPerformed(ActionEvent e) {
         checkForCollisionWithWorkshop();
-        checkForCollisionWithBorder(X); //Detta behöver vi lösa, ska World få tillgång till border width?
+        checkForCollisionWithBorder(X);
         moveAllCars();
-        notifyofchange();
+        notifyofchange();   //Låter observers veta att modellen förändrats
     }
 
     void gas(int amount) {
