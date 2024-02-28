@@ -5,11 +5,8 @@ public class Simulation{
 
 
     public static void main(String[] args) {
-        World world = new World(X,Y);
+        World world = new World(X,Y,6);
         CarController controller = new CarController(world);
-        controller.AddVolvo();
-        controller.AddSaab();
-        controller.AddScania();
         CarView frame= new CarView("yeehaw", controller,X,Y);
         world.AddObserver(frame.drawPanel);
     }

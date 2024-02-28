@@ -12,14 +12,20 @@ public class World implements ActionListener{
     Workshop<Volvo240> workshop = new Workshop<Volvo240>(500, 0, 2);
     ArrayList<WorldObserver> observers= new ArrayList<WorldObserver>();
     ArrayList<DrawableWithPosition> drawobjects = new ArrayList<DrawableWithPosition>(); //Lite redundant men smidigt
+    VehicleCreator factory = new VehicleCreator();
     int X;  //Behövs för att kunna hantera collisions med border
     int Y;  //Behövs inte men mer logiskt att ta in både x och y kanske?
+    int carLimit;
 
     
-    public World(int x_size, int y_size){
+    public World(int x_size, int y_size, int carLimit){
         timer.start();
         X=x_size;
         Y=y_size;
+        this.carLimit = carLimit;
+        addVehicle(factory.getVolvo());
+        addVehicle(factory.getSaab());
+        addVehicle(factory.getScania());
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -105,11 +111,6 @@ public class World implements ActionListener{
 
     void checkForCollisionWithWorkshop() {
         for (Vehicle car : cars) {
-            double car_x = car.getCurrentPos()[0] + car.getImage().getWidth() / 2; //VolvoImage not optimal, but easiest. should define constant for image size.
-            double car_y = car.getCurrentPos()[1] + car.getImage().getHeight() / 2;
-            double workshop_x = workshop.getCurrentPos()[0] + car.getImage().getWidth() / 2; //Same here.
-            double workshop_y = workshop.getCurrentPos()[1] + car.getImage().getHeight() / 2;
-            double distance = Math.sqrt(Math.pow(workshop_x - car_x, 2) + Math.pow(workshop_y - car_y, 2));
             if (car instanceof Volvo240) {
                 workshop.load((Volvo240) car);
                 if (workshop.getCurrentLoad().contains(car)) {
@@ -139,19 +140,33 @@ public class World implements ActionListener{
         }
     }    
 
-    ArrayList<Vehicle> getCars(){   //När används denna?
-        return cars;
-    }
     void addRandomCar(){        //Borde funka, ej testat dock
         Random random = new Random();
         int number = random.nextInt(4);
         switch (number){
-            case 0: AddVolvo();
-            case 1: AddSaab();
-            case 2: AddScania();
-            case 3: AddVolvoFM9();
+            case 0: 
+                addVehicle(factory.getVolvo()); 
+                break;
+            case 1: 
+                addVehicle(factory.getSaab()); 
+                break;
+            case 2: 
+                addVehicle(factory.getScania()); 
+                break;
+            case 3: 
+                addVehicle(factory.getVolvoFM9());
+                break;
         }
     }
+
+    void addVehicle(Vehicle vehicle) {
+        if (cars.size() < carLimit) {
+            cars.add(vehicle);
+            setPos();
+            updateDrawObjects();
+        }
+    }
+
     void removeCar(){
         if (cars.size() > 0){
         cars.remove(cars.size()-1); //Tar bort sista bilen
@@ -159,37 +174,17 @@ public class World implements ActionListener{
         updateDrawObjects();
     }
 
-    private void setPos(){  //Kanske lite dumt men funkar
+    private void setPos(){
         int lastindex=cars.size()-1; //Index of latest added car
-        int ypos=lastindex * 100;
+        int ypos=lastindex * 70;
         Vehicle newest = cars.get(lastindex);
         newest.setCurrentPos(0, ypos);
     }
 
-
-    void AddVolvo(){
-        cars.add(new Volvo240());
-        setPos();
-        updateDrawObjects();
-    }
-    void AddSaab(){
-        cars.add(new Saab95());
-        setPos();
-        updateDrawObjects();
-    }
-    void AddScania(){
-        cars.add(new Scania());
-        setPos();
-        updateDrawObjects();
-    }
-    void AddVolvoFM9(){ //Står addCarTransport i UML men den är abstract
-        cars.add(new VolvoFM9());
-        setPos();
-        updateDrawObjects();
-    }
     void AddObserver(WorldObserver obs){    //Smidigt sätt att lägga til observers
         observers.add(obs);
     }
+
     void updateDrawObjects(){
         drawobjects.clear();
         drawobjects.addAll(cars);

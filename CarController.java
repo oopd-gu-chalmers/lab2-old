@@ -61,18 +61,6 @@ public class CarController {
     void PlatformUp() {
         world.PlatformUp();
     }
-    void AddVolvo(){
-        world.AddVolvo();
-    }
-    void AddSaab(){
-        world.AddSaab();
-    }
-    void AddScania(){
-        world.AddScania();
-    }
-    void AddVolvoFM9(){
-        world.AddVolvoFM9();
-    }
     void addRandomCar(){
         world.addRandomCar();
     }
