@@ -39,6 +39,11 @@ public class CarView extends JFrame{
     JButton startButton = new JButton("Start all cars");
     JButton stopButton = new JButton("Stop all cars");
 
+    //Nya knappar för sista delen av labben
+    JButton addButton = new JButton("Add a car");
+    JButton removeButton = new JButton("Remove a car");
+
+
     // Constructor
     public CarView(String framename, CarController cc, int x_size, int y_size){
         this.carC = cc;
@@ -85,6 +90,11 @@ public class CarView extends JFrame{
         controlPanel.add(brakeButton, 3);
         controlPanel.add(turboOffButton, 4);
         controlPanel.add(lowerBedButton, 5);
+        //Ny för sista delen av labben
+        controlPanel.add(addButton,6);
+        controlPanel.add(removeButton,7);
+        //
+
         controlPanel.setPreferredSize(new Dimension((X/2)+4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -158,6 +168,23 @@ public class CarView extends JFrame{
                 carC.PlatformDown();
             }
         });
+
+        //Ny för sista delen av labben
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.addRandomCar();
+            }  
+        });
+
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e){
+                carC.removeCar();
+            }  
+        });
+
+        ///
 
 
         // Make the frame pack all it's components by respecting the sizes if possible.

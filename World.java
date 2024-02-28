@@ -152,6 +152,13 @@ public class World implements ActionListener{
             case 3: AddVolvoFM9();
         }
     }
+    void removeCar(){
+        if (cars.size() > 0){
+        cars.remove(cars.size()-1); //Tar bort sista bilen
+        }
+        updateDrawObjects();
+    }
+
     private void setPos(){  //Kanske lite dumt men funkar
         int lastindex=cars.size()-1; //Index of latest added car
         int ypos=lastindex * 100;
@@ -184,6 +191,7 @@ public class World implements ActionListener{
         observers.add(obs);
     }
     void updateDrawObjects(){
+        drawobjects.clear();
         drawobjects.addAll(cars);
         drawobjects.add(workshop);
     }

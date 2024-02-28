@@ -73,4 +73,10 @@ public class CarController {
     void AddVolvoFM9(){
         world.AddVolvoFM9();
     }
+    void addRandomCar(){
+        world.addRandomCar();
+    }
+    void removeCar(){
+        world.removeCar();
+    }
 }
