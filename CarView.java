@@ -14,8 +14,8 @@ import java.awt.event.ActionListener;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
+    private int X=800;
+    private int Y=800;
 
     // The controller member
     CarController carC;
@@ -40,9 +40,11 @@ public class CarView extends JFrame{
     JButton stopButton = new JButton("Stop all cars");
 
     // Constructor
-    public CarView(String framename, CarController cc){
+    public CarView(String framename, CarController cc, int x_size, int y_size){
         this.carC = cc;
         initComponents(framename);
+        X=x_size;
+        Y=y_size;
     }
 
     // Sets everything in place and fits everything

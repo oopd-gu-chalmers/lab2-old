@@ -12,14 +12,19 @@ public class World implements ActionListener{
     Workshop<Volvo240> workshop = new Workshop<Volvo240>(500, 0, 2);
     ArrayList<WorldObserver> observers= new ArrayList<WorldObserver>();
     ArrayList<DrawableWithPosition> drawobjects = new ArrayList<DrawableWithPosition>(); //Lite redundant men smidigt
+    int X;
+    int Y;
+
     
-    public World(){
+    public World(int x_size, int y_size){
         timer.start();
+        X=x_size;
+        Y=y_size;
     }
 
     public void actionPerformed(ActionEvent e) {
         checkForCollisionWithWorkshop();
-        // checkForCollisionWithBorder(frame.getPreferredSize().getWidth()); Detta behöver vi lösa, ska World få tillgång till border width?
+        checkForCollisionWithBorder(X); //Detta behöver vi lösa, ska World få tillgång till border width?
         moveAllCars();
         notifyofchange();
     }
