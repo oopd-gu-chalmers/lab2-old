@@ -1,4 +1,4 @@
-package src.main.model;
+package main.model;
 
 import java.awt.*;
 
@@ -10,7 +10,7 @@ public class Volvo240 extends Car {
         super(nrDoors, enginePower, color, modelName);
     }
 
-    protected double speedFactor(){
+    public double speedFactor(){
         return getEnginePower() * 0.01 * trimFactor;
     }
 

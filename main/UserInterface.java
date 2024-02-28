@@ -1,15 +1,11 @@
-package src.main;
+package main;
 
-import src.main.view.DrawPanel;
-import src.main.controller.CarController;
+import main.view.DrawPanel;
 
 import javax.swing.*;
-import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 
 /**
  * This class represents the full view of the MVC pattern of your car simulator.
@@ -34,11 +30,12 @@ public class UserInterface extends JFrame {
     public JButton brakeButton = new JButton("Brake");
     public JButton turboOnButton = new JButton("Saab Turbo on");
     public JButton turboOffButton = new JButton("Saab Turbo off");
-    public JButton liftBedButton = new JButton("main.model.Scania Lift Bed");
+    public JButton liftBedButton = new JButton("Lift Bed");
     public JButton lowerBedButton = new JButton("Lower Lift Bed");
 
     public JButton startButton = new JButton("Start all cars");
     public JButton stopButton = new JButton("Stop all cars");
+    public JButton addCarButton = new JButton("Add car");
 
     private int frameWidth;
     private int frameHeight;
@@ -80,11 +77,13 @@ public class UserInterface extends JFrame {
         controlPanel.setLayout(new GridLayout(2, 4));
 
         controlPanel.add(gasButton, 0);
-        controlPanel.add(turboOnButton, 1);
+        controlPanel.add(turboOffButton, 1);
         controlPanel.add(liftBedButton, 2);
-        controlPanel.add(brakeButton, 3);
-        controlPanel.add(turboOffButton, 4);
-        controlPanel.add(lowerBedButton, 5);
+        controlPanel.add(addCarButton, 3);
+        controlPanel.add(brakeButton, 4);
+        controlPanel.add(turboOnButton, 5);
+        controlPanel.add(lowerBedButton, 6);
+
         controlPanel.setPreferredSize(new Dimension((frameWidth / 2) + 4, 200));
         this.add(controlPanel);
         controlPanel.setBackground(Color.CYAN);
@@ -148,7 +147,9 @@ public class UserInterface extends JFrame {
     public void addLowerBedButtonListener(ActionListener al) {
         lowerBedButton.addActionListener(al);
     }
-
+    public void addAddCarButtonListener(ActionListener al) {
+        addCarButton.addActionListener(al);
+    }
     public void addGasSpinnerListener(ChangeListener cl) {
         gasSpinner.addChangeListener(cl);
     }

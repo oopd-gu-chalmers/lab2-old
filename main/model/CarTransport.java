@@ -1,4 +1,4 @@
-package src.main.model;
+package main.model;
 
 
 import java.awt.*;
@@ -51,7 +51,7 @@ public class CarTransport extends Truck implements Loadable<Car> {
             super.gas(amount);
     };
 
-    protected boolean getBedIsRaised() {
+    public boolean getBedIsRaised() {
         return transportBed.getIsRaised();
     }
 
@@ -66,7 +66,7 @@ public class CarTransport extends Truck implements Loadable<Car> {
         transportBed.lower();
     }
 
-    protected CarTransportBed getTransportBed(){
+    public CarTransportBed getTransportBed(){
         return transportBed;
     }
 }

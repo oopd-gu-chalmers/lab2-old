@@ -18,14 +18,14 @@ public class TestSaab {
     @Test
     public void testTurboOn() {
         testSaab.setTurboOn();
-        assertTrue(testSaab.turboOn);
+        assertTrue(testSaab.getTurboOn());
     }
 
 
     @Test
     public void testTurboOff() {
         testSaab.setTurboOff();
-        assertFalse(testSaab.turboOn);
+        assertFalse(testSaab.getTurboOn());
     }
 
 

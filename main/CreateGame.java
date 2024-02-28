@@ -1,9 +1,9 @@
-package src.main;
+package main;
 
-import src.main.controller.CarController;
-import src.main.model.VehicleModel;
-import src.main.model.*;
-import src.main.view.DrawPanel;
+import main.controller.CarController;
+import main.model.*;
+import main.view.DrawPanel;
+
 
 import java.awt.*;
 
@@ -17,7 +17,7 @@ public class CreateGame {
         DrawPanel drawPanel = new DrawPanel(model);   // definiera fönstrets storlek i modellen
 
         // Create ui
-        UserInterface ui = createUserinterface(drawPanel, model);  // lägg in panelen här
+        UserInterface ui = new UserInterface("CarSim 1.0", drawPanel, model.getWidth(), model.getHeight());
 
         // Create controller
         CarController cc = new CarController(model, ui);
@@ -34,6 +34,7 @@ public class CreateGame {
         ui.addTurboOffButtonListener(cc.createTurboOffActionListener());
         ui.addLiftBedButtonListener(cc.createLiftBedActionListener());
         ui.addLowerBedButtonListener(cc.createLowerBedActionListener());
+        ui.addAddCarButtonListener(cc.createAddCarActionListener());
         ui.addGasSpinnerListener(cc.createGasSpinnerChangeListener());
 
         // Get serviceshop and set position
@@ -42,7 +43,7 @@ public class CreateGame {
         volvoServiceShop.setYPos(300);
 
         // Start the timer
-        cc.timer.start();
+        model.timer.start();
 
 
     }
@@ -64,12 +65,6 @@ public class CreateGame {
         model.addVehicle(scania);
 
         return model;
-    }
-
-    private static UserInterface createUserinterface(DrawPanel panel, VehicleModel model) {
-        UserInterface ui = new UserInterface("CarSim 1.0", panel, model.getWidth(), model.getHeight());
-        return ui;
-        // nåt mer
     }
 
 }

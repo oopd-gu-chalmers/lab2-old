@@ -1,4 +1,4 @@
-package src.main.model;
+package main.model;
 
 import java.awt.*;
 
@@ -20,11 +20,11 @@ public class Scania extends Truck {
 //    }
 //    //en fråga: ska alla bilar inte kunna köra om bed är raised? nej väl?
 
-    protected int getBedAngle() {
+    public int getBedAngle() {
         return scaniaBed.getAngle();
     }
 
-    protected void setBedAngle(int angle) {
+    public void setBedAngle(int angle) {
         if (this.getCurrentSpeed() == 0)
             scaniaBed.setAngle(angle);
 

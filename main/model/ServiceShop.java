@@ -1,10 +1,12 @@
-package src.main.model;
+package main.model;
+
+import main.Drawable;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-public class ServiceShop<T extends Car> implements Loadable<T> {
+public class ServiceShop<T extends Car> implements Loadable<T>, Drawable {
     private final List<T> storage = new ArrayList<>();  // Composition
     private final int maxCapacity;  // Maximalt antal bilar som verkstaden kan ta emot
 
@@ -31,17 +33,18 @@ public class ServiceShop<T extends Car> implements Loadable<T> {
         }
     }
 
-    protected List<T> getStorage() {
+    public List<T> getStorage() {
         return storage;
     }
 
-    protected double getXPos() {
+    public double getXPos() {
         return xPos;
     }
 
-    protected double getYPos() {
+    public double getYPos() {
         return yPos;
     }
+
 
     public void setXPos(double x) {
         xPos = x;

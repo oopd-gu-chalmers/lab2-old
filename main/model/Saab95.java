@@ -1,4 +1,4 @@
-package src.main.model;
+package main.model;
 import java.awt.*;
 
 public class Saab95 extends Car {
@@ -18,7 +18,11 @@ public class Saab95 extends Car {
         turboOn = false;
     }
 
-    protected double speedFactor() {
+    public boolean getTurboOn(){
+        return turboOn;
+    }
+
+    public double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
