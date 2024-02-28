@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 import java.awt.event.ActionEvent;
 
 
@@ -136,21 +137,42 @@ public class World implements ActionListener{
     ArrayList<Vehicle> getCars(){   //När används denna?
         return cars;
     }
+    void addRandomCar(){        //Borde funka, ej testat dock
+        Random random = new Random();
+        int number = random.nextInt(4);
+        switch (number){
+            case 0: AddVolvo();
+            case 1: AddSaab();
+            case 2: AddScania();
+            case 3: AddVolvoFM9();
+        }
+    }
+    private void setPos(){  //Kanske lite dumt men funkar
+        int lastindex=cars.size()-1; //Index of latest added car
+        int ypos=lastindex * 100;
+        Vehicle newest = cars.get(lastindex);
+        newest.setCurrentPos(0, ypos);
+    }
+
 
     void AddVolvo(){
         cars.add(new Volvo240());
+        setPos();
         updateDrawObjects();
     }
     void AddSaab(){
         cars.add(new Saab95());
+        setPos();
         updateDrawObjects();
     }
     void AddScania(){
         cars.add(new Scania());
+        setPos();
         updateDrawObjects();
     }
     void AddVolvoFM9(){ //Står addCarTransport i UML men den är abstract
         cars.add(new VolvoFM9());
+        setPos();
         updateDrawObjects();
     }
     void AddObserver(WorldObserver obs){    //Smidigt sätt att lägga til observers
