@@ -5,7 +5,7 @@ import java.util.Random;
 import java.awt.event.ActionEvent;
 
 
-public class World implements ActionListener{
+public class World implements ActionListener, Observable{
     private static final int delay = 50;
     private Timer timer = new Timer(delay, this);
     ArrayList<Vehicle> cars = new ArrayList<>();
@@ -133,7 +133,7 @@ public class World implements ActionListener{
         }
     }
     }
-    void notifyofchange(){
+    public void notifyofchange(){
         for (WorldObserver o:observers){
             o.update(drawobjects);
         }
@@ -180,7 +180,7 @@ public class World implements ActionListener{
         newest.setCurrentPos(0, ypos);
     }
 
-    void AddObserver(WorldObserver obs){    //Smidigt sätt att lägga til observers
+    public void AddObserver(WorldObserver obs){    //Smidigt sätt att lägga til observers
         observers.add(obs);
     }
 
