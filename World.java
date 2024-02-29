@@ -13,7 +13,7 @@ public class World implements ActionListener, Observable{
     ArrayList<WorldObserver> observers= new ArrayList<WorldObserver>();
     ArrayList<DrawableWithPosition> drawobjects = new ArrayList<DrawableWithPosition>(); //Lite redundant men smidigt
     int X;  //Behövs för att kunna hantera collisions med border
-    int Y;  //Behövs inte men mer logiskt att ta in både x och y kanske?
+    int Y;
     int carLimit;
 
     
@@ -31,7 +31,6 @@ public class World implements ActionListener, Observable{
         checkForCollisionWithWorkshop();
         checkForCollisionWithBorder(X);
         moveAllCars();
-        notifyofchange();   //Låter observers veta att modellen förändrats
     }
 
     void gas(int amount) {
@@ -123,6 +122,7 @@ public class World implements ActionListener, Observable{
         for (Vehicle car : cars){
             car.move();
         }
+        notifyofchange();   //Låter observers veta att modellen förändrats
     }
     void checkForCollisionWithBorder(double borderWidth){
         for (Vehicle car: cars){
@@ -168,7 +168,7 @@ public class World implements ActionListener, Observable{
 
     void removeCar(){
         if (cars.size() > 0){
-        cars.remove(cars.size()-1); //Tar bort sista bilen
+        cars.removeLast(); //Tar bort sista bilen
         }
         updateDrawObjects();
     }
