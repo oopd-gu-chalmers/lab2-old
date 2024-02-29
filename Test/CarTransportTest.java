@@ -1,4 +1,9 @@
 import org.junit.jupiter.api.*;
+
+import Model.Car;
+import Model.Saab95;
+import Model.VolvoFM9;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class CarTransportTest{

@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.*;
+
+import Model.Scania;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ScaniaTest{

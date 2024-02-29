@@ -6,6 +6,8 @@ import java.awt.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import Model.Saab95;
+
 public class CarTest {
     private Saab95 TestSaab;
     @BeforeEach

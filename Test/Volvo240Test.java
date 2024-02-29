@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+
+import Model.Volvo240;
+
 import org.junit.jupiter.api.BeforeEach;
 
 import java.awt.*;

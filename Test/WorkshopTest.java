@@ -1,4 +1,10 @@
 import org.junit.jupiter.api.*;
+
+import Model.Saab95;
+import Model.Scania;
+import Model.Vehicle;
+import Model.Workshop;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class WorkshopTest {

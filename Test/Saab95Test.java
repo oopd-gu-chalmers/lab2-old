@@ -1,4 +1,7 @@
 import org.junit.jupiter.api.Test;
+
+import Model.Saab95;
+
 import org.junit.jupiter.api.BeforeEach;
 
 import java.awt.*;
