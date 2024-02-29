@@ -10,26 +10,11 @@
 public class CarController {
     // member fields:
     World world;
-    //methods:
-        // public static void main(String[] args) {
-        // // Instance of this class
-        // CarController cc = new CarController();
-        // // Start a new view and send a reference of self
-        // cc.frame = new CarView("CarSim 1.0", cc);
-        // cc.frame.drawPanel.loadWorkshop(cc.workshop);
-        // // Start the timer
-        // cc.timer.start();}
-            
 
-
-    /* Each step the TimerListener moves all the cars in the list and tells the
-    * view to update its images. Change this method to your needs.
-    * */
     public CarController(World w){
         this.world=w;
     }
   
-    // Calls the gas method for each car once
     void gas(int amount) {
         world.gas(amount);
     }
