@@ -9,6 +9,9 @@ public class Simulation{
         CarView frame= new CarView("yeehaw",X,Y);
         CarController controller = new CarController(world, frame);
         world.AddObserver(frame.drawPanel);
+        world.addVehicle(VehicleCreator.getVolvo());
+        world.addVehicle(VehicleCreator.getSaab());
+        world.addVehicle(VehicleCreator.getScania());
     }
 }
 
