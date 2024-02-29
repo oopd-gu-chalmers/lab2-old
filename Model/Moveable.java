@@ -1,3 +1,4 @@
+package Model;
 interface Moveable {
     public void move();
     public void turnLeft();

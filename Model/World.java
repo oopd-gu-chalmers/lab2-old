@@ -1,4 +1,6 @@
+package Model;
 import javax.swing.*;
+
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Random;
@@ -30,7 +32,7 @@ public class World implements ActionListener, Observable{
         moveAllCars();
     }
 
-    void gas(int amount) {
+    public void gas(int amount) {
         double gas = ((double) amount) / 100;
         for (Vehicle car : cars)
         {
@@ -42,7 +44,7 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void brake(int amount) {
+    public void brake(int amount) {
         double brake = ((double) amount) / 100;
         for (Vehicle car : cars)
         {
@@ -50,21 +52,21 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void startEngines() {
+    public void startEngines() {
         for (Vehicle car : cars)
         {
             car.startEngine();
         }
     }
 
-    void stopEngines() {
+    public void stopEngines() {
         for (Vehicle car : cars)
         {
             car.stopEngine();
         }
     }
 
-    void saabTurboOn() {
+    public void saabTurboOn() {
         for (Vehicle car : cars)
         {
             if (car instanceof Saab95){
@@ -74,7 +76,7 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void saabTurboOff() {
+    public void saabTurboOff() {
         for (Vehicle car : cars)
         {
             if (car instanceof Saab95){
@@ -84,7 +86,7 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void PlatformDown() {
+    public void PlatformDown() {
         for (Vehicle car : cars)
         {
             if (car instanceof TiltablePosterior){
@@ -94,7 +96,7 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void PlatformUp() {
+    public void PlatformUp() {
         for (Vehicle car : cars)
         {
             if (car instanceof TiltablePosterior){
@@ -104,7 +106,7 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void checkForCollisionWithWorkshop() {
+    public void checkForCollisionWithWorkshop() {
         for (Vehicle car : cars) {
             if (car instanceof Volvo240) {
                 workshop.load((Volvo240) car);
@@ -115,13 +117,13 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void moveAllCars(){
+    public void moveAllCars(){
         for (Vehicle car : cars){
             car.move();
         }
         notifyofchange();   //Låter observers veta att modellen förändrats
     }
-    void checkForCollisionWithBorder(double borderWidth){
+    public void checkForCollisionWithBorder(double borderWidth){
         for (Vehicle car: cars){
         if (car.getCurrentPos()[0] + car.getImage().getWidth() >= borderWidth){ // frame.drawPanel.volvoImage volvoImage is very hard coded change!
             car.setDirection(car.getDirection() + 180);
@@ -136,7 +138,7 @@ public class World implements ActionListener, Observable{
         }
     }    
 
-    void addRandomCar(){        //Borde funka, ej testat dock
+    public void addRandomCar(){        //Borde funka, ej testat dock
         Random random = new Random();
         int number = random.nextInt(4);
         switch (number){
@@ -155,7 +157,7 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void addVehicle(Vehicle vehicle) {
+    public void addVehicle(Vehicle vehicle) {
         if (cars.size() < carLimit) {
             cars.add(vehicle);
             setPos();
@@ -163,7 +165,7 @@ public class World implements ActionListener, Observable{
         }
     }
 
-    void removeCar(){
+    public void removeCar(){
         if (cars.size() > 0){
         cars.removeLast(); //Tar bort sista bilen
         }

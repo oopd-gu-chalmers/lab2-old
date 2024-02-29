@@ -1,6 +1,10 @@
+package Model;
 import java.awt.*;
 import java.lang.Math;
 import javax.imageio.ImageIO;
+
+import View.DrawPanel;
+
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 

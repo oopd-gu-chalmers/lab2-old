@@ -1,6 +1,12 @@
+package Controller;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+
+import Model.World;
+import View.CarView;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 /*

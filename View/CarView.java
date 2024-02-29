@@ -1,4 +1,9 @@
+package View;
+
 import javax.swing.*;
+
+import Controller.CarController;
+
 import java.awt.*;
 
 
@@ -11,48 +16,53 @@ import java.awt.*;
  **/
 
 public class CarView extends JFrame{
-    private static final int X = 800;
-    private static final int Y = 800;
+    private int X=800;
+    private int Y=800;
 
     // The controller member
-    DrawPanel drawPanel;
+    CarController carC;
+
+    DrawPanel drawPanel = new DrawPanel(X, Y-240);
 
     JPanel controlPanel = new JPanel();
 
     JPanel gasPanel = new JPanel();
-    JSpinner gasSpinner = new JSpinner();
+    public JSpinner gasSpinner = new JSpinner();
     JLabel gasLabel = new JLabel("Amount of gas");
 
-    JButton gasButton = new JButton("Gas");
-    JButton brakeButton = new JButton("Brake");
-    JButton turboOnButton = new JButton("Saab Turbo on");
-    JButton turboOffButton = new JButton("Saab Turbo off");
-    JButton liftBedButton = new JButton("Scania Lift Bed");
-    JButton lowerBedButton = new JButton("Lower Lift Bed");
+    public JButton gasButton = new JButton("Gas");
+    public JButton brakeButton = new JButton("Brake");
+    public JButton turboOnButton = new JButton("Saab Turbo on");
+    public JButton turboOffButton = new JButton("Saab Turbo off");
+    public JButton liftBedButton = new JButton("Scania Lift Bed");
+    public JButton lowerBedButton = new JButton("Lower Lift Bed");
 
-    JButton startButton = new JButton("Start all cars");
-    JButton stopButton = new JButton("Stop all cars");
+    public JButton startButton = new JButton("Start all cars");
+    public JButton stopButton = new JButton("Stop all cars");
 
     //Nya knappar för sista delen av labben
-    JButton addButton = new JButton("Add a car");
-    JButton removeButton = new JButton("Remove a car");
+    public JButton addButton = new JButton("Add a car");
+    public JButton removeButton = new JButton("Remove a car");
 
 
     // Constructor
-    public CarView(String framename, DrawPanel panel){
-        this.drawPanel = panel;
+    public CarView(String framename, int x_size, int y_size){
         initComponents(framename);
+        X=x_size;
+        Y=y_size;
     }
 
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
-        
+
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
+
+
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
