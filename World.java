@@ -12,7 +12,6 @@ public class World implements ActionListener{
     Workshop<Volvo240> workshop = new Workshop<Volvo240>(500, 0, 2);
     ArrayList<WorldObserver> observers= new ArrayList<WorldObserver>();
     ArrayList<DrawableWithPosition> drawobjects = new ArrayList<DrawableWithPosition>(); //Lite redundant men smidigt
-    VehicleCreator factory = new VehicleCreator();
     int X;  //Behövs för att kunna hantera collisions med border
     int Y;  //Behövs inte men mer logiskt att ta in både x och y kanske?
     int carLimit;
@@ -23,9 +22,9 @@ public class World implements ActionListener{
         X=x_size;
         Y=y_size;
         this.carLimit = carLimit;
-        addVehicle(factory.getVolvo());
-        addVehicle(factory.getSaab());
-        addVehicle(factory.getScania());
+        addVehicle(VehicleCreator.getVolvo());
+        addVehicle(VehicleCreator.getSaab());
+        addVehicle(VehicleCreator.getScania());
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -145,16 +144,16 @@ public class World implements ActionListener{
         int number = random.nextInt(4);
         switch (number){
             case 0: 
-                addVehicle(factory.getVolvo()); 
+                addVehicle(VehicleCreator.getVolvo()); 
                 break;
             case 1: 
-                addVehicle(factory.getSaab()); 
+                addVehicle(VehicleCreator.getSaab()); 
                 break;
             case 2: 
-                addVehicle(factory.getScania()); 
+                addVehicle(VehicleCreator.getScania()); 
                 break;
             case 3: 
-                addVehicle(factory.getVolvoFM9());
+                addVehicle(VehicleCreator.getVolvoFM9());
                 break;
         }
     }
