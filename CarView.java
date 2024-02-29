@@ -11,13 +11,11 @@ import java.awt.*;
  **/
 
 public class CarView extends JFrame{
-    private int X=800;
-    private int Y=800;
+    private static final int X = 800;
+    private static final int Y = 800;
 
     // The controller member
-    CarController carC;
-
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -41,23 +39,20 @@ public class CarView extends JFrame{
 
 
     // Constructor
-    public CarView(String framename, int x_size, int y_size){
+    public CarView(String framename, DrawPanel panel){
+        this.drawPanel = panel;
         initComponents(framename);
-        X=x_size;
-        Y=y_size;
     }
 
     // Sets everything in place and fits everything
     // TODO: Take a good look and make sure you understand how these methods and components work
     private void initComponents(String title) {
-
+        
         this.setTitle(title);
         this.setPreferredSize(new Dimension(X,Y));
         this.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         this.add(drawPanel);
-
-
 
         SpinnerModel spinnerModel =
                 new SpinnerNumberModel(0, //initial value
