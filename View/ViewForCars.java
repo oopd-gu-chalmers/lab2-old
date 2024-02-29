@@ -8,12 +8,12 @@ import Model.WorldObserver;
 
 // This panel represents the animated part of the view with the car images.
 
-public class DrawPanel extends JPanel implements WorldObserver{
+public class ViewForCars extends JPanel implements WorldObserver{
 
     ArrayList<? extends DrawableWithPosition> objects = new ArrayList<>();
 
     // Initializes the panel and reads the images
-    public DrawPanel(int x, int y) {
+    public ViewForCars(int x, int y) {
         this.setDoubleBuffered(true);
         this.setPreferredSize(new Dimension(x, y));
         this.setBackground(Color.green);

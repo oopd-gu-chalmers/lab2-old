@@ -3,7 +3,7 @@ import java.awt.*;
 import java.lang.Math;
 import javax.imageio.ImageIO;
 
-import View.DrawPanel;
+import View.ViewForCars;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -138,7 +138,7 @@ public abstract class Vehicle implements DrawableWithPosition, Moveable{
     }
     public void setImage(String imagePath){
         try {
-            this.image = ImageIO.read(DrawPanel.class.getResourceAsStream(imagePath));
+            this.image = ImageIO.read(ViewForCars.class.getResourceAsStream(imagePath));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

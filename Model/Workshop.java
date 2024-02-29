@@ -5,7 +5,7 @@ import java.util.*;
 
 import javax.imageio.ImageIO;
 
-import View.DrawPanel;
+import View.ViewForCars;
 
 public class Workshop<A extends Vehicle> implements DrawableWithPosition, Loadable<A>{ 
     
@@ -52,7 +52,7 @@ public class Workshop<A extends Vehicle> implements DrawableWithPosition, Loadab
     }
     public void setImage(String imagePath){
         try {
-            this.image = ImageIO.read(DrawPanel.class.getResourceAsStream(imagePath));
+            this.image = ImageIO.read(ViewForCars.class.getResourceAsStream(imagePath));
         } catch (IOException ex) {
             ex.printStackTrace();
         }
