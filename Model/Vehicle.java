@@ -30,7 +30,7 @@ abstract class Vehicle implements DrawableWithPosition, Moveable{
         setCurrentPos(0, 0);
         this.direction = 0;
         stopEngine();
-        setImage("pics/Volvo240.jpg");
+        setImage("/pics/Volvo240.jpg");
     }
     
     public int getNrDoors(){
