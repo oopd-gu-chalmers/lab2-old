@@ -21,7 +21,7 @@ public class Workshop<A extends Vehicle> implements DrawableWithPosition, Loadab
     public Workshop(double x, double y, int maxVehicles) {
         setCurrentPos(x, y);
         this.maxVehicles = maxVehicles;
-        setImage("pics/VolvoBrand.jpg");
+        setImage("/pics/VolvoBrand.jpg");
     };
 
     public Deque<A> getCurrentLoad() {

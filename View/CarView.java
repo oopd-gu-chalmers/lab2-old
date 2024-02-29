@@ -16,13 +16,13 @@ import java.awt.*;
  **/
 
 public class CarView extends JFrame{
-    private int X=800;
-    private int Y=800;
+    private static final int X = 800;
+    private static final int Y = 800;
 
     // The controller member
     CarController carC;
 
-    DrawPanel drawPanel = new DrawPanel(X, Y-240);
+    DrawPanel drawPanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -46,10 +46,9 @@ public class CarView extends JFrame{
 
 
     // Constructor
-    public CarView(String framename, int x_size, int y_size){
+    public CarView(String framename, DrawPanel drawPanel){
+        this.drawPanel = drawPanel;
         initComponents(framename);
-        X=x_size;
-        Y=y_size;
     }
 
     // Sets everything in place and fits everything
