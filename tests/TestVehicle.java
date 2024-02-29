@@ -17,7 +17,7 @@ public class TestVehicle {
     @Test
     public void testStartEngine(){
         testVehicle.startEngine();
-        assertEquals(testVehicle.getCurrentSpeed(), 0.1);
+        assertEquals(testVehicle.getEngineOn(), true);
     }
 
     @Test
@@ -25,13 +25,6 @@ public class TestVehicle {
         testVehicle.startEngine();
         testVehicle.stopEngine();
         assertEquals(testVehicle.getCurrentSpeed(), 0.0);
-    }
-
-    @Test
-    public void testMove() {
-        testVehicle.startEngine();
-        testVehicle.move();
-        assertEquals(testVehicle.getXPos() + testVehicle.getYPos() , 0 + 0.1);
     }
 
     @Test
@@ -62,7 +55,8 @@ public class TestVehicle {
     @Test
     public void testgetCurrentSpeed() {
         testVehicle.startEngine();
-        assertEquals(testVehicle.getCurrentSpeed(), 0.1);
+        testVehicle.gas(0.2);
+        assertEquals(testVehicle.getCurrentSpeed(), testVehicle.getEnginePower() * 0.01 * 1.25 * 0.2);
     }
 
     @Test

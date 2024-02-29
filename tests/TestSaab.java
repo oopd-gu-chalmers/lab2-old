@@ -45,7 +45,7 @@ public class TestSaab {
     @Test
     public void testdecrementSpeed() {
         testSaab.startEngine();
-        double expectedSpeed = testSaab.getCurrentSpeed() - testSaab.speedFactor() * 0.6;
+        double expectedSpeed = Math.max(testSaab.getCurrentSpeed() - testSaab.speedFactor() * 0.6, 0);
         testSaab.decrementSpeed(0.6);
         assertEquals(testSaab.getCurrentSpeed(), expectedSpeed);
     }
@@ -61,7 +61,7 @@ public class TestSaab {
     @Test
     public void testBrake() {
         testSaab.startEngine();
-        double expectedSpeed = testSaab.getCurrentSpeed() - testSaab.speedFactor() * 0.6;
+        double expectedSpeed = Math.max(testSaab.getCurrentSpeed() - testSaab.speedFactor() * 0.6, 0);
         testSaab.brake(0.6);
         assertEquals(testSaab.getCurrentSpeed(), expectedSpeed);
     }

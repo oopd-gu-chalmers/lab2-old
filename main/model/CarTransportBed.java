@@ -3,7 +3,7 @@ import java.util.Stack;
 
 public class CarTransportBed{
 
-    private boolean isRaised;
+    private boolean isRaised = true;
 
     private final Stack<Car> storage = new Stack<>();
 
