@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import static java.awt.Color.RED;
 
 
 public class VehicleModel{
@@ -27,15 +26,30 @@ public class VehicleModel{
         this.vehicleList = new VehicleList();
     }
 
-    public void addVehicle(Vehicle v){
-        vehicleList.addCar(v);
-        notifyListeners();
-
+    public void addCar(Vehicle v) {
+        try {
+            vehicleList.addCar(v);
+            notifyListeners();
+        } catch (IllegalStateException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
+
+    public void removeCar(){
+        try {
+            vehicleList.removeCar();
+            notifyListeners();
+        }
+        catch (IllegalStateException e){
+            System.out.println("Error: " + e.getMessage());
+        }
+        }
+
+
 
     public ArrayList<Drawable> getDrawables(){
         ArrayList<Drawable> drawables = new ArrayList<>();
-        for (Vehicle v : vehicleList.getVehicles()) {
+        for (Vehicle v : vehicleList.getVehicleList()) {
             drawables.add(v);
         }
         drawables.add(volvoServiceShop);
@@ -43,7 +57,7 @@ public class VehicleModel{
     }
 
     public void updateVehicles(){
-        for (Vehicle v : vehicleList.getVehicles()) {
+        for (Vehicle v : vehicleList.getVehicleList()) {
             v.move();
             checkCollisionWithVolvoServiceShop(v);
             checkOutOfBounds(v);
@@ -55,8 +69,12 @@ public class VehicleModel{
             if (Math.abs(vehicle.getXPos() - volvoServiceShop.getXPos()) < 5 && Math.abs(vehicle.getYPos() - volvoServiceShop.getYPos()) < 5){
                 if (vehicle instanceof Volvo240) {
                     Volvo240 volvo = (Volvo240) vehicle;
-                    volvoServiceShop.load(volvo);
-                    volvo.stopEngine();
+                    try {
+                        volvoServiceShop.load(volvo);
+                        volvo.stopEngine();
+                    } catch (IllegalStateException e) {
+                        System.out.println("Error: " + e.getMessage());
+                    }
                 }
             }
         }}
@@ -66,23 +84,23 @@ public class VehicleModel{
         int y = (int) Math.round(vehicle.getYPos());
         if (x < 0) {
             vehicle.setXPos(0);
-            vehicle.setDirection(-vehicle.getDirection());
+            vehicle.setDirection(vehicle.getDirection()+Math.PI);
         }
-        else if (x> width) {
-            vehicle.setXPos(width);
-            vehicle.setDirection(-vehicle.getDirection());
+        else if (x> width-100) {
+            vehicle.setXPos(width-100);
+            vehicle.setDirection(vehicle.getDirection()+Math.PI);
         }
 
         if (y < 0) {
             vehicle.setYPos(0);
-            vehicle.setDirection(-vehicle.getDirection());
+            vehicle.setDirection(vehicle.getDirection()+Math.PI);
         }
-        else if (y > height) {
-            vehicle.setYPos(height);
-            vehicle.setDirection(-vehicle.getDirection());
+        else if (y > height-290) {
+            vehicle.setYPos(height-290);
+            vehicle.setDirection(vehicle.getDirection()+Math.PI);
         }}
 
-    public ArrayList<Vehicle> getVehicles(){return vehicleList.getVehicles();
+    public ArrayList<Vehicle> getVehicles(){return vehicleList.getVehicleList();
     }
 
     public ServiceShop getVolvoServiceShop(){return volvoServiceShop;}
@@ -115,6 +133,7 @@ public class VehicleModel{
         public void actionPerformed(ActionEvent e) {
             // Logik som ska utföras vid varje tick
             updateVehicles();
+
         }
     }
 

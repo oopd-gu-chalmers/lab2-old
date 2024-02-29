@@ -37,6 +37,12 @@ public class UserInterface extends JFrame {
     public JButton stopButton = new JButton("Stop all cars");
     public JButton addCarButton = new JButton("Add car");
 
+    public JButton removeCarButton = new JButton("Remove car");
+
+    public JButton turnLeftButton = new JButton("Turn left");
+
+    public JButton turnRightButton = new JButton("Turn right");
+
     private int frameWidth;
     private int frameHeight;
 
@@ -80,9 +86,12 @@ public class UserInterface extends JFrame {
         controlPanel.add(turboOffButton, 1);
         controlPanel.add(liftBedButton, 2);
         controlPanel.add(addCarButton, 3);
-        controlPanel.add(brakeButton, 4);
-        controlPanel.add(turboOnButton, 5);
-        controlPanel.add(lowerBedButton, 6);
+        controlPanel.add(turnLeftButton, 4);
+        controlPanel.add(brakeButton, 5);
+        controlPanel.add(turboOnButton, 6);
+        controlPanel.add(lowerBedButton, 7);
+        controlPanel.add(removeCarButton, 8);
+        controlPanel.add(turnRightButton, 9);
 
         controlPanel.setPreferredSize(new Dimension((frameWidth / 2) + 4, 200));
         this.add(controlPanel);
@@ -152,5 +161,17 @@ public class UserInterface extends JFrame {
     }
     public void addGasSpinnerListener(ChangeListener cl) {
         gasSpinner.addChangeListener(cl);
+    }
+
+    public void addRemoveCarButtonListener(ActionListener al) {
+        removeCarButton.addActionListener(al);
+    }
+
+    public void addTurnLeftButtonListener(ActionListener al) {
+        turnLeftButton.addActionListener(al);
+    }
+
+    public void addTurnRightButtonListener(ActionListener al) {
+        turnRightButton.addActionListener(al);
     }
 }

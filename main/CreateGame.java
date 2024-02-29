@@ -36,6 +36,11 @@ public class CreateGame {
         ui.addLowerBedButtonListener(cc.createLowerBedActionListener());
         ui.addAddCarButtonListener(cc.createAddCarActionListener());
         ui.addGasSpinnerListener(cc.createGasSpinnerChangeListener());
+        ui.addRemoveCarButtonListener(cc.createremoveCarActionListener());
+        ui.addTurnLeftButtonListener(cc.createTurnLeftActionListener());
+        ui.addTurnRightButtonListener(cc.createTurnRightActionListener());
+
+
 
         // Get serviceshop and set position
         ServiceShop<Volvo240> volvoServiceShop = model.getVolvoServiceShop();
@@ -52,17 +57,17 @@ public class CreateGame {
         VehicleModel model = new VehicleModel();
 
         Vehicle volvo = VehicleFactory.createVolvo240(4, 100, Color.BLACK, "ILoveVolvo");
-        model.addVehicle(volvo);
+        model.addCar(volvo);
 
         Vehicle saab = VehicleFactory.createSaab(4,50,Color.RED,"ILoveSaab",true);
         saab.setXPos(0);
         saab.setYPos(100);
-        model.addVehicle(saab);
+        model.addCar(saab);
 
         Vehicle scania = VehicleFactory.createScania(2, 100, Color.BLUE, "ILoveScania");
         scania.setXPos(0);
         scania.setYPos(200);
-        model.addVehicle(scania);
+        model.addCar(scania);
 
         return model;
     }
