@@ -8,7 +8,7 @@ import View.DrawPanel;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-abstract class Vehicle implements DrawableWithPosition, Moveable{
+public abstract class Vehicle implements DrawableWithPosition, Moveable{
 
     private BufferedImage image;//default is Volvo 240
     private int nrDoors; // Number of doors on the car
