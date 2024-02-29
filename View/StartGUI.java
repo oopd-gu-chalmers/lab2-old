@@ -22,7 +22,7 @@ public class StartGUI extends JFrame{
     // The controller member
     CarController carC;
 
-    ViewForCars drawPanel;
+    CarView drawPanel;
 
     JPanel controlPanel = new JPanel();
 
@@ -46,7 +46,7 @@ public class StartGUI extends JFrame{
 
 
     // Constructor
-    public StartGUI(String framename, ViewForCars drawPanel){
+    public StartGUI(String framename, CarView drawPanel){
         this.drawPanel = drawPanel;
         initComponents(framename);
     }

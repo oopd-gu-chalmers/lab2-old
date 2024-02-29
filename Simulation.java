@@ -2,7 +2,7 @@ import Controller.CarController;
 import Model.VehicleCreator;
 import Model.World;
 import View.StartGUI;
-import View.ViewForCars;
+import View.CarView;
 
 public class Simulation{
     private static final int X=800;
@@ -11,7 +11,7 @@ public class Simulation{
 
     public static void main(String[] args) {
         World world = new World(X,Y,6);
-        ViewForCars panel = new ViewForCars(X,Y-240);
+        CarView panel = new CarView(X,Y-240);
         StartGUI frame= new StartGUI("yeehaw", panel);
         CarController controller = new CarController(world, frame);
         world.AddObserver(panel);
