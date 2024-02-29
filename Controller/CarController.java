@@ -5,7 +5,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import Model.World;
-import View.CarView;
+import View.StartGUI;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,10 +20,10 @@ import java.awt.event.ActionListener;
 public class CarController {
     // member fields:
     World world;
-    CarView frame;
+    StartGUI frame;
     int gasAmount = 0;
 
-    public CarController(World w, CarView frame){
+    public CarController(World w, StartGUI frame){
         this.world = w;
         this.frame = frame;
         initializeListeners();
