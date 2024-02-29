@@ -22,9 +22,6 @@ public class World implements ActionListener, Observable{
         X=x_size;
         Y=y_size;
         this.carLimit = carLimit;
-        addVehicle(VehicleCreator.getVolvo());
-        addVehicle(VehicleCreator.getSaab());
-        addVehicle(VehicleCreator.getScania());
     }
 
     public void actionPerformed(ActionEvent e) {

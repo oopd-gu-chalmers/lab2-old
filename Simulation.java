@@ -10,6 +10,9 @@ public class Simulation{
         CarView frame= new CarView("yeehaw", panel);
         CarController controller = new CarController(world, frame);
         world.AddObserver(frame.drawPanel);
+        world.addVehicle(VehicleCreator.getVolvo());
+        world.addVehicle(VehicleCreator.getSaab());
+        world.addVehicle(VehicleCreator.getScania());
     }
 }
 
