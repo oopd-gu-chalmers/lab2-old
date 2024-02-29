@@ -21,7 +21,7 @@ public class Saab95 extends Car{
     public void setTurboOff(){
 	    turboOn = false;
     }
-    protected double speedFactor(){
+    public double speedFactor(){
         double turbo = 1;
         if(turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;
