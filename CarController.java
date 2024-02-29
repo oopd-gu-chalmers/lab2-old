@@ -1,4 +1,8 @@
-
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 /*
 * This class represents the Controller part in the MVC pattern.
 * It's responsibilities is to listen to the View and responds in a appropriate manner by
@@ -10,46 +14,90 @@
 public class CarController {
     // member fields:
     World world;
+    CarView frame;
+    int gasAmount = 0;
 
-    public CarController(World w){
-        this.world=w;
+    public CarController(World w, CarView frame){
+        this.world = w;
+        this.frame = frame;
+        initializeListeners();
     }
-  
-    void gas(int amount) {
-        world.gas(amount);
-    }
+    private void initializeListeners() {
+    frame.gasSpinner.addChangeListener(new ChangeListener() {
+        public void stateChanged(ChangeEvent e) {
+            gasAmount = (int) ((JSpinner)e.getSource()).getValue();
+        }
+    });
 
-    void brake(int amount) {
-        world.brake(amount);
-    }
+    frame.gasButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            world.gas(gasAmount);
+        }
+    });
 
-    void startEngines() {
-        world.startEngines();
-    }
+    frame.brakeButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            world.brake(gasAmount);
+        }
+    });
 
-    void stopEngines() {
-        world.stopEngines();
-    }
+    frame.startButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            world.startEngines();;
+        }
+    });
 
-    void saabTurboOn() {
-        world.saabTurboOn();
-    }
+    frame.stopButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            world.stopEngines();
+        }
+    });
 
-    void saabTurboOff() {
-        world.saabTurboOff();
-    }
+    frame.turboOffButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            world.saabTurboOff();
+        }
+    });
 
-    void PlatformDown() {
-        world.PlatformDown();
-    }
+    frame.turboOnButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            world.saabTurboOn();
+        }
+    });
 
-    void PlatformUp() {
-        world.PlatformUp();
-    }
-    void addRandomCar(){
-        world.addRandomCar();
-    }
-    void removeCar(){
-        world.removeCar();
+    frame.liftBedButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            world.PlatformUp();
+        }
+    });
+
+    frame.lowerBedButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            world.PlatformDown();
+        }
+    });
+
+    //Ny för sista delen av labben
+    frame.addButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            world.addRandomCar();
+        }  
+    });
+
+    frame.removeButton.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e){
+            world.removeCar();
+        }  
+    });
     }
 }
