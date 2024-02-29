@@ -1,3 +1,5 @@
+import main.model.ServiceShop;
+import main.model.Volvo240;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +14,7 @@ public class TestServiceShop {
     @BeforeEach
     public void setUp() {
         volvoShop = new ServiceShop<>(5);
-        volvoCar = new Volvo240(4, 100, Color.BLACK, "Volvo240");
+        volvoCar = new Volvo240(4, 100, Color.BLACK, "main.model.Volvo240");
     }
 
     @Test
@@ -30,7 +32,7 @@ public class TestServiceShop {
     @Test
     public void testCapacityLimit() {
         for (int i = 0; i < 5; i++) {
-            volvoShop.load(new Volvo240(4, 100, Color.BLACK, "Volvo240-" + i));
+            volvoShop.load(new Volvo240(4, 100, Color.BLACK, "main.model.Volvo240-" + i));
         }
         assertThrows(IllegalStateException.class, () -> volvoShop.load(new Volvo240(4, 100, Color.BLACK, "ExtraVolvo")));
     }

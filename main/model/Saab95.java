@@ -1,3 +1,4 @@
+package main.model;
 import java.awt.*;
 
 public class Saab95 extends Car {
@@ -9,15 +10,19 @@ public class Saab95 extends Car {
         this.turboOn = turboOn;
     }
 
-    protected void setTurboOn() {
+    public void setTurboOn() {
         turboOn = true;
     }
 
-    protected void setTurboOff() {
+    public void setTurboOff() {
         turboOn = false;
     }
 
-    protected double speedFactor() {
+    public boolean getTurboOn(){
+        return turboOn;
+    }
+
+    public double speedFactor() {
         double turbo = 1;
         if (turboOn) turbo = 1.3;
         return getEnginePower() * 0.01 * turbo;

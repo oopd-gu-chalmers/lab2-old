@@ -1,3 +1,4 @@
+import main.model.Saab95;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,14 +18,14 @@ public class TestSaab {
     @Test
     public void testTurboOn() {
         testSaab.setTurboOn();
-        assertTrue(testSaab.turboOn);
+        assertTrue(testSaab.getTurboOn());
     }
 
 
     @Test
     public void testTurboOff() {
         testSaab.setTurboOff();
-        assertFalse(testSaab.turboOn);
+        assertFalse(testSaab.getTurboOn());
     }
 
 
@@ -44,7 +45,7 @@ public class TestSaab {
     @Test
     public void testdecrementSpeed() {
         testSaab.startEngine();
-        double expectedSpeed = testSaab.getCurrentSpeed() - testSaab.speedFactor() * 0.6;
+        double expectedSpeed = Math.max(testSaab.getCurrentSpeed() - testSaab.speedFactor() * 0.6, 0);
         testSaab.decrementSpeed(0.6);
         assertEquals(testSaab.getCurrentSpeed(), expectedSpeed);
     }
@@ -60,7 +61,7 @@ public class TestSaab {
     @Test
     public void testBrake() {
         testSaab.startEngine();
-        double expectedSpeed = testSaab.getCurrentSpeed() - testSaab.speedFactor() * 0.6;
+        double expectedSpeed = Math.max(testSaab.getCurrentSpeed() - testSaab.speedFactor() * 0.6, 0);
         testSaab.brake(0.6);
         assertEquals(testSaab.getCurrentSpeed(), expectedSpeed);
     }

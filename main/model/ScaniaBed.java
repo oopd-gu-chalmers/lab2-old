@@ -1,3 +1,5 @@
+package main.model;
+
 public class ScaniaBed {
 
     private int angle = 0;

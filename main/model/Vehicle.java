@@ -1,6 +1,10 @@
+package main.model;
+
+import main.Drawable;
+
 import java.awt.*;
 
-public abstract class Vehicle implements Movable {
+public abstract class Vehicle implements Movable, Drawable {
     private int nrDoors; // Number of doors on the car
     private double enginePower; // Engine power of the car
     protected double currentSpeed; // The current speed of the car
@@ -24,59 +28,61 @@ public abstract class Vehicle implements Movable {
     }
 
 
-    protected int getNrDoors(){
+    public int getNrDoors(){
         return nrDoors;
     }
 
-    protected double getEnginePower(){
+    public double getEnginePower(){
         return enginePower;
     }
 
-    protected double getCurrentSpeed(){
+    public double getCurrentSpeed(){
         return currentSpeed;
     }
 
-    protected Color getColor(){
+    public Color getColor(){
         return color;
     }
 
-    protected void setColor(Color clr){
+    public void setColor(Color clr){
         color = clr;
     }
 
-    protected void startEngine(){engineOn = true;}
+    public void startEngine(){engineOn = true;}
 
 
-    protected void stopEngine(){
+    public void stopEngine(){
         currentSpeed = 0;
         engineOn = false;
     }
 
-    protected boolean getEngineOn(){return engineOn;}
+    public boolean getEngineOn(){return engineOn;}
 
     protected abstract double speedFactor();
 
-    protected double getXPos() {
+    @Override
+    public double getXPos() {
         return xPos;
     }
 
-    protected double getYPos() {
+    @Override
+    public double getYPos() {
         return yPos;
     }
 
-    protected double getDirection() {
+    public double getDirection() {
         return direction;
     }
 
-    protected void setXPos(double x) {
+    public void setXPos(double x) {
         xPos = x;
     }
 
-    protected void setYPos(double y) {
+    public void setYPos(double y) {
         yPos = y;
     }
 
-    protected void setDirection(double dir) {
+    public void setDirection(double dir) {
         direction = (dir % (2*Math.PI) + 2*Math.PI)%(2*Math.PI);
     }
 
@@ -93,15 +99,15 @@ public abstract class Vehicle implements Movable {
         direction = (direction - Math.PI/2 + 2*Math.PI) % (2*Math.PI);
     }
 
-    protected void incrementSpeed(double amount){
+    public void incrementSpeed(double amount){
         currentSpeed = Math.min(getCurrentSpeed() + speedFactor() * amount, getEnginePower());
     };
 
-    protected void decrementSpeed(double amount){
+    public void decrementSpeed(double amount){
         currentSpeed = Math.max(getCurrentSpeed() - speedFactor() * amount, 0);
     };
 
-    protected void gas(double amount) {
+    public void gas(double amount) {
         if (engineOn) {
         if (amount >= 0 && amount <=1){
             incrementSpeed(amount);
@@ -111,11 +117,13 @@ public abstract class Vehicle implements Movable {
         else { throw new IllegalArgumentException("Turn engine on before you push gas");}
     }
 
-    protected void brake(double amount){
+    public void brake(double amount){
         if (amount >= 0 && amount <=1){
             decrementSpeed(amount);
         } else {
             throw new IllegalArgumentException("Argument must be between 0 and 1");
         }
     }
+
+
 }

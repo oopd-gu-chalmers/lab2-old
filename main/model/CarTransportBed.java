@@ -1,9 +1,9 @@
-import java.awt.*;
+package main.model;
 import java.util.Stack;
 
 public class CarTransportBed{
 
-    private boolean isRaised;
+    private boolean isRaised = true;
 
     private final Stack<Car> storage = new Stack<>();
 
@@ -15,8 +15,8 @@ public class CarTransportBed{
         this.isRaised = false;
     }
 
-    protected boolean getIsRaised(){return this.isRaised;}
+    public boolean getIsRaised(){return this.isRaised;}
 
-    protected Stack<Car> getStorage() {
+    public Stack<Car> getStorage() {
         return storage;
 }}
