@@ -43,8 +43,7 @@ public class VehicleModel{
         catch (IllegalStateException e){
             System.out.println("Error: " + e.getMessage());
         }
-        }
-
+    }
 
 
     public ArrayList<Drawable> getDrawables(){
@@ -53,7 +52,7 @@ public class VehicleModel{
             drawables.add(v);
         }
         drawables.add(volvoServiceShop);
-        return drawables; // lista med vehicles och serviceshop
+        return drawables;
     }
 
     public void updateVehicles(){

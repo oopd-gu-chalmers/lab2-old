@@ -5,6 +5,7 @@ import main.view.DrawPanel;
 import javax.swing.*;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
@@ -124,14 +125,9 @@ public class UserInterface extends JFrame {
     }
 
 
-    // Nedan är lite oklara
-    public void addGasButtonListener(ActionListener al) {
-        gasButton.addActionListener(al);
-    }
+    public void addGasButtonListener(ActionListener al) {gasButton.addActionListener(al);}
 
-    public void addBrakeButtonListener(ActionListener al) {
-        brakeButton.addActionListener(al);
-    }
+    public void addBrakeButtonListener(ActionListener al) {brakeButton.addActionListener(al);}
 
     public void addStartButtonListener(ActionListener al) {
         startButton.addActionListener(al);

@@ -14,7 +14,7 @@ public class CreateGame {
         VehicleModel model = createModel();
 
         // Create drawPanel
-        DrawPanel drawPanel = new DrawPanel(model);   // definiera fönstrets storlek i modellen
+        DrawPanel drawPanel = new DrawPanel(model);
 
         // Create ui
         UserInterface ui = new UserInterface("CarSim 1.0", drawPanel, model.getWidth(), model.getHeight());
@@ -39,7 +39,6 @@ public class CreateGame {
         ui.addRemoveCarButtonListener(cc.createremoveCarActionListener());
         ui.addTurnLeftButtonListener(cc.createTurnLeftActionListener());
         ui.addTurnRightButtonListener(cc.createTurnRightActionListener());
-
 
 
         // Get serviceshop and set position
