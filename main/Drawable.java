@@ -5,4 +5,6 @@ public interface Drawable {
 
     double getYPos();
 
+    //String getImagename();
+
 }

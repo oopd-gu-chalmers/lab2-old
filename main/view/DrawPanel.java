@@ -31,18 +31,16 @@ public class DrawPanel extends JPanel implements ModelUpdateListener {
         }
     }
 
-
     private void loadImages() throws IOException {
-        vehicleImages.put(Volvo240.class, ImageIO.read(new File(("main/view/pics/Volvo240.jpg"))));
-        vehicleImages.put(Saab95.class, ImageIO.read(new File(("main/view/pics/Saab95.jpg"))));
-        vehicleImages.put(Scania.class, ImageIO.read(new File(("main/view/pics/Scania.jpg"))));
-        vehicleImages.put(ServiceShop.class, ImageIO.read(new File(("main/view/pics/VolvoBrand.jpg"))));
+        for (Drawable drawable : model.getDrawables() ) {
+            vehicleImages.put(drawable.getClass(), ImageIO.read(new File(("main/view/pics/" + drawable.getClass().getSimpleName() + ".jpg"))));
+        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        for (Drawable drawable : model.getDrawables() ) {   // Gå igenom en lista av drawables
+        for (Drawable drawable : model.getDrawables() ) {
             int x = (int) Math.round(drawable.getXPos());
             int y = (int) Math.round(drawable.getYPos());
             BufferedImage image = vehicleImages.get(drawable.getClass());
