@@ -33,6 +33,24 @@ public class CarController {
     public CarController(VehicleModel vModel, UserInterface cView) {
         this.vehicleList = vModel.getVehicles();
         this.vModel = vModel;
+        addListeners(cView);
+    }
+
+    private void addListeners(UserInterface ui){
+        // Add listeners
+        ui.addGasButtonListener(createGasActionListener());
+        ui.addBrakeButtonListener(createBrakeActionListener());
+        ui.addStartButtonListener(createStartActionListener());
+        ui.addStopButtonListener(createStopActionListener());
+        ui.addTurboOnButtonListener(createTurboOnActionListener());
+        ui.addTurboOffButtonListener(createTurboOffActionListener());
+        ui.addLiftBedButtonListener(createLiftBedActionListener());
+        ui.addLowerBedButtonListener(createLowerBedActionListener());
+        ui.addAddCarButtonListener(createAddCarActionListener());
+        ui.addGasSpinnerListener(createGasSpinnerChangeListener());
+        ui.addRemoveCarButtonListener(createremoveCarActionListener());
+        ui.addTurnLeftButtonListener(createTurnLeftActionListener());
+        ui.addTurnRightButtonListener(createTurnRightActionListener());
     }
 
     public ArrayList<Vehicle> getVehicleList() {

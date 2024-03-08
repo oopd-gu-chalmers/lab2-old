@@ -25,21 +25,6 @@ public class CreateGame {
 
         model.addListener(drawPanel);
 
-        // Add listeners
-        ui.addGasButtonListener(cc.createGasActionListener());
-        ui.addBrakeButtonListener(cc.createBrakeActionListener());
-        ui.addStartButtonListener(cc.createStartActionListener());
-        ui.addStopButtonListener(cc.createStopActionListener());
-        ui.addTurboOnButtonListener(cc.createTurboOnActionListener());
-        ui.addTurboOffButtonListener(cc.createTurboOffActionListener());
-        ui.addLiftBedButtonListener(cc.createLiftBedActionListener());
-        ui.addLowerBedButtonListener(cc.createLowerBedActionListener());
-        ui.addAddCarButtonListener(cc.createAddCarActionListener());
-        ui.addGasSpinnerListener(cc.createGasSpinnerChangeListener());
-        ui.addRemoveCarButtonListener(cc.createremoveCarActionListener());
-        ui.addTurnLeftButtonListener(cc.createTurnLeftActionListener());
-        ui.addTurnRightButtonListener(cc.createTurnRightActionListener());
-
 
         // Get serviceshop and set position
         ServiceShop<Volvo240> volvoServiceShop = model.getVolvoServiceShop();
